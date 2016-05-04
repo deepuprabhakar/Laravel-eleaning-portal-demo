@@ -70,8 +70,8 @@ class StudentController extends Controller
         $role->users()->attach($user);
         $data['random'] = $password;
         Mail::send('emails.test', ['data' => $data], function ($m) use ($data) {
-            $m->from('lincyv@aidersolutions.in', 'Test');
-            $m->to($data['email'], $data['name'])->subject('Testing');
+            $m->from('eltest@coheart.ac.in', 'E-Learning - Coheart');
+            $m->to($data['email'], $data['name'])->subject('E-Learning Password');
         });
         $data['user_id'] = $user->id;
         $data = Student::create($data);
