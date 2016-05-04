@@ -1,0 +1,15 @@
+To: deepupv91@gmail.com
+Subject: Your Password Reset Link
+Message-ID: <80415b9a492b86a46782bb7d101c8cae@localhost>
+Date: Thu, 14 Apr 2016 10:27:10 +0000
+From: 
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Click here to reset your password: <a href=3D"http://localhost:8000/passwor=
+d/reset/65d9dfe52604bd3b438448c32788853c4d5ed0fe870ea8761d10dce5dcbaa20a?em=
+ail=3Ddeepupv91%40gmail.com"> http://localhost:8000/password/reset/65d9dfe5=
+2604bd3b438448c32788853c4d5ed0fe870ea8761d10dce5dcbaa20a?email=3Ddeepupv91%=
+40gmail.com </a>
+
