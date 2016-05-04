@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'abhirami@aidersolutions.in', 'name' => 'Abhirami'],
+    'from' => ['address' => 'eltest@coheart.ac.in', 'name' => 'E-Learning'],
     //'from' => ['address' => null, 'name' => null],
 
     /*
