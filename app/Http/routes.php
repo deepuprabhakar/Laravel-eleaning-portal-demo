@@ -100,12 +100,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('articles', 'User\ArticleController');
 
     //modules
-    Route::get('modules/semester/{id}',['as' => 'modules.index', 'uses' => 'user\ModulesController@index']);
+    Route::get('modules/semester/{id}',['as' => 'modules.index', 'uses' => 'User\ModulesController@index']);
 
-    Route::get('modules/semester/{sem}/{subject}',['as' => 'modules.show', 'uses' => 'user\ModulesController@show']);
-    Route::get('modules/semester/{sem}/{subject}/Quiz',['as' => 'modules.create', 'uses' => 'user\ModulesController@create' ]);
+    Route::get('modules/semester/{sem}/{subject}',['as' => 'modules.show', 'uses' => 'User\ModulesController@show']);
+    Route::get('modules/semester/{sem}/{subject}/Quiz',['as' => 'modules.create', 'uses' => 'User\ModulesController@create' ]);
 
-    Route::post('modules/semester/{sem}/{subject}/discussion',['as' => 'modules.store', 'uses' => 'user\ModulesController@store' ]);
+    Route::post('modules/semester/{sem}/{subject}/discussion',['as' => 'modules.store', 'uses' => 'User\ModulesController@store' ]);
 
     //profile
     Route::get('profile', ['as' =>'profile', 'uses' => 'User\ProfileController@profileView']);
