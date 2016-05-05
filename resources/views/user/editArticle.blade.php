@@ -20,12 +20,12 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Edit {{ $article['title'] }}
+      Edit - {{ str_limit(ucfirst($article['title']), 50) }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
       <li><a href="{{ route('articles.index') }}">Articles</a></li>
-      <li class="active">Edit Article</li>
+      <li class="active">{{ str_limit(ucfirst($article['title']), 20) }}</li>
     </ol>
   </section>
 
@@ -36,7 +36,14 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Edit {{ $article['title'] }}</h3>
+            <h3 class="box-title">Edit Article</h3>
+            @if($article->student_id == Sentinel::getUser()->id)
+            <div class="box-tools pull-right">
+              <a href="{{ route('articles.show', $article['slug']) }}" class="btn btn-primary btn-sm" title="Edit">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> Preview
+              </a>
+            </div>
+            @endif
           </div><!-- /.box-header -->
           <!-- form start -->
           {!! Form::model($article, ['url' => route('articles.update', $article->hash), 'autocomplete' => 'off', 'id' => 'articles-form', 'method' => 'PATCH', 'files' => true]) !!}

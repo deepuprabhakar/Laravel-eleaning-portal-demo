@@ -95,8 +95,11 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-       $article = Articles::with('author')->where('slug', $id)->first();
-       return view('user.viewArticleDetails',compact('article'));
+        $article = Articles::with('author')->where('slug', $id)->first();
+        if($article)
+            return view('user.viewArticleDetails',compact('article'));
+        else
+            abort(404);
     }
 
     /**
@@ -109,9 +112,14 @@ class ArticleController extends Controller
     {
         $article = Articles::findBySlug($slug);
         if($article)
-        {
-            $article->hash = Hashids::connection('article')->encode($article->id);
-            return view('user.editArticle', compact('article'));
+        {   
+            if($article->student_id == Sentinel::getUser()->id)
+            {    
+                $article->hash = Hashids::connection('article')->encode($article->id);
+                return view('user.editArticle', compact('article'));
+            }
+            else
+                return redirect()->back();
         }
         else
             abort(404);
@@ -147,7 +155,7 @@ class ArticleController extends Controller
            $articles->update($input);
         }
 
-        return redirect()->route('articles.edit', $articles->slug)->with('success', 'News updated succesfully'); 
+        return redirect()->route('articles.edit', $articles->slug)->with('success', 'Article updated succesfully'); 
 
     }
 

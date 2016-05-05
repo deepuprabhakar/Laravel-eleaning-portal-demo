@@ -2,7 +2,8 @@
 @if($flag)
     @include('errors.success')
 @endif
-  @include('errors.list')  
+    @include('errors.list')
+    <div id="response-quiz" style="display: none;"></div>  
     <div class="form-group">
         {{ Form::text('question', null, ['class' => 'form-control', 'id' => 'question', 'placeholder' => 'Enter Question']) }}
     </div>
@@ -31,7 +32,7 @@
             <label for="D" style="cursor: pointer;"> D</label>
             </div>
     </div>
-    <div id="response-quiz" style="display: none;"></div>
+    
 </div>
 <div class="box-footer">
     <button type="submit" class="btn btn-primary news-button" id="quiz">{{ $button }}</button>

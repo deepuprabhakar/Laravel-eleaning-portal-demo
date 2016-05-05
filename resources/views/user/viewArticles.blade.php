@@ -25,7 +25,7 @@
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
       <li><a href="{{ route('articles.index') }}">Articles</a></li>
-      <li class="active">View Articles</li>
+      <li class="active">View Article</li>
     </ol>
   </section>
 

@@ -157,10 +157,11 @@
             <!-- /.box-header -->
             {{ Form::open(['url' => 'createDiscussion', 'autocomplete' => 'off', 'id' => 'discussion-prompt-form']) }}
             <div class="box-body">
+              <div id="response-discussion" style="display: none;"></div>
               {{ Form::textarea('question', $subject['discussionprompt']['question'], ['class'=>'form-control', 'id' => 'discussion', 'placeholder' => 'Enter Question For Discussion Here']) }}
               {!! Form::hidden('subject_id', $subject['hashid'], ['id' => 'subjectid']) !!}
               {!! Form::hidden('course_id', $subject['course']['id'], ['id' => 'courseid']) !!}
-              <div id="response-discussion" style="display: none;"></div>
+              
             </div>
             <div class="box-footer">
                 <button type="submit" class="btn btn-primary news-button" id="discussionprompt">Create</button>
