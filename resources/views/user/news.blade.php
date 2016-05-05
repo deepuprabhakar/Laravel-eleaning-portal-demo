@@ -24,7 +24,7 @@
   </section>
 
   <!-- Main content -->
-  <section class="content" style="min-height: 600px;">
+  <section class="content">
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
         @include('errors.empty', ['item' => $news, 'title' => 'news'])
@@ -46,14 +46,14 @@
                     <i class="fa fa-clock-o"></i> 
                     {{ $content['time'] }}
                   </span>
-                      <h3 class="timeline-header"><a href="{{ route('news.show', $content['slug']) }}">{{ $content['title'] }}</a></h3>
+                      <h3 class="timeline-header"><a href="{{ route('news.show', $content['slug']) }}">{{ str_limit($content['title'], 100) }}</a></h3>
                   <div class="timeline-body" style="overflow: auto;">
                   @if($content['image'] != "")
                     {{ Html::image("uploads/news/thumbs/".$content['image'], 'image', ['class' => 'img-responsive pull-right float-img']) }}
                   @endif
                     <div class="">
-                      {!! str_limit((Purifier::clean($content['content'])), 200) !!}
-                    </p>
+                      {!! str_limit((Purifier::clean($content['content'])), 300) !!}
+                    </div>
                   </div>
                   <div class="timeline-footer" style="padding-top: 0;">
                     <a class="btn btn-primary btn-xs btn-flat" href="{{ route('news.show', $content['slug']) }}">Read more</a>
@@ -63,6 +63,11 @@
               <!-- END timeline item -->
               <!-- timeline item -->
             @endforeach
+            @if(!empty($news))
+              <li>
+                <i class="fa fa-clock-o bg-blue"></i>
+              </li>
+            @endif
           </ul>
           <!-- <div class="overlay text-center">
             <i class="fa fa-refresh fa-spin"></i>

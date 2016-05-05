@@ -36,7 +36,7 @@ class NewsController extends Controller
     	$student = $user->student->toArray();
         $news = News::orderBy('publish', 'desc')->where('audience', 'all')->orWhere('course', $student['course'])->where('batch', $student['batch'])->active()->get();
 
-    	foreach($news as $item)
+        foreach($news as $item)
         {
             $item->date = $item->publish->format('d M, Y');
             $item->time = $item->publish->diffForHumans();

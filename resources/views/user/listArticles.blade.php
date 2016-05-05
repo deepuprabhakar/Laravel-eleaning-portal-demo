@@ -56,7 +56,7 @@
               @foreach ($articles as $key => $content)
                 <tr>
                   <td>{{ ++$key }}</td>
-                  <td>{{ str_limit($content['title'], 20) }}</td>
+                  <td>{{ str_limit($content['title'], 40) }}</td>
                   <td class="text-center">{{ $content['date'] }}</td>
                   <td class="text-center table-actions">
                     <a class="btn bg-olive btn-xs btn-flat" href="{{ route('articles.edit', $content['slug']) }}" style="margin: 0 3px 0 2px;">Edit</a>

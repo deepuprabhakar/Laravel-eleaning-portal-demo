@@ -31,6 +31,21 @@
           <span>Home</span>
         </a>
       </li>
+      <li class="treeview {{ Request::is('modules') ? 'active' : '' }}{{ Request::is('modules/*') ? 'active' : '' }}">
+        <a href="#">
+          <i class="fa fa-book" aria-hidden="true"></i>
+          <span>Modules</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          @for($i=0; $i<$course->semester; $i++)
+              <li class="{{ Request::is('modules/') ? 'active' : '' }}">
+
+                <a href="{{ route('modules.index', $i+1) }}"><i class="fa fa-circle-o"></i>{{'Semester '.($i+1) }}</a>
+
+              </li>
+          @endfor   
+        </ul>
+      </li>
       <li class="treeview {{ Request::is('news') ? 'active' : '' }}">
         <a href="{{ route('news') }}">
           <i class="fa fa-newspaper-o" aria-hidden="true"></i>
@@ -50,25 +65,11 @@
             <a href="{{ route('articles.index') }}"><i class="fa fa-circle-o"></i> View Articles</a>
           </li>
           <li class="{{ Request::is('articles/list') ? 'active' : '' }}">
-            <a href="{{ route('listArticles') }}"><i class="fa fa-circle-o"></i> List Articles</a>
+            <a href="{{ route('listArticles') }}"><i class="fa fa-circle-o"></i> Edit Articles</a>
           </li>
         </ul>
       </li>
-      <li class="treeview {{ Request::is('modules') ? 'active' : '' }}{{ Request::is('modules/*') ? 'active' : '' }}">
-        <a href="#">
-          <i class="fa fa-book" aria-hidden="true"></i>
-          <span>Modules</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-          @for($i=0; $i<$course->semester; $i++)
-              <li class="{{ Request::is('modules/') ? 'active' : '' }}">
-
-                <a href="{{ route('modules.index', $i+1) }}"><i class="fa fa-circle-o"></i>{{'Semester '.($i+1) }}</a>
-
-              </li>
-          @endfor   
-        </ul>
-      </li>
+      
       <li class="{{ Request::is('messages') ? 'active' : '' }}{{ Request::is('messages/*') ? 'active' : '' }}">
         <a href="{{ route('messages.index') }}">
           @if($count != 0)

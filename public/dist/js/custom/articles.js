@@ -14,7 +14,10 @@ $(function() {
   });
   
 	$('#publish').datepicker({
-      autoclose: true
+      autoclose: true,
+      todayHighlight: true,
+      todayBtn: 'linked',
+      keyboardNavigation:true,
     });
 });
 $(document).on('click', '.btn-delete', function(e){

@@ -36,7 +36,7 @@ class ArticleController extends Controller
     {
         $user = Sentinel::getUser()->id;
         date_default_timezone_set('Asia/Kolkata');
-        $articles = Articles::active()->get();
+        $articles = Articles::with('author')->active()->get();
         foreach($articles as $item)
         {
             $item->date = $item->publish->format('d M. Y');
@@ -116,7 +116,9 @@ class ArticleController extends Controller
             if($article->student_id == Sentinel::getUser()->id)
             {    
                 $article->hash = Hashids::connection('article')->encode($article->id);
-                return view('user.editArticle', compact('article'));
+                $publish = new Carbon($article->publish);
+                $publish = $publish->format('m/d/Y');
+                return view('user.editArticle', compact('article', 'publish'));
             }
             else
                 return redirect()->back();
@@ -195,17 +197,14 @@ class ArticleController extends Controller
     public function listArticles()
     {
         $user = Sentinel::getUser()->id;
-        $articles = Articles::with('author')->where('student_id', $user)->get();
+        $articles = Articles::with('author')->where('student_id', $user)->latest()->get();
         foreach($articles as $item)
         {
-            $item->date = $item->publish->format('d M. Y');
+            $item->date = $item->publish->format('d M, Y');
             $item->time = $item->publish->diffForHumans();
         }
         $articles = $articles->toArray();
-        if($articles)
-            return view('user.listArticles', compact('articles'));
-        else
-            abort(404);
+        return view('user.listArticles', compact('articles'));
         
     }
         

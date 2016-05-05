@@ -32,7 +32,7 @@
   <section class="content" >
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
-        @include('errors.empty', ['news' => $articles, 'title' => 'articles'])
+        @include('errors.empty', ['item' => $articles, 'title' => 'articles'])
           <!-- The time line -->
           <ul class="timeline">
             @foreach($articles as $content)
@@ -51,9 +51,17 @@
                     <i class="fa fa-clock-o"></i> 
                     {{ $content['time'] }}
                   </span>
-                      <h3 class="timeline-header"><a href="{{ route('articles.show', $content['slug']) }}">{{ str_limit($content['title'], 60) }}</a></h3>
+                      <h3 class="timeline-header">
+                        <a href="{{ route('articles.show', $content['slug']) }}">
+                          {{ str_limit($content['title'], 100) }}
+                        </a>
+                        <div class="article-author">
+                          By {{ $content['author']['first_name'] }}
+                        </div>
+                      </h3>
+                      
                   <div class="timeline-body" style="overflow: auto;">
-                    <p>{!! str_limit($content['content'], 200) !!}</p>
+                    <div>{!! str_limit((Purifier::clean($content['content'])), 300) !!}</div>
                   </div>
                   <div class="timeline-footer" style="padding-top: 0;">
                     <a class="btn btn-primary btn-xs btn-flat" href="{{ route('articles.show', $content['slug']) }}">Read more</a>
@@ -63,6 +71,11 @@
               <!-- END timeline item -->
               <!-- timeline item -->
             @endforeach
+            @if(!empty($articles))
+              <li>
+                <i class="fa fa-clock-o bg-blue"></i>
+              </li>
+            @endif
           </ul>
           <!-- <div class="overlay text-center">
             <i class="fa fa-refresh fa-spin"></i>
@@ -83,5 +96,4 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
-    {!! Html::script('dist/js/custom/articles.js') !!}
 @stop

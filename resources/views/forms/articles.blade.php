@@ -16,7 +16,11 @@
       <div class="input-group-addon">
         <i class="fa fa-calendar"></i>
       </div>
-      {!! Form::text('publish', date('m/d/Y'), ['class' => 'form-control', 'id' => 'publish']) !!}
+      @if($flag == true)
+      {!! Form::text('publish', $publish, ['class' => 'form-control', 'id' => 'publish', 'placeholder' => 'Enter Publish Date']) !!}
+      @else
+      {!! Form::text('publish', date('m/d/Y'), ['class' => 'form-control', 'id' => 'publish', 'placeholder' => 'Enter Publish Date']) !!}
+      @endif
     </div>
   </div>
   <div class="form-group">
