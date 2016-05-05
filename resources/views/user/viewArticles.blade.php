@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-learning - List of Articles</title>
+    <title>Coheart E-learning - Articles</title>
 @stop
 
 @section('style')
@@ -30,7 +30,7 @@
   </section>
 
   <!-- Main content -->
-  <section class="content" style="min-height: 600px;">
+  <section class="content" >
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
           <!-- The time line -->
@@ -51,7 +51,7 @@
                     <i class="fa fa-clock-o"></i> 
                     {{ $content['time'] }}
                   </span>
-                      <h3 class="timeline-header"><a href="{{ route('articles.show', $content['slug']) }}">{{ $content['title'] }}</a></h3>
+                      <h3 class="timeline-header"><a href="{{ route('articles.show', $content['slug']) }}">{{ str_limit($content['title'], 60) }}</a></h3>
                   <div class="timeline-body" style="overflow: auto;">
                     <p>{!! str_limit($content['content'], 200) !!}</p>
                   </div>
