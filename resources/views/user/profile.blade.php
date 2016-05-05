@@ -18,7 +18,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            User Profile
+            Profile
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -35,7 +35,7 @@
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                  <img class="profile-user-img img-responsive img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User profile picture">
                   <h3 class="profile-username text-center">{{ $student['name'] }}</h3>
                   <p class="text-muted text-center">{{ $course['title'] }}</p>
 

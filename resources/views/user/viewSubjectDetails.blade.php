@@ -102,13 +102,20 @@
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane active" id="tab_1">
+                  @if($units->count() == 0)
+                    @include('errors.empty', ['item' => $units, 'title' => 'units'])
+                  @else
                       @foreach($units as $key=>$unit)
                         <b>{{ $unit->title }}</b>
                         <p>{!! $unit->content!!}</p>
                       @endforeach
+                  @endif
                   </div>
                   <!-- /.tab-pane for unit-->
                   <div class="tab-pane" id="tab_2">
+                  @if(empty($discussion))
+                    @include('errors.empty', ['item' => $discussion, 'title' => 'discussion'])
+                  @else
                       <blockquote>
                         <p>{{ $discussion['question'] }}</p>
                       </blockquote>
@@ -137,6 +144,7 @@
                         </div>
                         @endforeach
                       </div>
+                  @endif
                   </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="tab_3">
