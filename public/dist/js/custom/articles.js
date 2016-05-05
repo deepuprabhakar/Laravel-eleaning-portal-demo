@@ -12,6 +12,7 @@ $(function() {
         image_advtab: true,
       
   });
+  
 	$('#publish').datepicker({
       autoclose: true
     });

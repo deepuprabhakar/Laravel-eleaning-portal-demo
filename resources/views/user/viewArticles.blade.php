@@ -24,8 +24,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="{{ route('articles.index') }}">Articles</a></li>
-      <li class="active">View Article</li>
+      <li><a href="{{ route('articles.index') }}" class="active">Articles</a></li>
     </ol>
   </section>
 
@@ -33,6 +32,7 @@
   <section class="content" >
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
+        @include('errors.empty', ['news' => $articles, 'title' => 'articles'])
           <!-- The time line -->
           <ul class="timeline">
             @foreach($articles as $content)
@@ -70,9 +70,9 @@
               <!-- timeline item -->
             @endforeach
           </ul>
-          <div class="overlay text-center">
+          <!-- <div class="overlay text-center">
             <i class="fa fa-refresh fa-spin"></i>
-          </div>
+          </div> -->
         </div>
       </div>
   </section><!-- ./section -->  

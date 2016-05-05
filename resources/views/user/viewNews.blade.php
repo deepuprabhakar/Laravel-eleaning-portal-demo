@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-learning - List of News</title>
+    <title>Coheart E-learning - News - {{ $news->title }}</title>
 @stop
 
 @section('content')
@@ -19,7 +19,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li class="active">View News</li>
+      <li><a href="{{ route('news') }}">News</a></li>
+      <li class="active">{{ str_limit($news->title, 20) }}</li>
     </ol>
   </section>
 
@@ -31,32 +32,23 @@
             <div class="box-header with-border">
               <div class="user-block">
                 <img class="img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User Image">
-                <span class="username"><a href="#">Admin</a></span>
+                <span class="username"><a href="javascript::">Admin</a></span>
                 <span class="description">{{ $news['publish']->diffForHumans() }}</span>
               </div>
               <!-- /.user-block -->
               <!--box-tools-->
-              <div class="box-tools">
-                <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
-                  <i class="fa fa-circle-o"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-              <!-- /.box-tools -->
+              
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <h4>{{ ucfirst($news['title']) }}</h4>
               @if($news['image'] != "")
                 
                   {{ Html::image("uploads/news/".$news['image'], str_slug($news['title']), ['class' => 'img-responsive']) }}
                 
               @endif
-              <!-- News Title -->
-              <b>{{ $news['title'] }}</b>
-            
               <!-- News Content -->
-              <p>{!! $news['content'] !!}</p>
+              <p>{!! Purifier::clean(ucfirst($news['content'])) !!}</p>
              
           </div>
           </div>

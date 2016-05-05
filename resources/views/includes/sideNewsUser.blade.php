@@ -16,7 +16,7 @@
     @foreach ($latest as $news)
       <li class="item">
         <div class="product-info">
-          <a href="{{ route('news.show', $news->slug) }}" class="product-title">{{ $news->title }} <span class="label label-info pull-right">{{ $news->created_at->diffForHumans() }}</span></a>
+          <a href="{{ route('news.show', $news->slug) }}" class="product-title">{{ str_limit($news->title, 30) }}  <span class="label label-info pull-right">{{ $news->created_at->diffForHumans() }}</span></a>
         </div>
       </li><!-- /.item -->
     @endforeach

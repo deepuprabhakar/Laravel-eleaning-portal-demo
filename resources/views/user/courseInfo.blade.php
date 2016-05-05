@@ -21,7 +21,9 @@
           <div class="box-header with-border">
             <h3 class="box-title">{{ $course['title'] }}</h3>
           </div><!-- /.box-header -->
+          <div class="box-body">
            {!! Purifier::clean($courseInfo['content']) !!}
+          </div>
         </div><!-- /.box -->
       </div>
     </div> 

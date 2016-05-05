@@ -108,4 +108,13 @@ textarea{
 div.mce-fullscreen {
     z-index: 9999;
 }
-
+.callout span{
+	position: relative;
+    left: 10px;
+}
+.text-justify{
+	text-align: justify;
+}
+.float-img{
+	margin-left: 5px;
+}
