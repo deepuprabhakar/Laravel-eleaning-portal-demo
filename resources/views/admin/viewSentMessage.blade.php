@@ -19,6 +19,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.messages.sent') }}"> Messages</a></li>
         <li class="active">Sent</li>
       </ol>
     </section>
