@@ -24,7 +24,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="{{ route('articles.index') }}">Articles</a></li>
+      <li><a href="{{ route('listArticles') }}">Articles</a></li>
       <li class="active">{{ str_limit(ucfirst($article['title']), 20) }}</li>
     </ol>
   </section>

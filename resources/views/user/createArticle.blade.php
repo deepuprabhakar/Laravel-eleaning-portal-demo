@@ -20,7 +20,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Create Article
+      Create New Article
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
@@ -36,7 +36,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Create Article Form</h3>
+            <h3 class="box-title">Article Form</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
           {!! Form::open(['url' => route('articles.store'), 'autocomplete' => 'off', 'id' => 'articles-form', 'files' => true]) !!}
