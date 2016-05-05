@@ -65,9 +65,9 @@ class QuizController extends Controller
     public function edit($id)
     {
         $id = Hashids::connection('quiz')->decode($id);
-        $quiz = Quiz::find($id)->first()->toArray();
+        $quiz = Quiz::with('subject')->where('id', $id)->first()->toArray();
         $subject = Subject::find($id)->first();
-        return view('admin.editQuiz')->with(['quiz' => $quiz, 'subject' => $subject]);
+        return view('admin.editQuiz')->with(['quiz' => $quiz]);
     }
 
     public function update($id, QuizRequest $request)

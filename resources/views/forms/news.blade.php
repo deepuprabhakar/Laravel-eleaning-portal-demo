@@ -31,7 +31,6 @@
   <div class="form-group">
     {!! Form::select('batch', [null => 'Select Batch'], null, ['id' => 'batches', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
   </div>
-  
   <div class="form-group">
     {!! Form::label('image', 'Image') !!}
     {!! Form::file('image', ['class' => 'form-control', 'id' => 'image', 'placeholder' => 'Upload Image']) !!}<br>
