@@ -49,7 +49,9 @@
           <li class="{{ Request::is('articles') ? 'active' : '' }}">
             <a href="{{ route('articles.index') }}"><i class="fa fa-circle-o"></i> View Articles</a>
           </li>
-
+          <li class="{{ Request::is('articles/list') ? 'active' : '' }}">
+            <a href="{{ route('listArticles') }}"><i class="fa fa-circle-o"></i> List Articles</a>
+          </li>
         </ul>
       </li>
       <li class="treeview {{ Request::is('modules') ? 'active' : '' }}{{ Request::is('modules/*') ? 'active' : '' }}">

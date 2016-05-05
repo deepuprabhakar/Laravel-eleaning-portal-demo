@@ -173,7 +173,7 @@ class ArticleController extends Controller
         File::delete($filepath.'/'.$articles['article']);
         Articles::destroy($id);
         Session::flash('success', 'Article deleted!');
-        return redirect()->route('articles.index');
+        return redirect()->route('listArticles');
     }
     /**
      * to remove file in edit
@@ -190,6 +190,23 @@ class ArticleController extends Controller
         $article->article = '';
         $article->save();
         return redirect()->back();
+    }
+
+    public function listArticles()
+    {
+        $user = Sentinel::getUser()->id;
+        $articles = Articles::with('author')->where('student_id', $user)->get();
+        foreach($articles as $item)
+        {
+            $item->date = $item->publish->format('d M. Y');
+            $item->time = $item->publish->diffForHumans();
+        }
+        $articles = $articles->toArray();
+        if($articles)
+            return view('user.listArticles', compact('articles'));
+        else
+            abort(404);
+        
     }
         
 }

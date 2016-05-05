@@ -57,12 +57,6 @@
                   </div>
                   <div class="timeline-footer" style="padding-top: 0;">
                     <a class="btn btn-primary btn-xs btn-flat" href="{{ route('articles.show', $content['slug']) }}">Read more</a>
-                    @if($content['student_id'] == $user)
-                    <a class="btn bg-olive btn-xs btn-flat"  style="margin: 0 3px 0 2px;" href="{{ route('articles.edit', $content['slug']) }}">Edit</a>
-                      {!! Form::open(['route' => ['articles.destroy', $content['hashid']], 'method' => 'DELETE', 'class' => 'delete-form']) !!}
-                      {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs btn-flat btn-delete']) !!}
-                      {!! Form::close() !!}
-                    @endif
                   </div>
                 </div>
               </li>

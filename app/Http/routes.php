@@ -96,6 +96,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('news/{id}', ['as' =>'news.show', 'uses' =>'User\NewsController@newsShow']);
 
     //articles
+    Route::get('articles/list', ['as' => 'listArticles', 'uses' => 'User\ArticleController@listArticles']);
     Route::get('articles/deleteFile/{id}', ['as' => 'deleteFile', 'uses' => 'User\ArticleController@deleteFile']);
     Route::resource('articles', 'User\ArticleController');
 
