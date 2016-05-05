@@ -102,8 +102,10 @@ textarea{
 	height: 100%;
 	right: 0;
 }
-
 .message {
 	background-color: #EDFBF8 ;
+}
+div.mce-fullscreen {
+    z-index: 9999;
 }
 

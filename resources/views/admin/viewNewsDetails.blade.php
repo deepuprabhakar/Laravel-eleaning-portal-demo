@@ -30,8 +30,14 @@
       <div class="col-md-8">
         <div class="box box-primary">
           <div class="box-header with-border">
+            <div class="box-tools pull-right">
+              <a href="{{ route('admin.news.edit', $news['slug']) }}" class="btn btn-primary btn-sm" title="Edit">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+              </a>
+            </div>
             <div class="user-block">
               <img class="img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User Image">
+              <span class="news-edit"></span>
               <span class="username"><a href="" onclick="return false;">Admin</a></span>
               <span class="description">{{ $news['publish']->diffForHumans() }}</span>
             </div>
@@ -39,16 +45,15 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            @if($news['image'] != "")
-              
-                {{ Html::image("uploads/news/".$news['image'], str_slug($news['title']), ['class' => 'img-responsive']) }}
-              
-            @endif
             <!-- post text -->
             <h4>{{ ucfirst($news['title']) }}</h4>
-          
+
+            @if($news['image'] != "")
+              {{ Html::image("uploads/news/".$news['image'], str_slug($news['title']), ['class' => 'img-responsive', 'style' => 'width: 100%;']) }}
+            @endif
+            
             <!-- News Content -->
-            <p>{{ ucfirst($news['content']) }}</p>
+            <p>{!! Purifier::clean(ucfirst($news['content'])) !!}</p>
                
             </div>
           </div>

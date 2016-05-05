@@ -34,7 +34,7 @@ class NewsController extends Controller
         $news = News::orderBy('publish', 'desc')->get();
         foreach($news as $item)
         {
-            $item->date = $item->publish->format('d M. Y');
+            $item->date = $item->publish->format('d M, Y');
             $item->time = $item->publish->diffForHumans();
         }
         $news = $news->toArray();
@@ -76,7 +76,7 @@ class NewsController extends Controller
             });
             if(!(FILE::exists($filepath)))
             {
-                File::makeDirectory($filepath);
+                File::makeDirectory($filepath,  0775, true);
             }
             $img->save($filepath.$filename);
 
@@ -89,7 +89,7 @@ class NewsController extends Controller
             
             if(!(FILE::exists($file_new_path)))
             {
-                File::makeDirectory($file_new_path);
+                File::makeDirectory($file_new_path,  0775, true);
             }
             $img->save($file_new_path.$filename);
             

@@ -26,7 +26,7 @@ return [
         'default' => [
             'HTML.Doctype'             => 'XHTML 1.0 Strict',
             'CSS.AllowedFonts'         => 'source-sans-pro,sans-serif',
-            'CSS.AllowedProperties'    => 'font-size,font-weight,font-style,text-decoration,padding-left,color,background-color,text-align',
+            'CSS.AllowedProperties'    => 'font-weight,font-style,text-decoration,padding-left,color,background-color,text-align',
             'AutoFormat.AutoParagraph' => true,
             'AutoFormat.RemoveEmpty'   => true,
         ],

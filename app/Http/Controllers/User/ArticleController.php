@@ -74,7 +74,7 @@ class ArticleController extends Controller
             $filepath = 'uploads/articles';
             if(!(FILE::exists($filepath)))
             {
-                File::makeDirectory($filepath);
+                File::makeDirectory($filepath, 0775, true);
             }            
             $request->file('article')->move($filepath, $filename);
             $input['article'] = $filename;
