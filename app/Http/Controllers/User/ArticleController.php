@@ -13,7 +13,7 @@ use Session;
 use Image;
 use Carbon\Carbon;
 use Hashids;
-use sentinel;
+use Sentinel;
 use File;
 
 class ArticleController extends Controller
