@@ -41,7 +41,7 @@ class NewsController extends Controller
             $item->date = $item->publish->format('d M, Y');
             $item->time = $item->publish->diffForHumans();
         }
-        $news = $news->toArray();
+        //$news = $news->toArray();
     	return view('user.news',compact('news'));
     }
 

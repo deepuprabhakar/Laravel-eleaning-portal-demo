@@ -122,6 +122,7 @@ Route::group(['middleware' => ['web']], function () {
 
     //quiz
     Route::get('quiz', ['as' => 'quiz', 'uses' => 'User\QuizController@quiz']);
+    Route::post('quiz', ['as' => 'quiz.store', 'uses' => 'User\QuizController@store']);
 
     //course info
     Route::get('courseInfo', ['as' => 'courseInfo.index', 'uses' => 'User\CourseInfoController@index']);

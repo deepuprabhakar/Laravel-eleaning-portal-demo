@@ -8,14 +8,12 @@
     <meta name="format-detection" content="telephone=no"/>
     <title>Coheart E-Learning - {{ $subject->name }}</title>
 @stop
-
+    
 @section('style')
-
-
-<!-- DataTables -->
-    {!! Html::style('plugins/datatables/media/css/dataTables.bootstrap.css') !!}
-    {!! Html::style('plugins/datatables/extensions/Responsive/css/responsive.bootstrap.min.css') !!}  
-
+    <!-- jQuery Confirm -->
+    {!! Html::style('plugins/confirm/jquery-confirm.css') !!}
+    {!! Html::style('plugins/countdown/jquery.countdown.css') !!}
+    {!! Html::style('plugins/iCheck/all.css') !!}
 @stop
 
 @section('content')
@@ -34,7 +32,7 @@
   </section>
 
   <!-- Main content -->
-  <section class="content" style="min-height: 600px;">
+  <section class="content">
     
     <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
@@ -89,8 +87,9 @@
           <!-- /.info-box -->
         </div>
         <!-- /.col -->
-
-            <div class="col-md-10 col-md-offset-1">
+  </div>
+  <div class="row">
+            <div class="col-md-12">
               <!-- Custom Tabs -->
               <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
@@ -101,7 +100,7 @@
                   <li class="pull-right"><a href="#" class="text-muted"></a></li>
                 </ul>
                 <div class="tab-content">
-                  <div class="tab-pane active" id="tab_1">
+                  <div class="tab-pane fade in active" id="tab_1">
                   @if($units->count() == 0)
                     @include('errors.empty', ['item' => $units, 'title' => 'units'])
                   @else
@@ -112,7 +111,7 @@
                   @endif
                   </div>
                   <!-- /.tab-pane for unit-->
-                  <div class="tab-pane" id="tab_2">
+                  <div class="tab-pane fade" id="tab_2">
                   @if(empty($discussion))
                     @include('errors.empty', ['item' => $discussion, 'title' => 'discussion'])
                   @else
@@ -147,7 +146,7 @@
                   @endif
                   </div>
                 <!-- /.tab-pane -->
-                <div class="tab-pane" id="tab_3">
+                <div class="tab-pane fade" id="tab_3">
                   <h3><div class="text-center">Quiz</div></h3>
                     <div id="quiz-content">
                       <p class="text-center">Please note quiz can be taken only once.<br>
@@ -156,8 +155,52 @@
                         <button class="btn btn-primary btn-flat" style="width: 150px;" id="quiz-start">Start</button>
                       </div>
                     </div>
-                    <div id="quiz-questions">
-                      
+                    <div id="response" style="display: none;" class="text-center"></div>
+                    <div class="row"><div class="col-md-10 col-md-offset-1">
+                    <div id="quiz-questions" style="display: none;">
+                      <!-- <div class="bg-red timer-holder">
+                        <span id="timer-countdown"></span>
+                        <i class="fa fa-clock-o"></i>
+                      </div> -->
+                      <div class="timer-holder bg-red">
+                        <div id="countdown"></div>
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                      {!! Form::open(['url' => route('quiz.store'), 'id' => 'quiz-form']) !!}
+                      {!! Form::hidden('subject', $subject->slug, []) !!}
+                      @foreach ($quiz as $key => $question)
+                        <div id="{{ $key }}">
+                          <div class="question">
+                            <div class="callout callout-success" style="margin: 15px 0">
+                              <p>Question: {{ ucfirst($question['question']) }}</p>
+                            </div>
+                          </div>
+                          <div class="answers">
+                            <div style="margin: 5px 0;">
+                            {!! Form::radio($question['hashid'], 'A', false, ['class' => 'flat-red', 'id' => 'radio-1-'.$key]) !!}
+                            <label for="radio-1-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['A']) }}</label>&nbsp;&nbsp;
+                            </div>
+                            <div style="margin: 5px 0;">
+                            {!! Form::radio($question['hashid'], 'B', false, ['class' => 'flat-red', 'id' => 'radio-2-'.$key]) !!}
+                            <label for="radio-2-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['B']) }}</label>&nbsp;&nbsp;
+                            </div>
+                            <div style="margin: 5px 0;">
+                            {!! Form::radio($question['hashid'], 'C', false, ['class' => 'flat-red', 'id' => 'radio-3-'.$key]) !!}
+                            <label for="radio-3-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['C']) }}</label>&nbsp;&nbsp;
+                            </div>
+                            <div style="margin: 5px 0;">
+                            {!! Form::radio($question['hashid'], 'D', false, ['class' => 'flat-red', 'id' => 'radio-4-'.$key]) !!}
+                            <label for="radio-4-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['D']) }}</label>&nbsp;&nbsp;
+                            </div>
+                          </div>
+                        </div>
+                      @endforeach
+                      <div class="form-group text-center">
+                        {!! Form::button('Finish', ['class' => 'btn btn-success', 'style' => 'width: 150px; display: none;', 'id' => 'quiz-finish']) !!}
+                      </div>
+                      {!! Form::close() !!}
+                    </div>
+                    </div>
                     </div>
                 </div>
                
@@ -181,7 +224,13 @@
     <script>
       var url_img = "{{ url('dist/img') }}";
     </script>
+    <!--Countdown -->
+    {!! Html::script('plugins/countdown/jquery.plugin.js') !!}
+    {!! Html::script('plugins/countdown/jquery.countdown.js') !!}
+    <!--iCheck -->
+    {!! Html::script('plugins/iCheck/icheck.min.js') !!}
+    <!-- jQuery Confirm -->
+    {!! Html::script('plugins/confirm/jquery-confirm.js') !!}
     {!! Html::script('dist/js/custom/user_create_discussion.js') !!}
     {!! Html::script('dist/js/custom/userQuiz.js') !!}
-    
 @stop

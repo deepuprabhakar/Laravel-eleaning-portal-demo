@@ -45,11 +45,11 @@ class ModulesController extends Controller
             $course = $subject->course()->first();
             $units = $subject->unit;
             $discussion = $subject->discussionprompt;
-            $quiz = $subject->quiz;
+            $quiz = $subject->quiz()->get()->random(5)->toArray();
             $user = Sentinel::getUser();
-            $student = Student::where('user_id',$user->id)->get()->first();
+            $student = Student::where('user_id', $user->id)->get()->first();
             $discussions = ReplyDiscussion::with('student')->latest()->get();
-            return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions'));
+            return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions', 'quiz'));
         }
         else
             abort(404);
