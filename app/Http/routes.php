@@ -108,6 +108,12 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::post('modules/semester/{sem}/{subject}/discussion',['as' => 'modules.store', 'uses' => 'User\ModulesController@store' ]);
 
+    // Assignment create
+    Route::post('modules/createAssignment',['as' => 'modules.createAssignment', 'uses' => 'User\AssignmentsController@createAssignment' ]);
+    Route::post('fetchAssignments', 'User\AssignmentsController@fetch');
+    Route::post('assignment/{id}',['as' => 'modules.destroy', 'uses' => 'User\AssignmentsController@destroy' ]);
+
+
     //profile
     Route::get('profile', ['as' =>'profile', 'uses' => 'User\ProfileController@profileView']);
     Route::patch('profile/{id}', ['as' => 'profile.update', 'uses' => 'User\ProfileController@update']);
@@ -125,7 +131,8 @@ Route::group(['middleware' => ['web']], function () {
 
     //course info
     Route::get('courseInfo', ['as' => 'courseInfo.index', 'uses' => 'User\CourseInfoController@index']);
-
+    
+    
     /**
      * end of EL User Routes
      */

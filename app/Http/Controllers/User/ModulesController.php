@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\UserDiscussionPromptRequest;
+use App\Http\Requests\AssignmentRequest;
 use App\Http\Controllers\Controller;
 use Sentinel;
 use App\Subject;
@@ -14,6 +15,7 @@ use App\DiscussionPrompt;
 use App\Student;
 use Hashids;
 use App\ReplyDiscussion;
+use App\Assignment;
 
 class ModulesController extends Controller
 {
@@ -49,7 +51,8 @@ class ModulesController extends Controller
             $user = Sentinel::getUser();
             $student = Student::where('user_id',$user->id)->get()->first();
             $discussions = ReplyDiscussion::with('student')->latest()->get();
-            return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions'));
+            $assignments = Assignment::with('student')->latest()->get();
+            return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions','assignments'));
         }
         else
             abort(404);
@@ -69,4 +72,5 @@ class ModulesController extends Controller
             return redirect()->back()->with(['success' => 'Saved Successfully']);
         }
     }
+
 }
