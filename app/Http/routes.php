@@ -55,9 +55,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('messages/reply', ['as' => 'admin.messages.reply', 'uses' => 'Admin\MessageController@reply']);
         Route::resource('messages', 'Admin\MessageController');
 
-        // Projects
-        Route::resource('projects','Admin\ProjectController');
-
         // Units
         Route::get('{subject}/createunits/{id}',['as' => 'admin.units.create', 'uses' => 'Admin\UnitsController@create']);
 
@@ -75,6 +72,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('gallery', ['as' => 'admin.gallery', 'uses' => 'Admin\GalleryController@index']);
         Route::post('uploadImages', ['as' => 'admin.gallery.upload', 'uses' => 'Admin\GalleryController@upload']);
         Route::post('searchImages', ['as' => 'admin.gallery.search', 'uses' => 'Admin\GalleryController@search']);
+
+        //Projects
+        Route::get('projects', ['as' => 'admin.projects', 'uses' => 'Admin\ProjectController@viewProjects']);
+
     });
 
     /**
@@ -131,8 +132,15 @@ Route::group(['middleware' => ['web']], function () {
 
     //course info
     Route::get('courseInfo', ['as' => 'courseInfo.index', 'uses' => 'User\CourseInfoController@index']);
+
     
     
+
+
+    //project
+    Route::resource('project', 'User\ProjectController');
+
+
     /**
      * end of EL User Routes
      */

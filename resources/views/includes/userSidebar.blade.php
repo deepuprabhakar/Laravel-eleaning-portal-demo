@@ -70,7 +70,20 @@
           </li>
         </ul>
       </li>
-      
+      <li class="treeview {{ Request::is('project') ? 'active' : '' }}{{ Request::is('project/*') ? 'active' : '' }}">
+        <a href="#">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          <span>Project</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ Request::is('project/create') ? 'active' : '' }}">
+            <a href="{{ route('project.create') }}"><i class="fa fa-circle-o"></i> Create Project</a>
+          </li>
+          <li class="{{ Request::is('project') ? 'active' : '' }}">
+            <a href="{{ route('project.index') }}"><i class="fa fa-circle-o"></i> View Project</a>
+          </li>
+         </ul>
+      </li>
       <li class="{{ Request::is('messages') ? 'active' : '' }}{{ Request::is('messages/*') ? 'active' : '' }}">
         <a href="{{ route('messages.index') }}">
           @if($count != 0)
