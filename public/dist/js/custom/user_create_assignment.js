@@ -38,6 +38,7 @@ $('#assignment-form').submit(function(e){
 	e.preventDefault();
 	$('#response-assignment').hide();
 	var form = document.querySelector('#assignment-form');
+	$('#assignment').text('Saving...').prop('disabled', true);
 	var formdata = new FormData(form);
 	//console.log(formdata);
 	var url = $(this).attr('action');
@@ -82,4 +83,41 @@ $('#assignment-form').submit(function(e){
 $(function () {
   //Datatables
   fetchAssignment(subject);
-});	 
+});
+
+
+//Jquery conform
+$(function(){
+	$(document).on('click', '.btn-delete', function(e){
+    e.preventDefault();
+    var form = $(this).parent('form');
+    var formData = form.serializeArray();
+    var url = form.attr('action');
+    
+    $.confirm({
+        title: 'Confirm!',
+        content: 'Are you sure?',
+        theme: 'black',
+        confirmButtonClass: 'btn-danger',
+        cancelButtonClass: 'btn-info',
+        confirm: function(){
+        	$.ajax({
+            	url: url,
+            	data: formData,
+            	type: 'POST',
+            	dataType: 'json',
+            	success: function(response)
+            	{
+            		$('#assignment-table').DataTable().ajax.reload();
+            	}
+            });
+        },
+        cancel: function(){
+
+        }
+    });
+
+  });
+
+});
+

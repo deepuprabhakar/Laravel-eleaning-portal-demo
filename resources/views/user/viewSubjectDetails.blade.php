@@ -175,7 +175,7 @@
                             @include('errors.success')
                             <div class="form-group">
                               {!! Form::label('title', 'Assignment Title') !!}
-                              {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter article title']) !!}
+                              {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment title']) !!}
                             </div>
                             <div class="form-group">
                               {!! Form::label('file', 'Assignment File') !!}
@@ -188,7 +188,7 @@
                         </div><!-- /.box-body -->
                         <div class="box-footer">
                          
-                          <button type="submit" class="btn btn-primary news-button" id= "assignment">Create</button>
+                          <button type="submit" class="btn btn-primary news-button" id= "assignment">Save</button>
                         </div>
                         </div>
                         {{ Form::close() }}
@@ -245,6 +245,7 @@
     {!! Html::script('plugins/datatables/media/js/dataTables.bootstrap.min.js') !!}
     {!! Html::script('plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') !!}
     {!! Html::script('plugins/datatables/extensions/Responsive/js/responsive.bootstrap.min.js') !!}
+    {!! Html::script('plugins/confirm/jquery-confirm.js') !!}
     {!! Html::script('dist/js/custom/user_create_discussion.js') !!}
     {!! Html::script('dist/js/custom/user_create_assignment.js') !!}
     {!! Html::script('dist/js/custom/userQuiz.js') !!}

@@ -67,7 +67,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('editquiz/{id}',['as' => 'admin.quiz.edit', 'uses' => 'Admin\QuizController@edit']);
         Route::patch('updatequiz/{id}',['as' => 'admin.quiz.update', 'uses' => 'Admin\QuizController@update']);
         Route::delete('deletequiz/{id}',['as' => 'admin.quiz.destroy', 'uses' => 'Admin\QuizController@destroy']);
-
+        
+        //Assignment
+        Route::post('assignment/save/{id}', ['as' => 'admin.assignment.create', 'uses' => 'Admin\AssignmentController@create']);
+        
         //Gallery
         Route::get('gallery', ['as' => 'admin.gallery', 'uses' => 'Admin\GalleryController@index']);
         Route::post('uploadImages', ['as' => 'admin.gallery.upload', 'uses' => 'Admin\GalleryController@upload']);
