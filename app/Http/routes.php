@@ -75,6 +75,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //Projects
         Route::get('projects', ['as' => 'admin.projects', 'uses' => 'Admin\ProjectController@viewProjects']);
+        Route::post('/projects', 'Admin\ProjectController@saveMarks');
 
     });
 
@@ -87,6 +88,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/fetchSem', 'Admin\SubjectController@fetchSem');
     Route::post('createDiscussion','Admin\DiscussionPromptController@create');
     Route::post('createQuiz','Admin\QuizController@create');
+    Route::post('/fetchProjects', 'Admin\ProjectController@fetchProjects');
 
 
     /**

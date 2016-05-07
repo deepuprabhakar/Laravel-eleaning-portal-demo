@@ -12,7 +12,7 @@ class Projects extends Model implements SluggableInterface
     use SluggableTrait;
 
     protected $fillable = [
-    		'topic', 'description', 'project', 'student_id', 'course_id', 'slug', 'score', 'remarks',
+    		'topic', 'description', 'project', 'student_id', 'course_id', 'slug', 'score', 'remarks', 'batch',
     ];
 
     protected $sluggable = [

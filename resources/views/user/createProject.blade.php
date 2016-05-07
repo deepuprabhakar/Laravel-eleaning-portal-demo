@@ -7,7 +7,7 @@
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
     @if($project)
-      <title>Coheart E-learning - Edit {{ $project->topic }}</title>
+      <title>Coheart E-learning - Edit {{ str_limit($project->topic, 20) }}</title>
     @else
       <title>Coheart E-learning - Create Project</title>
     @endif
@@ -20,7 +20,7 @@
   <section class="content-header">
     <h1>
     @if($project)
-      Edit {{ $project->topic }}
+      Edit {{ str_limit($project->topic, 20) }}
     @else
       Create Project  
     @endif
@@ -30,7 +30,7 @@
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
       <li><a href="{{ route('project.index') }}">Project</a></li>
       @if($project)
-        <li class="active">Edit {{ $project->topic }}</li>
+        <li class="active">Edit {{ str_limit($project->topic, 20) }}</li>
       @else
         <li class="active">Create Project</li>
       @endif

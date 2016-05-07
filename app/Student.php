@@ -76,7 +76,7 @@ class Student extends Model implements SluggableInterface
     public function assignment()
     {
         return $this->hasMany('App\Assignment');
-
+    }
     public function project()
     {
         return $this->hasOne('App\Projects');

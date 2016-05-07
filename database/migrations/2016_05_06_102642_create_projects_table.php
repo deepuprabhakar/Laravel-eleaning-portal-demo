@@ -20,6 +20,7 @@ class CreateProjectsTable extends Migration
             $table->string('project');
             $table->unsignedInteger('student_id');
             $table->unsignedInteger('course_id');
+            $table->unsignedInteger('batch');
             $table->integer('score');
             $table->string('remarks');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');

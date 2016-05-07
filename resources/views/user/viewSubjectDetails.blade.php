@@ -297,7 +297,6 @@
       var url_img = "{{ url('dist/img') }}";
       var subject = "{{ $subject['hashid'] }}";
     </script>
-<<<<<<< HEAD
     <!--Countdown -->
     {!! Html::script('plugins/countdown/jquery.plugin.js') !!}
     {!! Html::script('plugins/countdown/jquery.countdown.js') !!}
@@ -305,13 +304,11 @@
     {!! Html::script('plugins/iCheck/icheck.min.js') !!}
     <!-- jQuery Confirm -->
     {!! Html::script('plugins/confirm/jquery-confirm.js') !!}
-=======
     <!-- DataTables -->
     {!! Html::script('plugins/datatables/media/js/jquery.dataTables.min.js') !!}
     {!! Html::script('plugins/datatables/media/js/dataTables.bootstrap.min.js') !!}
     {!! Html::script('plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') !!}
     {!! Html::script('plugins/datatables/extensions/Responsive/js/responsive.bootstrap.min.js') !!}
->>>>>>> 612cb21bc383b1d42f1ce9406601bb01b4d5539b
     {!! Html::script('dist/js/custom/user_create_discussion.js') !!}
     {!! Html::script('dist/js/custom/user_create_assignment.js') !!}
     {!! Html::script('dist/js/custom/userQuiz.js') !!}
