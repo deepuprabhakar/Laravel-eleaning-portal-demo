@@ -78,6 +78,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //Projects
         Route::get('projects', ['as' => 'admin.projects', 'uses' => 'Admin\ProjectController@viewProjects']);
+        Route::post('/projects', 'Admin\ProjectController@saveMarks');
 
     });
 
@@ -90,6 +91,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/fetchSem', 'Admin\SubjectController@fetchSem');
     Route::post('createDiscussion','Admin\DiscussionPromptController@create');
     Route::post('createQuiz','Admin\QuizController@create');
+    Route::post('/fetchProjects', 'Admin\ProjectController@fetchProjects');
 
 
     /**
@@ -132,6 +134,7 @@ Route::group(['middleware' => ['web']], function () {
 
     //quiz
     Route::get('quiz', ['as' => 'quiz', 'uses' => 'User\QuizController@quiz']);
+    Route::post('quiz', ['as' => 'quiz.store', 'uses' => 'User\QuizController@store']);
 
     //course info
     Route::get('courseInfo', ['as' => 'courseInfo.index', 'uses' => 'User\CourseInfoController@index']);

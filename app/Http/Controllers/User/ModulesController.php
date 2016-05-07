@@ -8,14 +8,15 @@ use App\Http\Requests;
 use App\Http\Requests\UserDiscussionPromptRequest;
 use App\Http\Requests\AssignmentRequest;
 use App\Http\Controllers\Controller;
-use Sentinel;
 use App\Subject;
 use App\Unit;
 use App\DiscussionPrompt;
 use App\Student;
-use Hashids;
 use App\ReplyDiscussion;
+use App\QuizResult;
 use App\Assignment;
+use Sentinel;
+use Hashids;
 
 class ModulesController extends Controller
 {
@@ -47,12 +48,13 @@ class ModulesController extends Controller
             $course = $subject->course()->first();
             $units = $subject->unit;
             $discussion = $subject->discussionprompt;
-            $quiz = $subject->quiz;
+            $quiz = $subject->quiz()->get()->random(5)->toArray();
             $user = Sentinel::getUser();
-            $student = Student::where('user_id',$user->id)->get()->first();
+            $student = Student::where('user_id', $user->id)->get()->first();
+            $quizResult = $subject->quizresult()->where('student_id', $student->id)->first();
             $discussions = ReplyDiscussion::with('student')->latest()->get();
             $assignments = Assignment::with('student')->latest()->get();
-            return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions','assignments'));
+            return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions','assignments', 'quiz', 'quizResult'));
         }
         else
             abort(404);

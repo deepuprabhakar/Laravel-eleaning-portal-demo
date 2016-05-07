@@ -92,6 +92,7 @@ class ProjectController extends Controller
         else
         {   
             //create project
+            $input['batch'] = $student['batch'];
             $input['student_id'] = $student['id'];
             $input['course_id'] = $student['course'];
             $project = $request->file('project');

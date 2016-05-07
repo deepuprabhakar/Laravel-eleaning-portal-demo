@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectsTable extends Migration
+class CreateQuizResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,19 +12,14 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('quiz_results', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('topic');
-            $table->string('slug');
-            $table->text('description');
-            $table->string('project');
             $table->unsignedInteger('student_id');
-            $table->unsignedInteger('course_id');
-            $table->unsignedInteger('batch');
+            $table->unsignedInteger('subject_id');
+            $table->integer('attended');
             $table->integer('score');
-            $table->string('remarks');
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -36,6 +31,6 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('projects');
+        Schema::drop('quiz_results');
     }
 }

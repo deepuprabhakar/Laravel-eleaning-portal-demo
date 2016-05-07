@@ -42,7 +42,7 @@ class ArticleController extends Controller
             $item->date = $item->publish->format('d M. Y');
             $item->time = $item->publish->diffForHumans();
         }
-        $articles = $articles->toArray();
+        //$articles = $articles->toArray();
         return view('user.viewArticles', compact('articles', 'user'));
     }
 

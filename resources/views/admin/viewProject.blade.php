@@ -26,7 +26,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li class="active">View Students</li>
+      <li class="active">View Projects</li>
     </ol>
   </section>
 
@@ -38,6 +38,8 @@
           <div class="box-header with-border">
             <h3 class="box-title">List of Projects</h3>
           </div><!-- /.box-header -->
+            <div class="box-body">
+            <div id="response-project" style="display: none;"></div>
               <div class="col-sm-6 form-group">
                 {!! Form::label('course', 'Course') !!}
                 {!! Form::select('course', [null => 'Select Course']+$courses, null, ['id' => 'courses', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
@@ -46,28 +48,27 @@
                 {!! Form::label('batch', 'Batch') !!}
                 {!! Form::select('batch', [null => 'Select Batch'], null, ['id' => 'batch', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
               </div>
-          <div class="box-body">
-            @include('errors.success')
-            <table id="student-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+          
+            
+            <table id="project-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="width: 20px;">No.</th>
                   <th>Student Name</th>
                   <th>Project Topic</th>
-                  <th>File</th>
-                  <th>Score</th>
-                  <th>Remarks</th>
-                  <th>Action</th>
+                  <th class="text-center">File</th>
+                  <th class="text-center">Score</th>
+                  <th class="text-center">Remarks</th>
+                  <th class="text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
                 
+                
               </tbody>
             </table>
           </div>
-          <div class="overlay">
-            <i class="fa fa-refresh fa-spin"></i>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -95,5 +96,8 @@
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
+    </script>
+    <script>
+      var old = "{{ old('batch') }}";
     </script>
   @stop

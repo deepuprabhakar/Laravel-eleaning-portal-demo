@@ -15,7 +15,10 @@
   <div class="form-group">
     {!! Form::label('project', 'Project') !!}
     {!! Form::file('project', ['class' => 'form-control', 'id' => 'project']) !!}
-      @if($project['project']!= '')
+      
+  </div>
+  <div class="form-group">
+    @if($project['project']!= '')
         <a href="{{ url('uploads/projects', $project['project']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $project['project'] }}</a>
       @endif
   </div>
