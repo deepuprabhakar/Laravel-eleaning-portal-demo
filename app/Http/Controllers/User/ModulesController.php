@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\UserDiscussionPromptRequest;
 use App\Http\Controllers\Controller;
-use Sentinel;
 use App\Subject;
 use App\Unit;
 use App\DiscussionPrompt;
 use App\Student;
-use Hashids;
 use App\ReplyDiscussion;
+use App\QuizResult;
+use Sentinel;
+use Hashids;
+
 
 class ModulesController extends Controller
 {
@@ -48,8 +50,9 @@ class ModulesController extends Controller
             $quiz = $subject->quiz()->get()->random(5)->toArray();
             $user = Sentinel::getUser();
             $student = Student::where('user_id', $user->id)->get()->first();
+            $quizResult = $subject->quizresult()->where('student_id', $student->id)->first();
             $discussions = ReplyDiscussion::with('student')->latest()->get();
-            return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions', 'quiz'));
+            return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions', 'quiz', 'quizResult'));
         }
         else
             abort(404);

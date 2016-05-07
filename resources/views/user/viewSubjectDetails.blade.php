@@ -148,6 +148,7 @@
                 <!-- /.tab-pane -->
                 <div class="tab-pane fade" id="tab_3">
                   <h3><div class="text-center">Quiz</div></h3>
+                @if(is_null($quizResult))
                     <div id="quiz-content">
                       <p class="text-center">Please note quiz can be taken only once.<br>
                       Click on start button to begin the Quiz....</p>
@@ -202,6 +203,16 @@
                     </div>
                     </div>
                     </div>
+                  @else
+                    <div class="row">
+                      <div class="col-md-8 col-md-offset-2">
+                        <div class="callout callout-success text-center">
+                          <p style="font-size: 15px;">Attended: {{ $quizResult->attended }}/5</p style="font-size: 15px;">
+                          <h4>Your score: {{ $quizResult->score }}/5</h4>
+                        </div>
+                      </div>
+                    </div>
+                  @endif
                 </div>
                
               </div>
