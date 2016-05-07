@@ -89,6 +89,17 @@ return [
             'length' => 6,
             'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
         ],
+        'project' => [
+            'salt' => 'LMNopresqwngwsqDKKlllMNopfkeFkdflKlkdofekfefmdkpoyutkjBFJeufekAS',
+            'length' => 6,
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
+        ],
+
+        'assignment' => [
+            'salt' => 'ASSrjaghtengwsqDKKlllMNopfkeFkdflKlkdofSSnvdhfddjfsfjsfjfjsdf',
+            'length' => 6,
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
+        ],
 
     ],
 

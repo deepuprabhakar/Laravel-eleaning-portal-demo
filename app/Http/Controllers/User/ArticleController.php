@@ -13,7 +13,7 @@ use Session;
 use Image;
 use Carbon\Carbon;
 use Hashids;
-use sentinel;
+use Sentinel;
 use File;
 
 class ArticleController extends Controller
@@ -72,7 +72,7 @@ class ArticleController extends Controller
             $extension = $article->getClientOriginalExtension();
             $filename = str_slug($request->get('title'), "-").'-'.time().'.'.$extension;
             $filepath = 'uploads/articles';
-            if(!(FILE::exists($filepath)))
+            if(!(File::exists($filepath)))
             {
                 File::makeDirectory($filepath, 0775, true);
             }            
