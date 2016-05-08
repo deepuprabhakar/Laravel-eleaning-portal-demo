@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class AssignmentRequest extends Request
+class AdminAssignmentRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class AssignmentRequest extends Request
     public function rules()
     {
         return [
-            
-            'title' => 'required',
-            'file' => 'required|mimes:pdf,doc,docx',
+            'mark' => 'required',
         ];
     }
 }

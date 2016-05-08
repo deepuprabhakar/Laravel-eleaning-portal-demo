@@ -201,9 +201,43 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              The body of the box
+            <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th style="width: 20px;">No.</th>
+                  <th>Student Name</th>
+                  <th> Assignment Title</th>
+                  <th>Assignment File</th>
+                  <th>Score</th>
+                  <th>Remark</th>
+                  <th class="text-center" style="width: 200px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              @foreach ($assignments as $key => $assignment)
+                <tr>
+                  <td>{{ ++$key }}</td>
+                  <td>{{ $assignment['student']['name'] }}</td>
+                  <td>{{ $assignment['title'] }}</td>
+                  <td><a href="{{ url('uploads/assignments', $assignment['file']) }}" class="btn btn-primary" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></td>
+                  
+                   {{ Form::open(['url' => route('admin.assignment.create', $assignment['hashid']), 'autocomplete' => 'off', 'class' => 'assignment-form']) }} 
+                   <td>{{ Form::text('mark', $assignment['mark'], ['id' => 'mark','class' => 'form-control', 'placeholder' => 'Enter Mark']) }}</td>
+                   <td>{{ Form::text('remark', $assignment['remark'], ['class' => 'form-control', 'id' => 'remark', 'placeholder' => 'Enter Remark']) }}</td>
+                  <td class="text-center table-actions">
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary assignment-button']) !!}
+                  </td>
+                  {{ Form::close() }}
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+            <div id="response-assignment" style="display: none;"></div>
             </div>
             <!-- /.box-body -->
+            <div class="overlay">
+            <i class="fa fa-refresh fa-spin"></i>
+          </div>
         </div>
       </div>
       </div><!-- ./Row -->    
@@ -244,5 +278,5 @@
     {!! Html::script('plugins/datatables/media/js/jquery.dataTables.min.js') !!}
     {!! Html::script('plugins/datatables/media/js/dataTables.bootstrap.min.js') !!}
     {!! Html::script('plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') !!}
-    
+    {!! Html::script('dist/js/custom/viewAssignment.js') !!}
 @stop

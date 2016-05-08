@@ -67,7 +67,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('editquiz/{id}',['as' => 'admin.quiz.edit', 'uses' => 'Admin\QuizController@edit']);
         Route::patch('updatequiz/{id}',['as' => 'admin.quiz.update', 'uses' => 'Admin\QuizController@update']);
         Route::delete('deletequiz/{id}',['as' => 'admin.quiz.destroy', 'uses' => 'Admin\QuizController@destroy']);
-
+        
+        //Assignment
+        Route::post('assignment/save/{id}', ['as' => 'admin.assignment.create', 'uses' => 'Admin\AssignmentController@create']);
+        
         //Gallery
         Route::get('gallery', ['as' => 'admin.gallery', 'uses' => 'Admin\GalleryController@index']);
         Route::post('uploadImages', ['as' => 'admin.gallery.upload', 'uses' => 'Admin\GalleryController@upload']);
@@ -75,6 +78,7 @@ Route::group(['middleware' => ['web']], function () {
 
         //Projects
         Route::get('projects', ['as' => 'admin.projects', 'uses' => 'Admin\ProjectController@viewProjects']);
+        Route::post('/projects', 'Admin\ProjectController@saveMarks');
 
     });
 
@@ -87,6 +91,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/fetchSem', 'Admin\SubjectController@fetchSem');
     Route::post('createDiscussion','Admin\DiscussionPromptController@create');
     Route::post('createQuiz','Admin\QuizController@create');
+    Route::post('/fetchProjects', 'Admin\ProjectController@fetchProjects');
 
 
     /**

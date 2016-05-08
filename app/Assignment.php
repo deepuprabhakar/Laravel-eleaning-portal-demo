@@ -35,4 +35,9 @@ class Assignment extends Model implements SluggableInterface
 	{
 		return $this->belongsTo('App\Student');
 	}
+	
+	public function subject()
+	{
+		return $this->belongsTo('App\Subject');
+	}
 }

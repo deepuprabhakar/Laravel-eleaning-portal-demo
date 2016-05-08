@@ -211,6 +211,60 @@
                 <div class="form-group text-center">
                   {!! Form::button('Finish', ['class' => 'btn btn-success', 'style' => 'width: 150px; display: none;', 'id' => 'quiz-finish']) !!}
                 </div>
+
+
+                <div class="tab-pane" id="tab_4">
+                    <div id="assignment-content">
+                      <div class="box box-success box-solid">
+                        <div class="box-header with-border">
+                          <h3 class="box-title">Add Assignment</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                          {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
+                            @include('errors.list')
+                            @include('errors.success')
+                            <div class="form-group">
+                              {!! Form::label('title', 'Assignment Title') !!}
+                              {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment title']) !!}
+                            </div>
+                            <div class="form-group">
+                              {!! Form::label('file', 'Assignment File') !!}
+                              {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
+                              {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
+                              {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
+                               <div id="response-assignment" style="display: none;"></div>
+                            </div>
+                            
+                        </div><!-- /.box-body -->
+                        <div class="box-footer">
+                         
+                          <button type="submit" class="btn btn-primary news-button" id= "assignment">Save</button>
+                        </div>
+                        </div>
+                        {{ Form::close() }}
+                    </div>
+                    <div class="box box-success box-solid">
+                      <div class="box-header with-border">
+                        <h3 class="box-title">Assignments</h3>
+                      </div><!-- /.box-header -->
+                      <div class="box-body">
+                        <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th style="width: 20px;">No.</th>
+                              <th>Title</th>
+                              <th>Score</th>
+                              <th>Remarks</th>
+                              <th class="text-center">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                          </tbody>
+                        </table>
+                      </div><!-- /.box-body -->
+                    </div>
+
                 {!! Form::close() !!}
               </div>
               </div>
@@ -222,6 +276,7 @@
                   <div class="callout callout-success text-center">
                     <p style="font-size: 15px;">Attended: {{ $quizResult->attended }}/5</p style="font-size: 15px;">
                     <h4>Your score: {{ $quizResult->score }}/5</h4>
+
                   </div>
                 </div>
               </div>

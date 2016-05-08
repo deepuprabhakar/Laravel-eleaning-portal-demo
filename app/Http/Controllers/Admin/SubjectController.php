@@ -9,6 +9,7 @@ use App\Http\Requests\SubjectRequest;
 use App\Course;
 use App\Subject;
 use App\Unit;
+use App\Assignment;
 use Session;
 use Hashids;
 
@@ -70,7 +71,8 @@ class SubjectController extends Controller
     {
         $subject = Subject::with('course')->with('discussionprompt')->where('slug', $id)->first()->toArray();
         $units = Unit::with('subject')->where('subject_id', $subject['id'])->get()->toArray();
-        return view('admin.viewSubjectDetails', compact('subject','units'));
+        $assignments = Assignment::with('subject','student')->where('subject_id', $subject['id'])->get()->toArray();
+        return view('admin.viewSubjectDetails', compact('subject','units', 'assignments'));
     }
 
     /**
