@@ -30,7 +30,7 @@ $(function(){
 		    var block = "";
 		    $.each(result, function(key, value){
 		    	block += ('<div class="item"><div class="well">\
-		    				<img src="'+url+'/'+value.image+'" class="img-responsive">\
+		    				<img src="'+url+'/thumbs/'+value.image+'" class="img-responsive">\
 		    				<div class="img-path">'+url+'/'+value.image+'</div>\
 		    				</div></div>');
 		    });

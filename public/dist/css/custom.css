@@ -89,7 +89,7 @@ textarea{
 	width: 100%;
 }
 .masonry .img-path{
-	word-wrap: break-word;
+	word-break: break-all;
     background: #ECF0F5;
     padding: 3px 8px;
 }

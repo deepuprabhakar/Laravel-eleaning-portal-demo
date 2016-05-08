@@ -56,7 +56,7 @@
           @foreach ($images as $image)
             <div class="item">
               <div class="well"> 
-                <img src="{{ url('uploads/gallery', $image->image) }}" alt="" class="img-responsive">
+                <img src="{{ url('uploads/gallery/thumbs', $image->image) }}" alt="" class="img-responsive">
                 <div class="img-path">
                   {{ url('uploads/gallery', $image->image) }}
                 </div>
