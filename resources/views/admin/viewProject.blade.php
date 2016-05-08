@@ -40,6 +40,7 @@
           </div><!-- /.box-header -->
             <div class="box-body">
             <div id="response-project" style="display: none;"></div>
+            <div class="row">
               <div class="col-sm-6 form-group">
                 {!! Form::label('course', 'Course') !!}
                 {!! Form::select('course', [null => 'Select Course']+$courses, null, ['id' => 'courses', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
@@ -48,7 +49,7 @@
                 {!! Form::label('batch', 'Batch') !!}
                 {!! Form::select('batch', [null => 'Select Batch'], null, ['id' => 'batch', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
               </div>
-          
+            </div>
             
             <table id="project-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
               <thead>

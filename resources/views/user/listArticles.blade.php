@@ -69,9 +69,9 @@
               </tbody>
             </table>
           </div>
-          <div class="overlay">
+          <!-- <div class="overlay">
             <i class="fa fa-refresh fa-spin"></i>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

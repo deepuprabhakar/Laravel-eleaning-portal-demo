@@ -41,6 +41,11 @@
               </tr>
             </thead>
             <tbody>
+              @if(empty($project))
+              <tr>
+                <td colspan="3" class="text-center">No data available!</td>
+              </tr>
+              @else
               <tr>
                 <td>{{ $project->topic }}</td>
                 @if($project->score == 0 && $project->remarks =='')
@@ -51,6 +56,7 @@
                 <td>{{ $project->remarks }}</td>
                 @endif
               </tr>
+              @endif
             </tbody>
           </table>
         </div><!-- /.table-responsive -->

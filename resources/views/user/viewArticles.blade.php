@@ -71,7 +71,7 @@
               <!-- END timeline item -->
               <!-- timeline item -->
             @endforeach
-            @if(!empty($articles))
+            @if($articles->count()>0)
               <li>
                 <i class="fa fa-clock-o bg-blue"></i>
               </li>
