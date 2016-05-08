@@ -154,6 +154,13 @@
           <div class="tab-pane fade" id="tab_3">
             <h3><div class="text-center">Quiz</div></h3>
           @if(is_null($quizResult))
+            @if(is_null($quiz))
+              <div class="question">
+                <div class="callout callout-info" style="margin: 15px 0">
+                  <p>Will be updated soon...</p>
+                </div>
+              </div>
+            @else
               <div id="quiz-content">
                 <p class="text-center">Please note quiz can be taken only once.<br>
                 Click on start button to begin the Quiz....</p>
@@ -207,7 +214,8 @@
                 {!! Form::close() !!}
               </div>
               </div>
-              </div>
+              </div><!-- ./row-->
+              @endif
             @else
               <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -266,7 +274,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
@@ -297,7 +311,6 @@
       var url_img = "{{ url('dist/img') }}";
       var subject = "{{ $subject['hashid'] }}";
     </script>
-<<<<<<< HEAD
     <!--Countdown -->
     {!! Html::script('plugins/countdown/jquery.plugin.js') !!}
     {!! Html::script('plugins/countdown/jquery.countdown.js') !!}
@@ -305,13 +318,11 @@
     {!! Html::script('plugins/iCheck/icheck.min.js') !!}
     <!-- jQuery Confirm -->
     {!! Html::script('plugins/confirm/jquery-confirm.js') !!}
-=======
     <!-- DataTables -->
     {!! Html::script('plugins/datatables/media/js/jquery.dataTables.min.js') !!}
     {!! Html::script('plugins/datatables/media/js/dataTables.bootstrap.min.js') !!}
     {!! Html::script('plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') !!}
     {!! Html::script('plugins/datatables/extensions/Responsive/js/responsive.bootstrap.min.js') !!}
->>>>>>> 612cb21bc383b1d42f1ce9406601bb01b4d5539b
     {!! Html::script('dist/js/custom/user_create_discussion.js') !!}
     {!! Html::script('dist/js/custom/user_create_assignment.js') !!}
     {!! Html::script('dist/js/custom/userQuiz.js') !!}

@@ -53,6 +53,8 @@ class AssignmentsController extends Controller
         $subject = Subject::find($subject)->first();
         $student = Student::where('user_id', Sentinel::getUser()->id)->first();
         $assignment = $subject->assignments()->where('student_id', $student->id)->get();
+        //return $assignment;
+        $response = [];
         foreach ($assignment as $key => $value) {
             $response[$key]['no'] = $key+1;
             $response[$key]['title'] = $value->title;

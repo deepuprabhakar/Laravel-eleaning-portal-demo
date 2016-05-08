@@ -48,7 +48,11 @@ class ModulesController extends Controller
             $course = $subject->course()->first();
             $units = $subject->unit;
             $discussion = $subject->discussionprompt;
-            $quiz = $subject->quiz()->get()->random(5)->toArray();
+            $quizCount = $subject->quiz()->count();
+            if($quizCount >= 5)
+                $quiz = $subject->quiz()->get()->random(5)->toArray();
+            else
+                $quiz = NULL;
             $user = Sentinel::getUser();
             $student = Student::where('user_id', $user->id)->get()->first();
             $quizResult = $subject->quizresult()->where('student_id', $student->id)->first();
