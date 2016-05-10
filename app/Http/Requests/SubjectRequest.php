@@ -37,7 +37,8 @@ class SubjectRequest extends Request
                 'name'  => 'required|min:2|unique_with:subjects,batch,course,semester',
                 'batch' => 'required|regex:/\b\d{4}\b/',
                 'course'=> 'required',
-                'semester'=> 'required'
+                'semester'=> 'required',
+                'file' => 'required|mimes:pdf,doc,docx',
             ];
         }
 

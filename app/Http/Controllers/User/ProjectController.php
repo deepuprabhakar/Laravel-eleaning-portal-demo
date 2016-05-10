@@ -91,6 +91,16 @@ class ProjectController extends Controller
         }
         else
         {   
+            $validator = Validator::make($request->all(), [
+                        'topic' => 'required',
+                        'description' => 'required',
+                        'project' => 'required|mimes:pdf,doc,docx'
+
+                    ]);
+            if ($validator->fails()) 
+            {
+                return redirect(route('project.create'))->withErrors($validator)->withInput();
+            }
             //create project
             $input['batch'] = $student['batch'];
             $input['student_id'] = $student['id'];

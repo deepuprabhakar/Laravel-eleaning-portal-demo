@@ -47,11 +47,10 @@ class ProjectController extends Controller
         $course = $request->get('course');
         $batch = $request->get('batch');
         $students = Student::with('project')->where('course', $course)->where('batch', $batch)->get();
-        //return $students;
         $response = [];
         foreach ($students as $key => $value) {
-            if(is_null($value->project))
-            {
+            //dd($value->project);
+            if(!is_null($value->project)){
                 $response[$key]['no'] = $key+1;
                 $response[$key]['name'] = $value->name;
                 $response[$key]['topic'] = str_limit($value['project']['topic'],40);
@@ -61,7 +60,6 @@ class ProjectController extends Controller
                 $response[$key]['remarks'] ='<input type="text" class="form-control remarks" name="remarks-'.$key.'" value="'.$value['project']['remarks'].'">';
                 $response[$key]['action'] = '<div class="text-center"><button type="submit" class="btn bg-blue btn-sm btn-flat save-button">Save</button></div>';
             }
-                
         }
         $data['data'] = $response;
         return response()->json($data, 200);

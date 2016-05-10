@@ -17,6 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('batch');
+            $table->string('file');
             $table->unsignedInteger('course');
             $table->unsignedInteger('semester');
             $table->string('file');

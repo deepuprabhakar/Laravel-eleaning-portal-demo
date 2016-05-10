@@ -12,6 +12,7 @@ use App\Unit;
 use App\Assignment;
 use Session;
 use Hashids;
+use File;
 
 class SubjectController extends Controller
 {
@@ -56,7 +57,21 @@ class SubjectController extends Controller
     public function store(SubjectRequest $request)
     {
         date_default_timezone_set('Asia/Kolkata');
-        Subject::create($request->all());
+        $subjectfile = $request->file('file');
+        $input = $request->all();
+        if($request->hasFile('file')) 
+        {
+            $extension = $subjectfile->getClientOriginalExtension();
+            $filename = str_slug($request->get('name'), "-").'-'.time().'.'.$extension;
+            $filepath = 'uploads/subjects';
+            if(!(File::exists($filepath)))
+            {
+                File::makeDirectory($filepath, 0775, true);
+            }            
+            $request->file('file')->move($filepath, $filename);
+            $input['file'] = $filename;
+            $subject = Subject::create($input);
+        }
         Session::flash('success', 'Subject added successfully.');
         return redirect(route('admin.subjects.create'));
     }
@@ -104,8 +119,27 @@ class SubjectController extends Controller
     {
         $id = Hashids::connection('subject')->decode($id);
         $subject = Subject::find($id)->first();
-        $subject->update($request->all());
-        return redirect()->route('admin.subjects.edit', $subject->slug)->with('success', 'Subject updated succesfully');
+        $subjectFile = $subject->file;
+        $input = $request->all();
+        $filepath = 'uploads/subjects';
+            if($request->hasFile('file'))
+            {
+                File::delete($filepath.'/'.$subjectFile);
+                $subjectfile = $request->file('file');
+                $extension = $subjectfile->getClientOriginalExtension();
+                $filename = str_slug($request->get('name'), "-").'-'.time().'.'.$extension;
+                $input['file'] = $filename;
+                $request->file('file')->move($filepath, $filename);
+            }
+            else
+            {
+                $ext = explode('.', $subject->file);
+                $extension = $ext[1];
+                $filename = str_slug($request->get('name'), "-").'-'.time().'.'.$extension;   
+                $input['file'] = $filename;
+            }
+            $subject->update($input);
+            return redirect()->route('admin.subjects.edit', $subject->slug)->with('success', 'Subject updated succesfully');
     }
 
     /**
@@ -117,6 +151,9 @@ class SubjectController extends Controller
     public function destroy($id)
     {
         $id = Hashids::connection('subject')->decode($id);
+        $subject = Subject::find($id)->first();
+        $filepath = 'uploads/subjects';
+        File::delete($filepath.'/'.$subject['file']);
         Subject::destroy($id);
         return redirect()->route('admin.subjects.index')->with('success', 'Subject deleted succesfully');
     }
