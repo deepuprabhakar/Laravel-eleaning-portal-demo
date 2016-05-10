@@ -46,18 +46,15 @@
                 <tr>
                   <th style="width: 10px">No</th>
                   <th>Subject</th>
-                  <th>Course</th>
-                  <th>Batch</th>
-                  <th style="width: 40px">Action</th>
+                  <th class="text-center">Action</th>
                 </tr>
                 @foreach($subjects as $key=>$subject )
                 <tr>
                   <td>{{ ++$key }}</td>
                   <td>{{ $subject['name'] }}</td>
-                  <td>{{ $subject['course']['title'] }}</td>
-                  <td>{{ $subject['batch'] }}</td>
                   <td class="text-center table-actions">
                     <a class="btn bg-purple btn-xs btn-flat" href="{{ route('modules.show', [$subject['semester'], $subject['slug']]) }}">View</a>
+                    <a href="{{ url('uploads/subjects', $subject['name']) }}" class="btn bg-blue btn-xs btn-flat" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
                   </td>
                   
                 </tr>
