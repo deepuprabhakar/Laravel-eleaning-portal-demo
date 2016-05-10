@@ -1,4 +1,4 @@
-function fetchAssignment(sub)
+ function fetchAssignment(sub)
 {
 	$('#assignment-table')
 	  .on( 'init.dt', function () {

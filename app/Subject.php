@@ -13,7 +13,7 @@ class Subject extends Model implements SluggableInterface
 	use SluggableTrait;
 
 	protected $fillable = [
-		'name', 'batch', 'course', 'semester', 'slug'
+		'name', 'batch', 'course', 'semester', 'slug', 'file'
 	];
 
 	protected $sluggable = [
