@@ -19,6 +19,7 @@ class CreateSubjectsTable extends Migration
             $table->integer('batch');
             $table->unsignedInteger('course');
             $table->unsignedInteger('semester');
+            $table->string('file');
             $table->unique(array('name', 'batch', 'course', 'semester'));
             $table->foreign('course')->references('id')->on('courses')->onDelete('cascade');
             $table->timestamps();

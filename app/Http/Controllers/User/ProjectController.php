@@ -95,16 +95,20 @@ class ProjectController extends Controller
             $input['batch'] = $student['batch'];
             $input['student_id'] = $student['id'];
             $input['course_id'] = $student['course'];
-            $project = $request->file('project');
-            $extension = $project->getClientOriginalExtension();
-            $filename = str_slug($request->get('topic'), "-").'-'.$student['name'].'-'.time().'.'.$extension;
-            $input['project'] = $filename;
-            $project = Projects::create($input);
-            if(!(FILE::exists($filepath)))
+            if($request->hasFile('project'))
             {
-                File::makeDirectory($filepath, 0775, true);
-            }            
-            $request->file('project')->move($filepath, $filename);
+                $project = $request->file('project');
+                $extension = $project->getClientOriginalExtension();
+                $filename = str_slug($request->get('topic'), "-").'-'.$student['name'].'-'.time().'.'.$extension;
+                $input['project'] = $filename;
+                
+                if(!(FILE::exists($filepath)))
+                {
+                    File::makeDirectory($filepath, 0775, true);
+                }            
+                $request->file('project')->move($filepath, $filename);
+            }
+            $project = Projects::create($input);
             Session::flash('success','Project Added Successfully'); 
         }
         
