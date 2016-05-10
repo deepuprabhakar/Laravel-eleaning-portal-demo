@@ -30,6 +30,11 @@ class Assignment extends Model implements SluggableInterface
     {
         return Hashids::connection('assignment')->encode($this->attributes['id']);
     }
+    public function getRemarkAttribute($value)
+	{
+		return ucfirst($value);
+	}
+
 
     public function student()
 	{

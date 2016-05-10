@@ -25,6 +25,13 @@
     {!! Form::label('semester', 'Semester') !!}
     {!! Form::select('semester', [null => 'Select Semester'], null, ['id' => 'semester', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
   </div>
+  <div class="form-group">
+    {!! Form::label('file', 'Subject File') !!}
+    {!! Form::file('file', ['class' => 'form-control', 'id' => 'file', 'placeholder' => 'Upload File']) !!}<br>
+    @if($flag && $subject['file'] != "")
+        <a href="{{ url('uploads/subjects', $subject['file']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $subject['file'] }}</a>
+   @endif
+  </div>
 </div><!-- /.box-body -->
 
 <div class="box-footer">
