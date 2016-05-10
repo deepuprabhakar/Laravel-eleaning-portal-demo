@@ -36,8 +36,8 @@
             <thead>
               <tr>
                 <th>Topic</th>
-                <th>Score</th>
-                <th>Remarks</th>
+                <th class="text-center">Score</th>
+                <th class="text-center">Remarks</th>
               </tr>
             </thead>
             <tbody>
@@ -52,8 +52,8 @@
                 <td>Not yet checked!</td>
                 <td>Not yet checked!</td>
                 @else
-                <td>{{ $project->score }}</td>
-                <td>{{ $project->remarks }}</td>
+                <td class="text-center">{{ $project->score }}</td>
+                <td class="text-center">{{ $project->remarks }}</td>
                 @endif
               </tr>
               @endif

@@ -29,6 +29,11 @@ class Projects extends Model implements SluggableInterface
         return Hashids::connection('project')->encode($this->attributes['id']);
     }
 
+    public function getRemarksAttribute($value)
+    {
+        return ucfirst($value);
+    }
+    
     /**
      * Relations
      */
