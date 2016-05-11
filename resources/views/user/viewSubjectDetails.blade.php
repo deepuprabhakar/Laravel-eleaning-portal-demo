@@ -110,9 +110,23 @@
               @include('errors.empty', ['item' => $units, 'title' => 'units'])
             @else
                 @foreach($units as $key=>$unit)
-                  <b>{{ $unit->title }}</b>
-                  <p>{!! $unit->content!!}</p>
-                @endforeach
+                  <div class="box box-success box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">{{ $unit->title }}</h3>
+                      <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                      </div>
+                      <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" style="display: block;">
+                      {!! $unit->content!!}
+                    </div>
+                    <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+              @endforeach
             @endif
             </div>
             <!-- /.tab-pane for unit-->

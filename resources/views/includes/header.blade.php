@@ -34,7 +34,12 @@
             @include('includes.topMessages')
             </li>
             @if($latest)
-            <li class="footer"><a href="{{ route('admin.messages.index') }}">See All Messages</a></li>
+
+            @if(Sentinel::inRole('admin'))
+             <li class="footer"><a href="{{ route('admin.messages.index') }}">See All Messages</a></li>
+           @else
+              <li class="footer"><a href="{{ route('messages.index') }}">See All Messages</a></li>
+            @endif
             @else
             <li class="footer"></li>
             @endif
