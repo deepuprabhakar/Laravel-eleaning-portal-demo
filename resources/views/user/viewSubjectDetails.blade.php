@@ -101,10 +101,10 @@
             <li><a href="#tab_2" data-toggle="tab">Discussion Prompt</a></li>
             <li><a href="#tab_3" data-toggle="tab">Quiz</a></li>
             <li><a href="#tab_4" data-toggle="tab">Assignment</a></li>
-        
             <li class="pull-right"><a href="#" class="text-muted"></a></li>
           </ul>
           <div class="tab-content">
+            <!--units-->
             <div class="tab-pane fade in active" id="tab_1">
             @if($units->count() == 0)
               @include('errors.empty', ['item' => $units, 'title' => 'units'])
@@ -128,9 +128,9 @@
                   <!-- /.box -->
               @endforeach
             @endif
-            </div>
-            <!-- /.tab-pane for unit-->
-            <div class="tab-pane fade" id="tab_2">
+            </div><!--end units-->
+            <!--discussion-->
+              <div class="tab-pane fade" id="tab_2">
             @if(empty($discussion))
               @include('errors.empty', ['item' => $discussion, 'title' => 'discussion'])
             @else
@@ -164,8 +164,9 @@
                 </div>
             @endif
             </div>
-          <!-- /.tab-pane -->
-          <div class="tab-pane fade" id="tab_3">
+            <!--end discussion-->
+            <!--quiz-->
+               <div class="tab-pane fade" id="tab_3">
             <h3><div class="text-center">Quiz</div></h3>
           @if(is_null($quizResult))
             @if(is_null($quiz))
@@ -226,61 +227,6 @@
                   {!! Form::button('Finish', ['class' => 'btn btn-success', 'style' => 'width: 150px; display: none;', 'id' => 'quiz-finish']) !!}
                 </div>
 
-
-                <div class="tab-pane" id="tab_4">
-                    <div id="assignment-content">
-                      <div class="box box-success box-solid">
-                        <div class="box-header with-border">
-                          <h3 class="box-title">Add Assignment</h3>
-                        </div><!-- /.box-header -->
-                        <div class="box-body">
-                          {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
-                            @include('errors.list')
-                            @include('errors.success')
-                            <div class="form-group">
-                              {!! Form::label('title', 'Assignment Title') !!}
-                              {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment title']) !!}
-                            </div>
-                            <div class="form-group">
-                              {!! Form::label('file', 'Assignment File') !!}
-                              {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
-                              {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
-                              {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
-                               <div id="response-assignment" style="display: none;"></div>
-                            </div>
-                            
-                        </div><!-- /.box-body -->
-                        <div class="box-footer">
-                         
-                          <button type="submit" class="btn btn-primary news-button" id= "assignment">Save</button>
-                        </div>
-                        </div>
-                        {{ Form::close() }}
-                    </div>
-                    <div class="box box-success box-solid">
-                      <div class="box-header with-border">
-                        <h3 class="box-title">Assignments</h3>
-                      </div><!-- /.box-header -->
-                      <div class="box-body">
-                        <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
-                          <thead>
-                            <tr>
-                              <th style="width: 20px;">No.</th>
-                              <th>Title</th>
-                              <th>Score</th>
-                              <th>Remarks</th>
-                              <th class="text-center">Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            
-                          </tbody>
-                        </table>
-                      </div><!-- /.box-body -->
-                    </div>
-
-                {!! Form::close() !!}
-              </div>
               </div>
               </div><!-- ./row-->
               @endif
@@ -296,8 +242,10 @@
               </div>
             @endif
           </div>
-
-          <div class="tab-pane" id="tab_4">
+        </div>
+            <!--end quiz-->
+            <!--assignment-->
+              <div class="tab-pane" id="tab_4">
               <div id="assignment-content">
                 <div class="box box-success box-solid">
                   <div class="box-header with-border">
@@ -309,7 +257,7 @@
                       @include('errors.success')
                       <div class="form-group">
                         {!! Form::label('title', 'Assignment Title') !!}
-                        {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter article title']) !!}
+                        {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
                       </div>
                       <div class="form-group">
                         {!! Form::label('file', 'Assignment File') !!}
@@ -355,16 +303,11 @@
                 </div><!-- /.box-body -->
               </div>
             </div>
-         
+            <!--end assignment-->
+          </div>
         </div>
-        <!-- /.tab-content -->
+      </div>
     </div>
-    <!-- nav-tabs-custom -->
-  </div>
-        <!-- /.col -->
-    </div> 
-    <!-- /.row -->
-
   </section>
 </div><!-- ./Content Wrapper -->  
 @stop
