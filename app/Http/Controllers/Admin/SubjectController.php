@@ -87,10 +87,8 @@ class SubjectController extends Controller
     {
         $subject = Subject::with('course')->with('discussionprompt','assignment')->where('slug', $id)->first()->toArray();
         $students = Student::where('course', $subject['course']['id'])->where('batch', $subject['batch'])->get()->first()->toArray();
-        //dd($students);
         $units = Unit::with('subject')->where('subject_id', $subject['id'])->get()->toArray();
         $assignments = Assignment::with('subject','student')->where('subject_id', $subject['id'])->get();
-        //d($assignments);
         return view('admin.viewSubjectDetails', compact('subject','units', 'assignments', 'students'));
     }
 

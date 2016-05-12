@@ -59,6 +59,7 @@ class ProgressController extends Controller
         $batch = $request->get('batch');
         $subject = $request->get('subject');
         $students = Student::with('assignment','replyDiscussion','quizresult')->where('course', $course)->where('batch', $batch)->get();
+        return $students;
         $response = [];
         foreach ($students as $key => $value) {
                       

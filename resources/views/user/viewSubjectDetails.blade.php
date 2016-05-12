@@ -257,7 +257,7 @@
                       @include('errors.success')
                       <div class="form-group">
                         {!! Form::label('title', 'Assignment Title') !!}
-                        {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
+                        {!! Form::text('title', $assignment['title'], ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
                       </div>
                       <div class="form-group">
                         {!! Form::label('file', 'Assignment File') !!}
@@ -265,6 +265,11 @@
                         {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
                         {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
                          <div id="response-assignment" style="display: none;"></div>
+                      </div>
+                      <div class="form-group">
+                          @if($assignment['file']!= '')
+                            <a href="{{ url('uploads/assignment', $assignment['file']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $assignment['file'] }}</a>
+                          @endif
                       </div>
                       
                   </div><!-- /.box-body -->
@@ -274,7 +279,7 @@
                   </div>
                   </div>
                   {{ Form::close() }}
-              </div>
+              <!--</div>-->
               <div class="box box-success box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">Assignments</h3>
@@ -287,12 +292,10 @@
                         <th>Title</th>
                         <th>Score</th>
                         <th>Remarks</th>
-                        <th class="text-center">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

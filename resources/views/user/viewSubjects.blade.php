@@ -93,5 +93,5 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
-    {!! Html::script('dist/js/custom/articles.js') !!}
+    
 @stop
