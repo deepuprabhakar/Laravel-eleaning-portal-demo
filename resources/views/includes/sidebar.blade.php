@@ -129,6 +129,12 @@
           <span>Gallery</span>
         </a>
       </li>
+       <li class="{{ Request::is('admin/progress') ? 'active' : '' }}">
+        <a href="{{ route('admin.progress') }}">
+          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <span>Progress</span>
+        </a>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->
