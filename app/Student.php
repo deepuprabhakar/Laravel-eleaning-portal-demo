@@ -83,5 +83,6 @@ class Student extends Model implements SluggableInterface
         return $this->hasOne('App\Projects');
 
     }
+    
 
 }

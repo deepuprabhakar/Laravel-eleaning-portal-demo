@@ -102,6 +102,12 @@
             <span>Course Info</span>
         </a>
       </li>
+      <li class="{{ Request::is('progress') ? 'active' : '' }}">
+        <a href="{{ route('progress') }}">
+          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <span>Progress</span>
+        </a>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

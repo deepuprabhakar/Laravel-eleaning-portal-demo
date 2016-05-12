@@ -80,6 +80,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('projects', ['as' => 'admin.projects', 'uses' => 'Admin\ProjectController@viewProjects']);
         Route::post('/projects', 'Admin\ProjectController@saveMarks');
 
+        //progress
+        Route::get('progress', ['as' => 'admin.progress', 'uses' => 'Admin\ProgressController@progress']);
+
     });
 
     /**
@@ -92,6 +95,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('createDiscussion','Admin\DiscussionPromptController@create');
     Route::post('createQuiz','Admin\QuizController@create');
     Route::post('/fetchProjects', 'Admin\ProjectController@fetchProjects');
+    Route::post('/fetchSubjects', 'Admin\ProgressController@fetchSubjects');
+    Route::post('/fetchProgress', 'Admin\ProgressController@fetchProgress');
 
 
     /**
@@ -139,7 +144,8 @@ Route::group(['middleware' => ['web']], function () {
     //course info
     Route::get('courseInfo', ['as' => 'courseInfo.index', 'uses' => 'User\CourseInfoController@index']);
 
-    
+    //progress
+        Route::get('progress', ['as' => 'progress', 'uses' => 'User\ProgressController@progress']);
     
 
 

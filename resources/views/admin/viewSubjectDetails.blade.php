@@ -201,11 +201,27 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+
+
+          <div class="box box-default box-solid">
+        
+          
+            <div class="box-header with-border">
+              <h3 class="box-title">{{ $students['name']}}</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+              <!-- /.box-tools -->
+            </div>
+        
+            <!-- /.box-header -->
+            <div class="box-body" style="display: block;">
+                 <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="width: 20px;">No.</th>
-                  <th>Student Name</th>
                   <th> Assignment Title</th>
                   <th>Assignment File</th>
                   <th>Score</th>
@@ -217,7 +233,6 @@
               @foreach ($assignments as $key => $assignment)
                 <tr>
                   <td>{{ ++$key }}</td>
-                  <td>{{ $assignment['student']['name'] }}</td>
                   <td>{{ $assignment['title'] }}</td>
                   <td><a href="{{ url('uploads/assignments', $assignment['file']) }}" class="btn btn-primary" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></td>
                   
@@ -232,6 +247,10 @@
               @endforeach
               </tbody>
             </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+         
             <div id="response-assignment" style="display: none;"></div>
             </div>
             <!-- /.box-body -->

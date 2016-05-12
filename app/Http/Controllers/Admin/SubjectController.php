@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\SubjectRequest;
 use App\Course;
 use App\Subject;
+use App\Student;
 use App\Unit;
 use App\Assignment;
 use Session;
@@ -84,10 +85,13 @@ class SubjectController extends Controller
      */
     public function show($id)
     {
-        $subject = Subject::with('course')->with('discussionprompt')->where('slug', $id)->first()->toArray();
+        $subject = Subject::with('course')->with('discussionprompt','assignment')->where('slug', $id)->first()->toArray();
+        $students = Student::where('course', $subject['course']['id'])->where('batch', $subject['batch'])->get()->first()->toArray();
+        //dd($students);
         $units = Unit::with('subject')->where('subject_id', $subject['id'])->get()->toArray();
-        $assignments = Assignment::with('subject','student')->where('subject_id', $subject['id'])->get()->toArray();
-        return view('admin.viewSubjectDetails', compact('subject','units', 'assignments'));
+        $assignments = Assignment::with('subject','student')->where('subject_id', $subject['id'])->get();
+        //d($assignments);
+        return view('admin.viewSubjectDetails', compact('subject','units', 'assignments', 'students'));
     }
 
     /**

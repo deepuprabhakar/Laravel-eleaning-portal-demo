@@ -49,8 +49,8 @@
               <tr>
                 <td>{{ $project->topic }}</td>
                 @if($project->score == 0 && $project->remarks =='')
-                <td>Not yet checked!</td>
-                <td>Not yet checked!</td>
+                <td class="text-center">Not yet checked!</td>
+                <td class="text-center">Not yet checked!</td>
                 @else
                 <td class="text-center">{{ $project->score }}</td>
                 <td class="text-center">{{ $project->remarks }}</td>
