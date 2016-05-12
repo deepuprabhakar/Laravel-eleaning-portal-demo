@@ -168,7 +168,6 @@
             </div><!-- ./discussion -->
             <!-- ./quiz -->
             <div class="tab-pane fade" id="tab_3">
-                <h3><div class="text-center">Quiz</div></h3>
                 @if(is_null($quizResult))
                   @if(is_null($quiz))
                     <div class="question">
@@ -238,82 +237,77 @@
                 </div>
               @endif
             </div>
-          </div>
+          
 
             <!-- ./end quiz -->
             <!-- assignment -->
             <div class="tab-pane fade" id="tab_4">
               <div id="assignment-content">
+                  <div class="box box-success box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Add Assignment</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
+                        @include('errors.list')
+                        @include('errors.success')
+                        <div class="form-group">
+                          {!! Form::label('title', 'Assignment Title') !!}
+                          {!! Form::text('title', $assignment['title'], ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('file', 'Assignment File') !!}
+                          {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
+                          {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
+                          {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
+                           <div id="response-assignment" style="display: none;"></div>
+                        </div>
+                        <div class="form-group">
+                            @if($assignment['file']!= '')
+                              <a href="{{ url('uploads/assignment', $assignment['file']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $assignment['file'] }}</a>
+                            @endif
+                        </div>
+                        
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                     
+                      <button type="submit" class="btn btn-primary news-button" id= "assignment">Create</button>
+                    </div>
+                  </div>
+                    {{ Form::close() }}
+                </div><!-- ./assignment-content -->
+
                 <div class="box box-success box-solid">
                   <div class="box-header with-border">
-                    <h3 class="box-title">Add Assignment</h3>
+                    <h3 class="box-title">Assignments</h3>
                   </div><!-- /.box-header -->
                   <div class="box-body">
-                    {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
-                      @include('errors.list')
-                      @include('errors.success')
-                      <div class="form-group">
-                        {!! Form::label('title', 'Assignment Title') !!}
-                        {!! Form::text('title', $assignment['title'], ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
-                      </div>
-                      <div class="form-group">
-                        {!! Form::label('file', 'Assignment File') !!}
-                        {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
-                        {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
-                        {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
-                         <div id="response-assignment" style="display: none;"></div>
-                      </div>
-                      <div class="form-group">
-                          @if($assignment['file']!= '')
-                            <a href="{{ url('uploads/assignment', $assignment['file']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $assignment['file'] }}</a>
-                          @endif
-                      </div>
-                      
+                    <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th style="width: 20px;">No.</th>
+                          <th>Title</th>
+                          <th>Score</th>
+                          <th>Remarks</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div><!-- /.box-body -->
-                  <div class="box-footer">
-                   
-                    <button type="submit" class="btn btn-primary news-button" id= "assignment">Create</button>
-                  </div>
-                  </div>
-                  {{ Form::close() }}
-
-              <!--</div>-->
-
-              </div>
-
-
-              <div class="box box-success box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Assignments</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th style="width: 20px;">No.</th>
-                        <th>Title</th>
-                        <th>Score</th>
-                        <th>Remarks</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div><!-- /.box-body -->
-              </div>
-
+                </div>
+                
             </div><!-- ./assignment -->
-
+          </div><!-- ./tab content -->
           </div>
         </div>
       </div>
-    </div>
   </section>
 </div><!-- ./Content Wrapper -->  
 @stop
