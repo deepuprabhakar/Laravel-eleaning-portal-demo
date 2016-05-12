@@ -58,7 +58,7 @@ class ModulesController extends Controller
             $student = Student::where('user_id', $user->id)->get()->first();
             $quizResult = $subject->quizresult()->where('student_id', $student->id)->first();
             $discussions = ReplyDiscussion::with('student')->latest()->get();
-            $assignment = Assignment::with('student')->get()->first()->toArray();
+            $assignment = Assignment::with('student')->get()->first();
             return view('user.viewSubjectDetails', compact('units', 'discussion', 'subject', 'course','student','discussions','assignment', 'quiz', 'quizResult'));
         }
         else
