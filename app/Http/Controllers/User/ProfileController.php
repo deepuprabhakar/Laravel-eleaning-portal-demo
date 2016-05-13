@@ -71,14 +71,18 @@ class ProfileController extends Controller
             if(!(File::exists($filepath)))
                 File::makeDirectory($filepath, 0775, true);
 
-            $img->resize(300, null, function ($constraint) {
+            $img->resize(240, null, function ($constraint) {
                 $constraint->aspectRatio();
-                $constraint->upsize();
+                //$constraint->upsize();
             });
 
             $img->save($filepath . $filename);
+            if($user->image != "")
+                File::delete($filepath . $user->image);
             $data = [];
             $data['image'] = '<img src="'.url($filepath . $filename).'">';
+            $user->image = $filename;
+            $user->save();
         }
         else
             $data['image'] = "";
@@ -89,10 +93,20 @@ class ProfileController extends Controller
 
     public function cropImage(Request $request)
     {   
-        //dd($request->get('path'));
+        $user = Student::where('user_id', Sentinel::getUser()->id)->first();
         $image = $request->get('image');
-        $img = Image::make(file_get_contents('uploads/profile/deepu-prabhakar-1463150942.jpg'));
-        $img->crop(100, 100, 25, 25);
-        $img->save('uploads/profile/deepu-prabhakar-1463150942.jpg');
+        $img = Image::make('uploads/profile/'.$user->image);
+        $ext = explode('.', $user->image);
+        $ext = end($ext);
+        $filename = $user->slug . '-' . time() . '.' . $ext;
+        $img->crop($image['width'], $image['height'], $image['x'], $image['y']);
+        File::delete('uploads/profile/'.$user->image);
+        $img->save('uploads/profile/'.$filename);
+        $user->image = $filename;
+        $user->save();
+        
+        $data['image'] = '<img src="'.url('uploads/profile/' . $filename).'">';
+        $data['path'] = url('uploads/profile/' . $filename);
+        return $data;
     }
 }

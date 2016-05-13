@@ -37,7 +37,13 @@
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User profile picture">
+
+                @if($student['image'] == "")
+                  <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="profile-user-img img-responsive img-circle side-profile-pic" alt="User profile picture">
+                @else
+                  <img src="{{ asset('uploads/profile/'.$student['image']) }}" class="profile-user-img img-responsive img-circle side-profile-pic" alt="User profile picture">
+                @endif
+
                   <h3 class="profile-username text-center">{{ $student['name'] }}</h3>
                   <p class="text-muted text-center">{{ $course['title'] }}</p>
                 </div><!-- /.box-body -->
@@ -96,7 +102,7 @@
                       </div>
                       <div class="box-body">
                         <div class="profile-pic-upload">
-                          <a href="" class="btn btn-primary">
+                          <a href="" class="btn btn-primary btn-flat">
                             Upload
                             {!! Form::open(['id' => 'profile-pic-form']) !!}
                               {!! Form::file('profile-pic', ['id' => 'profile-input']) !!}
@@ -104,8 +110,8 @@
                             {!! Form::close() !!}
                           </a>
                         </div>
-                        <div id="preview" style="display: none;"></div>
-                        <button type="button"  class="btn btn-success" style="display: none; z-index: 999;" id="save-image">Save</button>
+                        <div id="preview" style="display: none; margin-top: 10px"></div>
+                        <button type="button"  class="btn btn-success btn-flat" style="display: none; margin-top: 10px;" id="save-image">Save</button>
                       </div><!-- /.box-body -->
                       <!-- Loading (remove the following to stop the loading)-->
                       <div class="overlay" style="display: none;">

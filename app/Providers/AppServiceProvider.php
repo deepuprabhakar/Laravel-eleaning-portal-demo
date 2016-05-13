@@ -84,9 +84,10 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('includes.header', function($view)
         {
             $user = Sentinel::getUser();
+            $student = Student::where('user_id', $user->id)->first();
             $latest = User::find($user->id)->messages()->with('user')->latest()->take(5)->get()->toArray();
             $count = User::find($user->id)->messages()->where('status', 0)->count();
-            $view->with(['count' => $count, 'latest' => $latest]);
+            $view->with(['count' => $count, 'latest' => $latest, 'student' => $student]);
         });
         view()->composer('includes.userSidebar', function($view)
         {
@@ -94,7 +95,7 @@ class AppServiceProvider extends ServiceProvider
             $course = $student->course()->select('semester','slug')->first();
             $user = Sentinel::getUser();
             $count = User::find($user->id)->messages()->where('status', 0)->count();
-            $view->with(['course' => $course, 'count' => $count]);
+            $view->with(['course' => $course, 'count' => $count, 'student' => $student]);
         });
 
         

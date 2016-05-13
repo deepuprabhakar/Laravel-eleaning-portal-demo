@@ -159,7 +159,20 @@
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="user-image" alt="User Image">
+          
+          @if(Sentinel::inRole('admin'))
+            <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="user-image header-profile-image" alt="User Image">
+          
+          @elseif(Sentinel::inRole('user'))
+          
+            @if($student->image != "")
+              <img src="{{ asset('uploads/profile/'.$student->image) }}" class="user-image header-profile-image" alt="User Image">
+            @else
+              <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="user-image header-profile-image" alt="User Image">
+            @endif
+          
+          @endif
+
             <span class="hidden-xs">
               {{ Sentinel::getUser()->first_name}}
             </span>
@@ -167,7 +180,19 @@
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle" alt="User Image">
+              @if(Sentinel::inRole('admin'))
+                <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle header-profile-image" alt="User Image">
+              
+              @elseif(Sentinel::inRole('user'))
+              
+                @if($student->image != "")
+                  <img src="{{ asset('uploads/profile/'.$student->image) }}" class="img-circle header-profile-image" alt="User Image">
+                @else
+                  <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle header-profile-image" alt="User Image">
+                @endif
+              
+              @endif
+              
               <p>
                 {{ Sentinel::getUser()->first_name }}
                 <small>Member since {{ Sentinel::getUser()->created_at->format('F, Y') }}</small>

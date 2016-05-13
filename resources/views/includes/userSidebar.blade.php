@@ -5,7 +5,11 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle" alt="User Image">
+      @if($student->image == "")
+        <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle side-profile-pic" alt="User Image">
+      @else
+        <img src="{{ asset('uploads/profile/'.$student->image) }}" class="img-circle side-profile-pic" alt="User Image">
+      @endif
       </div>
       <div class="pull-left info">
         <p>{{ Sentinel::getUser()->first_name }}</p>
