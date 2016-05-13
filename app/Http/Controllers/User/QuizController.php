@@ -24,7 +24,7 @@ class QuizController extends Controller
     public function store(Request $request)
     {
     	$input = $request->all();
-    	$count = count($input)-2;
+        $count = count($input)-2;
     	$score = $i = 0;
     	if($count>2)
     	{
