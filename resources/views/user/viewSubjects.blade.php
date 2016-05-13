@@ -54,9 +54,6 @@
                   <td>{{ $subject['name'] }}</td>
                   <td class="text-center table-actions">
                     <a class="btn bg-purple btn-xs btn-flat" href="{{ route('modules.show', [$subject['semester'], $subject['slug']]) }}">View</a>
-
-                    <a href="{{ url('uploads/subjects', $subject['name']) }}" class="btn bg-blue btn-xs btn-flat" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
-
                     <a href="{{ url('uploads/subjects', $subject['file']) }}" class="btn bg-blue btn-xs btn-flat" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
 
                   </td>

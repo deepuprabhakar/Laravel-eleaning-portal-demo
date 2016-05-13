@@ -29,7 +29,34 @@ class AssignmentsController extends Controller
 
     public function createAssignment(AssignmentRequest $request)
     {
-        if($request->ajax())
+        $student = Student::where('user_id', Sentinel::getUser()->id)->first();
+        $input = $request->all();
+        $filepath = 'uploads/assignments';
+        $assignment = $student->assignment()->first();
+        if($student->assignment()->count())
+        {
+            if($request->hasFile('file'))
+            {
+                File::delete($filepath.'/'.$assignment->file);
+                $file = $request->file('file');
+                $extension = $file->getClientOriginalExtension();
+                $filename =  str_slug($request->get('title'), "-").'.'.$extension;
+                $input['file'] = $filename;
+                $request->file('file')->move($filepath, $filename);
+            }
+            else
+            {
+                $ext = explode('.', $assignment->file);
+                $extension = $ext[1];
+                $filename = str_slug($request->get('title'), "-").'.'.$extension;   
+                $input['file'] = $filename;
+            }
+            $assignment = Assignment::find($assignment->id)->first();
+            $assignment->update($input);
+            $response['data']['success'] = 'Assignment Created Successfully';
+            return $response;
+        }
+        else
         {
             $input = $request->all();
             $filepath = 'uploads/assignments';
@@ -42,9 +69,11 @@ class AssignmentsController extends Controller
             $request->file('file')->move($filepath, $newFilename);
             $input['file'] = $newFilename;
             Assignment::create($input);
-            $response['data']['success'] = 'Saved Successfully';
+            $response['data']['success'] = 'Assignment Updated Successfully';
             return $response;
+
         }
+        
         
     }
 
@@ -61,32 +90,10 @@ class AssignmentsController extends Controller
             $response[$key]['score'] = $value->mark;
             $response[$key]['remarks'] = $value->remark;
             $id = Hashids::connection('assignment')->encode($value->id);
-            $response[$key]['action'] = 
-                '<div class="text-center"><form action="/assignment/'.$id.'" method="POST">'.csrf_field().'
-                    <button type="submit" class="btn btn-danger btn-xs btn-flat btn-delete" id="deleteAssignment">Delete</button>          
-                </form></div>';
+            
         }
         $data['data'] = $response;
         return response()->json($data, 200);
     }
-    public function destroy(Request $request, $id)
-    {
-        $id = Hashids::connection('assignment')->decode($id);
-        $assignment = Assignment::find($id)->first();
-        if($assignment->file != "")
-        {
-           if(File::exists('uploads/assignments/'.$assignment->file))
-            {
-            File::delete('uploads/assignments/'.$assignment->file);
-            } 
-        }
-        if($request->ajax())
-        {
-            
-             Assignment::destroy($id);
-             $response['success'] = 'Assignment Deleted Successfully';
-             return $response;   
-        }
-
-    }
+   
 }

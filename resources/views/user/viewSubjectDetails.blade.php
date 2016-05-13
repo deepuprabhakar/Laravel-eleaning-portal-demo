@@ -1,3 +1,4 @@
+
 @extends('app')
 
 @section('meta')
@@ -20,9 +21,8 @@
 @stop
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
        View Subject details
@@ -33,65 +33,51 @@
       <li class="active">View Subject</li>
     </ol>
   </section>
-
   <!-- Main content -->
   <section class="content">
-    
     <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
+    <!--infobox-->
+      <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-book"></i></span>
-
             <div class="info-box-content">
               <span class="info-box-text">Subject</span>
               <span class="info-box-number">{{ $subject->name }}</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-         <div class="col-md-3 col-sm-6 col-xs-12">
+      </div><!--end info box-->
+      <!--infobox-->
+      <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
-
             <div class="info-box-content">
               <span class="info-box-text">Batch</span>
               <span class="info-box-number">{{ $subject->batch}}</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
+      </div><!--end info box-->
+      <!--infobox-->
+      <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="fa fa-graduation-cap"></i></span>
-
             <div class="info-box-content">
               <span class="info-box-text">Course</span>
               <span class="info-box-number">{{ $course->title}}</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-         <div class="col-md-3 col-sm-6 col-xs-12">
+      </div><!--end info box-->
+      <!--infobox-->
+      <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-files-o"></i></span>
-
             <div class="info-box-content">
               <span class="info-box-text">Semester</span>
               <span class="info-box-number">{{ $subject->semester }}</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-
-    </div>
+      </div><!--end info box-->
+    </div><!--end row-->
+    <!--row-->
     <div class="row">
       <div class="col-md-12">
         <!-- Custom Tabs -->
@@ -106,9 +92,9 @@
           <div class="tab-content">
             <!--units-->
             <div class="tab-pane fade in active" id="tab_1">
-            @if($units->count() == 0)
-              @include('errors.empty', ['item' => $units, 'title' => 'units'])
-            @else
+              @if($units->count() == 0)
+                @include('errors.empty', ['item' => $units, 'title' => 'units'])
+              @else
                 @foreach($units as $key=>$unit)
                   <div class="box box-success box-solid">
                     <div class="box-header with-border">
@@ -116,24 +102,20 @@
                       <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
-                      </div>
-                      <!-- /.box-tools -->
-                    </div>
-                    <!-- /.box-header -->
+                      </div><!-- /.box-tools -->
+                    </div><!-- /.box-header -->
                     <div class="box-body" style="display: block;">
                       {!! $unit->content!!}
-                    </div>
-                    <!-- /.box-body -->
-                  </div>
-                  <!-- /.box -->
-              @endforeach
-            @endif
+                    </div><!-- /.box-body -->
+                  </div><!-- /.box -->
+                @endforeach
+              @endif
             </div><!--end units-->
             <!--discussion-->
-              <div class="tab-pane fade" id="tab_2">
-            @if(empty($discussion))
-              @include('errors.empty', ['item' => $discussion, 'title' => 'discussion'])
-            @else
+            <div class="tab-pane fade" id="tab_2">
+              @if(empty($discussion))
+                @include('errors.empty', ['item' => $discussion, 'title' => 'discussion'])
+              @else
                 <blockquote>
                   <p>{{ $discussion['question'] }}</p>
                 </blockquote>
@@ -145,136 +127,127 @@
                 <button type="submit" class="btn btn-primary news-button" id="discussionprompt" style="width: 150px; margin-top: 5px;">Reply</button>
                 {{ Form::close() }}
                 <br>
-                <div id="post-list">
-                  @foreach($discussions as $key=>$discussion)
-                  <div class="post">
-                    <div class="user-block">
-                      <img class="img-circle img-bordered-sm" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="user image">
-                          <span class="username">
-                            <a href="#">{{ $discussion['student']['name'] }}</a>
-                           </span>
-                      <span class="description">{{ $discussion['created_at']->diffForHumans() }}</span>
-                    </div>
-                    <!-- /.user-block -->
-                    <p>
-                      {!! $discussion->answer !!}
-                    </p>
+                  <div id="post-list">
+                    @foreach($discussions as $key=>$discussion)
+                      <div class="post">
+                        <div class="user-block">
+                          <img class="img-circle img-bordered-sm" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="user image">
+                          <span class="username"><a href="#">{{ $discussion['student']['name'] }}</a></span>
+                          <span class="description">{{ $discussion['created_at']->diffForHumans() }}</span>
+                        </div><!-- /.user-block -->
+                        <p>
+                          {!! $discussion->answer !!}
+                        </p>
+                      </div>
+                    @endforeach
                   </div>
-                  @endforeach
-                </div>
-            @endif
-            </div>
-            <!--end discussion-->
-            <!--quiz-->
-               <div class="tab-pane fade" id="tab_3">
-            <h3><div class="text-center">Quiz</div></h3>
-          @if(is_null($quizResult))
-            @if(is_null($quiz))
-              <div class="question">
-                <div class="callout callout-info" style="margin: 15px 0">
-                  <p>Will be updated soon...</p>
-                </div>
-              </div>
-            @else
-              <div id="quiz-content">
-                <p class="text-center">Please note quiz can be taken only once.<br>
-                Click on start button to begin the Quiz....</p>
-                <div class="text-center">
-                  <button class="btn btn-primary btn-flat" style="width: 150px;" id="quiz-start">Start</button>
-                </div>
-              </div>
-              <div id="response" style="display: none;" class="text-center"></div>
-              <div class="row"><div class="col-md-10 col-md-offset-1">
-              <div id="quiz-questions" style="display: none;">
-                <!-- <div class="bg-red timer-holder">
-                  <span id="timer-countdown"></span>
-                  <i class="fa fa-clock-o"></i>
-                </div> -->
-                <div class="timer-holder bg-red">
-                  <div id="countdown"></div>
-                  <i class="fa fa-clock-o"></i>
-                </div>
-                {!! Form::open(['url' => route('quiz.store'), 'id' => 'quiz-form']) !!}
-                {!! Form::hidden('subject', $subject->slug, []) !!}
-                @foreach ($quiz as $key => $question)
-                  <div id="{{ $key }}">
+                @endif
+              </div><!--end discussion-->
+              <!--quiz-->
+              <div class="tab-pane fade" id="tab_3">
+                <h3><div class="text-center">Quiz</div></h3>
+                @if(is_null($quizResult))
+                  @if(is_null($quiz))
                     <div class="question">
-                      <div class="callout callout-success" style="margin: 15px 0">
-                        <p>Question: {{ ucfirst($question['question']) }}</p>
+                      <div class="callout callout-info" style="margin: 15px 0">
+                        <p>Will be updated soon...</p>
                       </div>
                     </div>
-                    <div class="answers">
-                      <div style="margin: 5px 0;">
-                      {!! Form::radio($question['hashid'], 'A', false, ['class' => 'flat-red', 'id' => 'radio-1-'.$key]) !!}
-                      <label for="radio-1-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['A']) }}</label>&nbsp;&nbsp;
+                  @else
+                    <div id="quiz-content">
+                      <p class="text-center">Please note quiz can be taken only once.<br>
+                      Click on start button to begin the Quiz....</p>
+                      <div class="text-center">
+                        <button class="btn btn-primary btn-flat" style="width: 150px;" id="quiz-start">Start</button>
                       </div>
-                      <div style="margin: 5px 0;">
-                      {!! Form::radio($question['hashid'], 'B', false, ['class' => 'flat-red', 'id' => 'radio-2-'.$key]) !!}
-                      <label for="radio-2-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['B']) }}</label>&nbsp;&nbsp;
-                      </div>
-                      <div style="margin: 5px 0;">
-                      {!! Form::radio($question['hashid'], 'C', false, ['class' => 'flat-red', 'id' => 'radio-3-'.$key]) !!}
-                      <label for="radio-3-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['C']) }}</label>&nbsp;&nbsp;
-                      </div>
-                      <div style="margin: 5px 0;">
-                      {!! Form::radio($question['hashid'], 'D', false, ['class' => 'flat-red', 'id' => 'radio-4-'.$key]) !!}
-                      <label for="radio-4-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['D']) }}</label>&nbsp;&nbsp;
-                      </div>
+                    </div>
+                    <div id="response" style="display: none;" class="text-center"></div>
+                    <div class="row"><div class="col-md-10 col-md-offset-1">
+                    <div id="quiz-questions" style="display: none;">
+                     <div class="timer-holder bg-red">
+                        <div id="countdown"></div>
+                        <i class="fa fa-clock-o"></i>
+                     </div>
+                     {!! Form::open(['url' => route('quiz.store'), 'id' => 'quiz-form']) !!}
+                     {!! Form::hidden('subject', $subject->slug, []) !!}
+                     @foreach ($quiz as $key => $question)
+                        <div id="{{ $key }}">
+                          <div class="question">
+                            <div class="callout callout-success" style="margin: 15px 0">
+                              <p>Question: {{ ucfirst($question['question']) }}</p>
+                            </div>
+                          </div>
+                          <div class="answers">
+                            <div style="margin: 5px 0;">
+                            {!! Form::radio($question['hashid'], 'A', false, ['class' => 'flat-red', 'id' => 'radio-1-'.$key]) !!}
+                            <label for="radio-1-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['A']) }}</label>&nbsp;&nbsp;
+                            </div>
+                            <div style="margin: 5px 0;">
+                            {!! Form::radio($question['hashid'], 'B', false, ['class' => 'flat-red', 'id' => 'radio-2-'.$key]) !!}
+                            <label for="radio-2-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['B']) }}</label>&nbsp;&nbsp;
+                            </div>
+                            <div style="margin: 5px 0;">
+                            {!! Form::radio($question['hashid'], 'C', false, ['class' => 'flat-red', 'id' => 'radio-3-'.$key]) !!}
+                            <label for="radio-3-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['C']) }}</label>&nbsp;&nbsp;
+                            </div>
+                            <div style="margin: 5px 0;">
+                            {!! Form::radio($question['hashid'], 'D', false, ['class' => 'flat-red', 'id' => 'radio-4-'.$key]) !!}
+                            <label for="radio-4-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['D']) }}</label>&nbsp;&nbsp;
+                            </div>
+                          </div>
+                        </div>
+                      @endforeach
+                    <div class="form-group text-center">
+                      {!! Form::button('Finish', ['class' => 'btn btn-success', 'style' => 'width: 150px; display: none;', 'id' => 'quiz-finish']) !!}
+                    </div>
+                    </div>
+                    </div>
+                  </div><!-- ./row-->
+                @endif
+              @else
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <div class="callout callout-success text-center">
+                      <p style="font-size: 15px;">Attended: {{ $quizResult->attended }}/5</p style="font-size: 15px;">
+                      <h4>Your score: {{ $quizResult->score }}/5</h4>
                     </div>
                   </div>
-                @endforeach
-                <div class="form-group text-center">
-                  {!! Form::button('Finish', ['class' => 'btn btn-success', 'style' => 'width: 150px; display: none;', 'id' => 'quiz-finish']) !!}
                 </div>
-
-              </div>
-              </div><!-- ./row-->
               @endif
-            @else
-              <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                  <div class="callout callout-success text-center">
-                    <p style="font-size: 15px;">Attended: {{ $quizResult->attended }}/5</p style="font-size: 15px;">
-                    <h4>Your score: {{ $quizResult->score }}/5</h4>
-
-                  </div>
-                </div>
-              </div>
-            @endif
-          </div>
-        </div>
-            <!--end quiz-->
-            <!--assignment-->
-              <div class="tab-pane" id="tab_4">
-              <div id="assignment-content">
-                <div class="box box-success box-solid">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">Add Assignment</h3>
-                  </div><!-- /.box-header -->
-                  <div class="box-body">
-                    {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
-                      @include('errors.list')
-                      @include('errors.success')
-                      <div class="form-group">
-                        {!! Form::label('title', 'Assignment Title') !!}
-                        {!! Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
-                      </div>
-                      <div class="form-group">
-                        {!! Form::label('file', 'Assignment File') !!}
-                        {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
-                        {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
-                        {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
-                         <div id="response-assignment" style="display: none;"></div>
-                      </div>
-                      
+            </div>
+          </div><!-- end quiz-->
+          <!--assignment-->
+          <div class="tab-pane" id="tab_4">
+              <div class="box box-success box-solid">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Add Assignment</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
+                  @include('errors.list')
+                  @include('errors.success')
+                    <div class="form-group">
+                      {!! Form::label('title', 'Assignment Title') !!}
+                      {!! Form::text('title', $assignment['title'], ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
+                    </div>
+                    <div class="form-group">
+                      {!! Form::label('file', 'Assignment File') !!}
+                      {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
+                      {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
+                      {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
+                      <div id="response-assignment" style="display: none;"></div>
+                    </div>
+                    <div class="form-group">
+                      @if($assignment['file']!= '')
+                        <a href="{{ url('uploads/assignment', $assignment['file']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $assignment['file'] }}</a>
+                      @endif
+                    </div>
                   </div><!-- /.box-body -->
-                  <div class="box-footer">
-                   
-                    <button type="submit" class="btn btn-primary news-button" id= "assignment">Create</button>
-                  </div>
-                  </div>
-                  {{ Form::close() }}
-              </div>
+                 <div class="box-footer">
+                   <button type="submit" class="btn btn-primary news-button" id= "assignment">Create</button>
+                 </div>
+                </div>
+                {{ Form::close() }}
               <div class="box box-success box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">Assignments</h3>
@@ -287,12 +260,10 @@
                         <th>Title</th>
                         <th>Score</th>
                         <th>Remarks</th>
-                        <th class="text-center">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -302,14 +273,13 @@
                   </table>
                 </div><!-- /.box-body -->
               </div>
-            </div>
-            <!--end assignment-->
-          </div>
+            </div><!--end assignment-->
+          </div><!--tab content-->
         </div>
       </div>
-    </div>
+    </div><!--end row-->
   </section>
-</div><!-- ./Content Wrapper -->  
+</div><!--content wrapper
 @stop
 
 @section('script')
