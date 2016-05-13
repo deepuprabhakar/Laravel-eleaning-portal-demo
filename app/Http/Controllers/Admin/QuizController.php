@@ -37,8 +37,7 @@ class QuizController extends Controller
         
     	if($request->ajax())
     	{
-    		//$quizzes = Quiz::get()->count();
-            if(1)
+    		if(1)
             {
                 Quiz::create($request->all());
                 $response['success'] = 'Created Successfully';

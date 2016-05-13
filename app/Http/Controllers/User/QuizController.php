@@ -1,4 +1,4 @@
- <?php
+<?php
 
 namespace App\Http\Controllers\User;
 
@@ -15,6 +15,17 @@ use Sentinel;
 
 class QuizController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['sentinel.auth', 'history']);
+        $this->middleware('sentinel.role:user');
+    }
+    
     public function quiz()
     {
     	$quiz = Quiz::with('subject')->get();
@@ -44,14 +55,11 @@ class QuizController extends Controller
 			                    <p style="font-size: 15px;">Attended: '.$count.'/5</p style="font-size: 15px;">
 			                    <h4>Your score: '.$score.'/5</h4>
 			                  </div></div></div>';
-
     	$data['student_id'] = Student::select('id')->where('user_id', Sentinel::getUser()->id)->first()->id;
     	$data['subject_id'] = Subject::select('id')->where('slug', $input['subject'])->first()->id;
     	$data['attended'] = $count;
     	$data['score'] = $score;
-
     	QuizResult::create($data);
-
     	return $response;
     }
 }

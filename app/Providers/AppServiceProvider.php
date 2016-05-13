@@ -85,7 +85,6 @@ class AppServiceProvider extends ServiceProvider
         {
             $user = Sentinel::getUser();
             $latest = User::find($user->id)->messages()->with('user')->latest()->take(5)->get()->toArray();
-            //dd($latest);
             $count = User::find($user->id)->messages()->where('status', 0)->count();
             $view->with(['count' => $count, 'latest' => $latest]);
         });

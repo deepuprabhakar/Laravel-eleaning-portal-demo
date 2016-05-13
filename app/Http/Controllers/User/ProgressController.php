@@ -32,7 +32,6 @@ class ProgressController extends Controller
         $semester = $id;
         $student = Student::where('user_id', Sentinel::getUser()->id)->select('id', 'name')->first();
     	$subjects = Subject::where('semester', $semester)->get();
-        
         foreach ($subjects as $key => $subject) {
             $subject->discussion = $student->replyDiscussion()->where('subject_id', $subject->id)->select('id', 'created_at')->first();
             $subject->quizresult = $student->quizresult()->where('subject_id', $subject->id)->select('id', 'score')->first();

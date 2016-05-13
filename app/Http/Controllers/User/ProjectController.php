@@ -18,6 +18,16 @@ use Validator;
 
 class ProjectController extends Controller
 {
+      /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['sentinel.auth', 'history']);
+        $this->middleware('sentinel.role:user');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +37,6 @@ class ProjectController extends Controller
     {
         $student = Student::where('user_id', Sentinel::getUser()->id)->first()->toArray();
         $project = Projects::where('student_id', $student['id'])->first();
-        //dd($project);
         return view('user.viewProject', compact('project'));
     }
 
@@ -40,7 +49,6 @@ class ProjectController extends Controller
     {
         $student = Student::where('user_id', Sentinel::getUser()->id)->first()->toArray();
         $project = Projects::where('student_id', $student['id'])->first();
-        //dd($project);
         return view('user.createProject', compact('project'));
     }
 
