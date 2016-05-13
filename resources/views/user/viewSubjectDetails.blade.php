@@ -222,6 +222,7 @@
                     <div class="form-group text-center">
                       {!! Form::button('Finish', ['class' => 'btn btn-success', 'style' => 'width: 150px; display: none;', 'id' => 'quiz-finish']) !!}
                     </div>
+                    {!! Form::close() !!}
                     </div>
                     </div>
                   </div><!-- ./row-->

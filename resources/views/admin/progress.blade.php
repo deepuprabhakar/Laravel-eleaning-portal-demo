@@ -47,11 +47,11 @@
               </div>
               <div class="col-sm-4 form-group">
                 {!! Form::label('batch', 'Batch') !!}
-                {!! Form::select('batch', [null => 'Select Batch'], null, ['id' => 'batch', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
+                {!! Form::select('batch', [null => 'Select Batch'], null, ['id' => 'batch', 'class' => 'form-control', 'style' => 'width: 100%', 'disabled' => true]) !!}
               </div>
               <div class="col-sm-4 form-group">
                 {!! Form::label('subject', 'Subject') !!}
-                {!! Form::select('subject', [null => 'Select Subject'], null, ['id' => 'subject', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
+                {!! Form::select('subject', [null => 'Select Subject'], null, ['id' => 'subject', 'class' => 'form-control', 'style' => 'width: 100%', 'disabled' => true]) !!}
               </div>
             </div>
             
@@ -66,11 +66,11 @@
                 </tr>
               </thead>
               <tbody>
+                <!-- <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
+                <td></td> -->
               </tbody>
             </table>
           </div>
@@ -83,6 +83,14 @@
 @stop
 
 @section('script')
+    <script>
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+    </script>
+    <script>
+      var old = "{{ old('batch') }}";
+    </script>
     <!-- DataTables -->
     {!! Html::script('plugins/datatables/media/js/jquery.dataTables.min.js') !!}
     {!! Html::script('plugins/datatables/media/js/dataTables.bootstrap.min.js') !!}
@@ -98,12 +106,4 @@
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
     {!! Html::script('dist/js/custom/progress.js') !!}
-    <script>
-      $.ajaxSetup({
-         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      });
-    </script>
-    <script>
-      var old = "{{ old('batch') }}";
-    </script>
-  @stop
+@stop
