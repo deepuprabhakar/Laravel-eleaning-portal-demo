@@ -7,6 +7,9 @@ $(function(){
   $('#batch').select2({
     placeholder: 'Select Batch'
   });
+  $('#subject').select2({
+    placeholder: 'Select Subject'
+  });
 
   //Fetch Batch
   $('#courses').change(function(){
