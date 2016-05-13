@@ -24,14 +24,12 @@
    <!-- Main content -->
   <section class="content" style="min-height: 700px;">
     <div class="row">
-      <div class="col-md-offset-1 col-md-10">
+      <div class="col-md-12">
         <!-- general form elements -->
         @if($subjects->count() == 0)
             @include('errors.empty', ['item' => $subjects, 'title' => 'data'])
         @else
-          <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Progress</h3>
+          <div class="box-header with-border">
             </div><!-- /.box-header -->
             <div class="box-body">
               @foreach($subjects as $subject)
@@ -106,7 +104,7 @@
                 @endforeach
             @endif
             </div>
-          </div><!-- /.box -->
+          <!-- /.box -->
       </div>
     </div> 
   </section><!-- ./section -->  
