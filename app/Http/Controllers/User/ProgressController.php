@@ -27,10 +27,11 @@ class ProgressController extends Controller
      *
      * @return     <type>  ( description_of_the_return_value )
      */
-    public function progress()
+    public function index($id)
     {
+        $semester = $id;
     	$student = Student::with('assignment', 'replyDiscussion', 'quizresult')->where('user_id', Sentinel::getUser()->id)->get()->first()->toArray();
-    	$subject = Subject::where('course', $student['course'])->where('batch', $student['batch'])->get();
+    	$subject = Subject::where('course', $student['course'])->where('batch', $student['batch'])->where('semester', $semester)->get();
     	return view('user.progress',compact('subject','student'));
     }
 }
