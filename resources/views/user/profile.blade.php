@@ -44,19 +44,15 @@
               <!-- About Me Box -->
             <!-- /.box -->
             </div><!-- /.col -->
-            <div class="col-md-9">
+            
+          
+          <div class="col-md-9">
               <div class="nav-tabs-custom">
-                
-                
-                  <div class="active tab-pane" id="activity">
-                   <!-- Post -->
-                    
-                  </div><!-- /.tab-pane -->
-                  <div class="tab-pane" id="timeline">
-                   
-                  </div><!-- /.tab-pane -->
-                <!-- Profile Settings-->
-                  <div class="tab-pane" id="settings">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="settings">
                   {!! Form::open(['url' => route('profile.update', $student['hashid']), 'autocomplete' => 'off', 'method' => 'PATCH']) !!}
                     <div class="box-body">
                         @include('errors.list')
@@ -88,11 +84,11 @@
                         <button type="submit" class="btn btn-primary news-button">Update</button>
                       </div>
                   {{ Form::close() }}
-                  </div><!-- profile setting -->
+                  </div><!-- /.tab-pane -->
+                </div><!-- /.tab-content -->
               </div><!-- /.nav-tabs-custom -->
             </div><!-- /.col -->
-          </div><!-- /.row -->
-
+            </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
  
