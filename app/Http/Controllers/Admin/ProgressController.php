@@ -43,7 +43,7 @@ class ProgressController extends Controller
         $course = $request->get('course');
         $batch = $request->get('batch');
         $subjects = Subject::where('course', $course)->where('batch', $batch)->get();
-        return $subjects->lists('name','name');
+        return $subjects->lists('name', 'id');
     }
 
     /**
@@ -58,28 +58,44 @@ class ProgressController extends Controller
         $course = $request->get('course');
         $batch = $request->get('batch');
         $subject = $request->get('subject');
-        $students = Student::with(array('assignment','replyDiscussion','quizresult'))->where('course', $course)->where('batch', $batch)->get();
+        //$students = Student::with(array('assignment','replyDiscussion','quizresult'))->where('course', $course)->where('batch', $batch)->get();
+        $students = Student::where('course', $course)->where('batch', $batch)->select('id', 'name')->get();
+        /*return $students->quizresult()->where('subject_id', $subject)->select('id', 'score')->first();
+        return $students->assignment()->where('subject_id', $subject)->select('id', 'mark')->first();
+        return $students->replyDiscussion()->where('subject_id', $subject)->select('id', 'created_at')->first();*/
         $response = [];
-        foreach ($students as $key => $value) {
-                $response[$key]['no'] = $key+1;
-                $response[$key]['name'] = $value->name;
-                foreach($value->replyDiscussion as $key => $valuereplyDiscussion)
-                {
-                if($valuereplyDiscussion->student_id)
-                $response[$key]['discussion'] = '<div class="text-center">'.'5'.'</div>';
-                else
-                $response[$key]['discussion'] = '<div class="text-center">'.'Not Added Yet'.'</div>';
-                }
-                $response[$key]['quiz'] = '<div class="text-center">'.'0'.'</div>';
-                foreach($value->assignment as $key => $valueassignment)
-                {
-                if(!is_null($value->assignment))
-                $response[$key]['assignment'] = '<div class="text-center">'.$valueassignment->mark.'</div>';
-                else
-                $response[$key]['assignment'] = '<div class="text-center">'.'Not Added Yet'.'</div>';
-                }
+        foreach ($students as $key => $student) {
+            $response[$key]['no'] = $key+1;
+            $response[$key]['name'] = $student->name;
 
-                
+            // Discussion result
+            $discussion = $student->replyDiscussion()->where('subject_id', $subject)->select('id', 'created_at')->first();
+            if(is_null($discussion))
+                $response[$key]['discussion'] = '<div class="text-center">Not added yet!</div>';
+            else
+                $response[$key]['discussion'] = '<div class="text-center">5</div>';
+
+            // Quiz
+            $quizResult = $student->quizresult()->where('subject_id', $subject)->select('id', 'score')->first();
+            if(is_null($quizResult))
+                $response[$key]['quiz'] = '<div class="text-center">Not attended yet!</div>';
+            else
+            {
+                $response[$key]['quiz'] = '<div class="text-center">'.$quizResult->score.'</div>';
+            }
+
+            // Assignment
+            $assignment = $student->assignment()->where('subject_id', $subject)->select('id', 'mark')->first();
+            if(is_null($assignment))
+                $response[$key]['assignment'] = '<div class="text-center">Not added yet!</div>';
+            else
+            {
+                if($assignment->mark == 0)
+                    $response[$key]['assignment'] = '<div class="text-center">Added but not reviewed!</div>';
+                else
+                    $response[$key]['assignment'] = '<div class="text-center">'.$assignment->mark.'</div>';
+            }
+
         }
         $data['data'] = $response;
         return response()->json($data, 200);
