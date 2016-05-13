@@ -30,8 +30,13 @@ class ProgressController extends Controller
     public function index($id)
     {
         $semester = $id;
-    	$student = Student::with('assignment', 'replyDiscussion', 'quizresult')->where('user_id', Sentinel::getUser()->id)->get()->first()->toArray();
-    	$subject = Subject::where('course', $student['course'])->where('batch', $student['batch'])->where('semester', $semester)->get();
-    	return view('user.progress',compact('subject','student'));
+        $student = Student::where('user_id', Sentinel::getUser()->id)->select('id', 'name')->first();
+    	$subjects = Subject::where('semester', $semester)->get();
+        foreach ($subjects as $key => $subject) {
+            $subject->discussion = $student->replyDiscussion()->where('subject_id', $subject->id)->select('id', 'created_at')->first();
+            $subject->quizresult = $student->quizresult()->where('subject_id', $subject->id)->select('id', 'score')->first();
+            $subject->assignment = $student->assignment()->where('subject_id', $subject->id)->select('id', 'mark')->first();
+        }
+        return view('user.progress', compact('subjects', 'semester'));
     }
 }

@@ -35,7 +35,7 @@
   <!-- Main content -->
   <section class="content" style="min-height: 600px;">
     <div class="row">
-      <div class="col-md-offset-1 col-md-10">
+      <div class="col-md-12">
         <div class="box box-success box-solid">
           <div class="box-header with-border">
             <h3 class="box-title">List Quiz</h3>

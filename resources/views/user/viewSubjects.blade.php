@@ -20,7 +20,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Modules
+      Semester {{ $semester }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
@@ -32,53 +32,41 @@
   <!-- Main content -->
   <section class="content" style="min-height: 600px;">
     <div class="row">
-  
-      
-      <div class="col-md-8 col-md-offset-2">
-          <div class="box">
+      <div class="col-md-12">
+        @if(!$subjects)
+                @include('errors.empty', ['item' => $subjects, 'title' => 'subjects'])
+        @else
+          <div class="box box-success box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Subject Table</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tbody>
-                <tr>
-                  <th style="width: 10px">No</th>
-                  <th>Subject</th>
-                  <th class="text-center">Action</th>
-                </tr>
-                @foreach($subjects as $key=>$subject )
-                <tr>
-                  <td>{{ ++$key }}</td>
-                  <td>{{ $subject['name'] }}</td>
-                  <td class="text-center table-actions">
-                    <a class="btn bg-purple btn-xs btn-flat" href="{{ route('modules.show', [$subject['semester'], $subject['slug']]) }}">View</a>
-                    <a href="{{ url('uploads/subjects', $subject['file']) }}" class="btn bg-blue btn-xs btn-flat" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
 
-                  </td>
-                  
-                </tr>
-                @endforeach
-              </tbody>
-              </table>
+            <div class="box-body">
+                <table class="table table-bordered">
+                  <tbody>
+                  <tr>
+                    <th style="width: 10px">No</th>
+                    <th>Subject</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                  @foreach($subjects as $key=>$subject )
+                  <tr>
+                    <td>{{ ++$key }}</td>
+                    <td>{{ $subject['name'] }}</td>
+                    <td class="text-center table-actions">
+                      <a class="btn bg-purple btn-xs btn-flat" href="{{ route('modules.show', [$subject['semester'], $subject['slug']]) }}">View</a>
+                      <a href="{{ url('uploads/subjects', $subject['file']) }}" class="btn bg-blue btn-xs btn-flat" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
+                    </td>
+                  </tr>
+                  @endforeach
+                  </tbody>
+                </table>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">«</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
-            </div>
+           @endif
           </div>
-          <!-- /.box -->
-
-          <!-- /.box -->
         </div>
-      
       </div>
   </section><!-- ./section -->  
 </div><!-- ./Content Wrapper -->  

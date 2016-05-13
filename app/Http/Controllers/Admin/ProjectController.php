@@ -49,7 +49,6 @@ class ProjectController extends Controller
         $students = Student::with('project')->where('course', $course)->where('batch', $batch)->get();
         $response = [];
         foreach ($students as $key => $value) {
-            //dd($value->project);
             if(!is_null($value->project)){
                 $response[$key]['no'] = $key+1;
                 $response[$key]['name'] = $value->name;

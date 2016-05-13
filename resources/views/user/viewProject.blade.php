@@ -26,41 +26,49 @@
 
   <!-- Main content -->
   <section class="content" style="min-height: 600px;">
-    <div class="box box-info">
-      <div class="box-header with-border">
-          <h3 class="box-title">Project</h3>
-      </div><!-- /.box-header -->
-      <div class="box-body">
-        <div class="table-responsive">
-          <table class="table no-margin">
-            <thead>
-              <tr>
-                <th>Topic</th>
-                <th class="text-center">Score</th>
-                <th class="text-center">Remarks</th>
-              </tr>
-            </thead>
-            <tbody>
-              @if(empty($project))
-              <tr>
-                <td colspan="3" class="text-center">No data available!</td>
-              </tr>
-              @else
-              <tr>
-                <td>{{ $project->topic }}</td>
-                @if($project->score == 0 && $project->remarks =='')
-                <td class="text-center">Not yet checked!</td>
-                <td class="text-center">Not yet checked!</td>
-                @else
-                <td class="text-center">{{ $project->score }}</td>
-                <td class="text-center">{{ $project->remarks }}</td>
-                @endif
-              </tr>
-              @endif
-            </tbody>
-          </table>
-        </div><!-- /.table-responsive -->
+  <div class="row">
+  <div class="col-md-12">
+      @if(!$project)
+         @include('errors.empty', ['item' => $project, 'title' => 'project'])
+      @else
+        <div class="box box-success box-solid">
+          <div class="box-header with-border">
+              <h3 class="box-title">Project</h3>
+          </div><!-- /.box-header -->
+          <div class="box-body">
+            <div class="table-responsive">
+              <table class="table no-margin">
+                <thead>
+                  <tr>
+                    <th>Topic</th>
+                    <th class="text-center">Score</th>
+                    <th class="text-center">Remarks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if(empty($project))
+                  <tr>
+                    <td colspan="3" class="text-center">No data available!</td>
+                  </tr>
+                  @else
+                  <tr>
+                    <td>{{ $project->topic }}</td>
+                    @if($project->score == 0 && $project->remarks =='')
+                    <td class="text-center">Not yet checked!</td>
+                    <td class="text-center">Not yet checked!</td>
+                    @else
+                    <td class="text-center">{{ $project->score }}</td>
+                    <td class="text-center">{{ $project->remarks }}</td>
+                    @endif
+                  </tr>
+                  @endif
+                </tbody>
+              </table>
+            </div><!-- /.table-responsive -->
+        @endif
       </div><!-- /.box-body -->
+      </div>
+    </div>
     </div><!-- /.box -->
   </section><!-- ./section -->  
 </div><!-- ./Content Wrapper -->  

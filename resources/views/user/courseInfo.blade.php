@@ -26,15 +26,20 @@
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
         <!-- general form elements -->
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">{{ $course['title'] }}</h3>
-          </div><!-- /.box-header -->
-          <div class="box-body">
-           {!! Purifier::clean($courseInfo['content']) !!}
-          </div>
-        </div><!-- /.box -->
-      </div>
+        @if(!$courseInfo)
+            @include('errors.empty', ['item' => $courseInfo, 'title' => 'info'])
+        @else
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{ $course['title'] }}</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+             {!! Purifier::clean($courseInfo['content']) !!}
+            
+            </div>
+          </div><!-- /.box -->
+        </div>
+      @endif
     </div> 
   </section><!-- ./section -->  
 </div><!-- ./Content Wrapper -->  
