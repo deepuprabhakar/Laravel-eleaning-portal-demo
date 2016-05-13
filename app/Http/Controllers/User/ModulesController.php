@@ -37,9 +37,15 @@ class ModulesController extends Controller
      public function index($id)
     {
         $semester = $id;
+
+        $student = Student::where('user_id', Sentinel::getUser()->id)->get()->first();
+        $subjects = Subject::with('course')->where('semester', $semester)->where('course', $student->course)->where('batch', $student->batch)->get()->toArray();
+        return view('user.viewSubjects', compact('subjects', 'semester'));
+
         $student = Student::where('user_id' , Sentinel::getUser()->id)->get()->first();
         $subjects = Subject::with('course')->where('semester', $semester)->where('course', $student->course)->where('batch', $student->batch)->get()->toArray();
        return view('user.viewSubjects', compact('subjects', 'semester'));
+
     }
 
     public function show($sem, $slug)

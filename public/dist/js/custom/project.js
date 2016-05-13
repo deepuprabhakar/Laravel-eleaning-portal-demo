@@ -12,7 +12,8 @@ $(function(){
   $('#courses').change(function(){
     var data = $(this).val();
     var option = '<option value >Select Batch</option>';
-   
+    $('#batch').val('').trigger('change').prop('disabled', true);
+    
     $.ajax({
       dataType: "json",
       type: 'POST',
@@ -23,7 +24,7 @@ $(function(){
               option += '<option value="'+key+'">'+val+'</option>'
           });
           $('#batch').html(option);
-          
+          $('#batch').prop('disabled', false);
       },
       complete: function()
       {

@@ -1,3 +1,4 @@
+
 @extends('app')
 
 @section('meta')
@@ -20,9 +21,8 @@
 @stop
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
        View Subject details
@@ -33,65 +33,51 @@
       <li class="active">View Subject</li>
     </ol>
   </section>
-
   <!-- Main content -->
   <section class="content">
-    
     <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
+    <!--infobox-->
+      <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-aqua"><i class="fa fa-book"></i></span>
-
             <div class="info-box-content">
               <span class="info-box-text">Subject</span>
               <span class="info-box-number">{{ $subject->name }}</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-         <div class="col-md-3 col-sm-6 col-xs-12">
+      </div><!--end info box-->
+      <!--infobox-->
+      <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
-
             <div class="info-box-content">
               <span class="info-box-text">Batch</span>
               <span class="info-box-number">{{ $subject->batch}}</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
+      </div><!--end info box-->
+      <!--infobox-->
+      <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-yellow"><i class="fa fa-graduation-cap"></i></span>
-
             <div class="info-box-content">
               <span class="info-box-text">Course</span>
               <span class="info-box-number">{{ $course->title}}</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-         <div class="col-md-3 col-sm-6 col-xs-12">
+      </div><!--end info box-->
+      <!--infobox-->
+      <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-files-o"></i></span>
-
             <div class="info-box-content">
               <span class="info-box-text">Semester</span>
               <span class="info-box-number">{{ $subject->semester }}</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-
-    </div>
+      </div><!--end info box-->
+    </div><!--end row-->
+    <!--row-->
     <div class="row">
       <div class="col-md-12">
         <!-- Custom Tabs -->
@@ -106,29 +92,25 @@
 
             <!-- units -->
             <div class="tab-pane fade in active" id="tab_1">
-            @if($units->count() == 0)
-              @include('errors.empty', ['item' => $units, 'title' => 'units'])
-            @else
-              @foreach($units as $key=>$unit)
-                <div class="box box-success box-solid">
-                  <div class="box-header with-border">
-                    <h3 class="box-title">{{ $unit->title }}</h3>
-                    <div class="box-tools pull-right">
-                      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                      </button>
-                    </div>
-                    <!-- /.box-tools -->
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body" style="display: block;">
-                    {!! $unit->content!!}
-                  </div>
-                  <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-              @endforeach
-            @endif
-            </div><!-- ./units -->
+              @if($units->count() == 0)
+                @include('errors.empty', ['item' => $units, 'title' => 'units'])
+              @else
+                @foreach($units as $key=>$unit)
+                  <div class="box box-success box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">{{ $unit->title }}</h3>
+                      <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                      </div><!-- /.box-tools -->
+                    </div><!-- /.box-header -->
+                    <div class="box-body" style="display: block;">
+                      {!! $unit->content!!}
+                    </div><!-- /.box-body -->
+                  </div><!-- /.box -->
+                @endforeach
+              @endif
+            </div><!--end units-->
             
             <!-- discussion -->
             <div class="tab-pane fade" id="tab_2">
@@ -166,7 +148,8 @@
               </div>
             @endif  
             </div><!-- ./discussion -->
-            <!-- ./quiz -->
+            
+            <!-- quiz -->
             <div class="tab-pane fade" id="tab_3">
                 @if(is_null($quizResult))
                   @if(is_null($quiz))
@@ -238,9 +221,9 @@
                 </div>
               @endif
             </div>
-          
 
             <!-- ./end quiz -->
+
             <!-- assignment -->
             <div class="tab-pane fade" id="tab_4">
               <div id="assignment-content">
@@ -310,7 +293,7 @@
         </div>
       </div>
   </section>
-</div><!-- ./Content Wrapper -->  
+</div><!--content wrapper
 @stop
 
 @section('script')
