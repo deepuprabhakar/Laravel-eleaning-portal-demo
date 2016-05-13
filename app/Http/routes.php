@@ -83,6 +83,9 @@ Route::group(['middleware' => ['web']], function () {
         //progress
         Route::get('progress', ['as' => 'admin.progress', 'uses' => 'Admin\ProgressController@progress']);
 
+           
+
+
     });
 
     /**

@@ -22,6 +22,7 @@
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="{{ route('admin.students.index') }}">Students</a></li>
             <li class="active">Profile</li>
           </ol>
         </section>
@@ -36,7 +37,7 @@
               <div class="box box-primary">
                 <div class="box-body box-profile">
                   <img class="profile-user-img img-responsive img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User profile picture">
-                  <h3 class="profile-username text-center">{{ $student['name'] }}</h3>
+                  <h3 class="profile-username text-center">{{ $students['name'] }}</h3>
                   <p class="text-muted text-center">{{ $course['title'] }}</p>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -55,40 +56,7 @@
                   <div class="tab-pane" id="timeline">
                    
                   </div><!-- /.tab-pane -->
-                <!-- Profile Settings-->
-                  <div class="tab-pane" id="settings">
-                  {!! Form::open(['url' => route('profile.update', $student['hashid']), 'autocomplete' => 'off', 'method' => 'PATCH']) !!}
-                    <div class="box-body">
-                        @include('errors.list')
-                        <div id="response" style="display: none;"></div>
-                        @include('errors.success')
-                        <div class="form-group">
-                          {!! Form::label('name', 'Name') !!}
-                          {!! Form::text('name', $student['name'], ['class' => 'form-control', 'id' => 'name']) !!}
-                        </div>
-                        <div class="form-group">
-                          {!! Form::label('address', 'Address') !!}
-                          {!! Form::textarea('address', $student['address'], ['class' => 'form-control', 'id' => 'address']) !!}
-                        </div>
-                        <div class="form-group">
-                          {!! Form::label('phone', 'Phone') !!}
-                          {!! Form::text('phone', $student['phone'], ['class' => 'form-control', 'id' => 'phone']) !!}
-                        </div>
-                        <div class="form-group">
-                          {!! Form::label('dob', 'Date of Birth') !!}
-                          <div class="input-group date">
-                            <div class="input-group-addon">
-                              <i class="fa fa-calendar"></i>
-                            </div>
-                            {!! Form::text('dob', $student['dob'], ['class' => 'form-control', 'id' => 'dob']) !!}
-                          </div>
-                        </div>
-                      </div><!-- /.box-body -->
-                      <div class="box-footer">
-                        <button type="submit" class="btn btn-primary news-button">Update</button>
-                      </div>
-                  {{ Form::close() }}
-                  </div><!-- profile setting -->
+                
               </div><!-- /.nav-tabs-custom -->
             </div><!-- /.col -->
           </div><!-- /.row -->

@@ -87,7 +87,14 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $students = Student::findBySlug($id)->toArray();
+        $course = Course::find($students['course'])->toArray();
+        if($students)
+        {
+            return view('admin.viewStudentDetails')->with(['students' => $students, 'course' => $course]);
+        }
+        else
+            abort(404);  
     }
 
     /**
