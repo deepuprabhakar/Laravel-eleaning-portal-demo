@@ -58,24 +58,27 @@ class ProgressController extends Controller
         $course = $request->get('course');
         $batch = $request->get('batch');
         $subject = $request->get('subject');
-        $students = Student::with('assignment','replyDiscussion','quizresult')->where('course', $course)->where('batch', $batch)->get();
+        $students = Student::with(array('assignment','replyDiscussion','quizresult'))->where('course', $course)->where('batch', $batch)->get();
         $response = [];
         foreach ($students as $key => $value) {
-                      
                 $response[$key]['no'] = $key+1;
                 $response[$key]['name'] = $value->name;
-                if(!is_null($value->replyDiscussion))
+                foreach($value->replyDiscussion as $key => $valuereplyDiscussion)
+                {
+                if($valuereplyDiscussion->student_id)
                 $response[$key]['discussion'] = '<div class="text-center">'.'5'.'</div>';
                 else
                 $response[$key]['discussion'] = '<div class="text-center">'.'Not Added Yet'.'</div>';
-                if(!is_null($value->quizresult))
-                $response[$key]['quiz'] = '<div class="text-center">'.'Not Added Yet'.'</div>';
-                else
-                $response[$key]['quiz'] = '<div class="text-center">'.'Not Added Yet'.'</div>';
+                }
+                $response[$key]['quiz'] = '<div class="text-center">'.'0'.'</div>';
+                foreach($value->assignment as $key => $valueassignment)
+                {
                 if(!is_null($value->assignment))
-                $response[$key]['assignment'] = '<div class="text-center">'.'Not Added Yet'.'</div>';
+                $response[$key]['assignment'] = '<div class="text-center">'.$valueassignment->mark.'</div>';
                 else
                 $response[$key]['assignment'] = '<div class="text-center">'.'Not Added Yet'.'</div>';
+                }
+
                 
         }
         $data['data'] = $response;

@@ -201,68 +201,49 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-
-
-          <div class="box box-default box-solid">
-        
-          
-            <div class="box-header with-border">
-              <h3 class="box-title">{{ $students['name']}}</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-              </div>
-              <!-- /.box-tools -->
-            </div>
-        
-            <!-- /.box-header -->
-            <div class="box-body" style="display: block;">
-                 <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th style="width: 20px;">No.</th>
-                  <th> Assignment Title</th>
-                  <th>Assignment File</th>
-                  <th>Score</th>
-                  <th>Remark</th>
-                  <th class="text-center" style="width: 200px;">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-              @foreach ($assignments as $key => $assignment)
-                <tr>
-                  <td>{{ ++$key }}</td>
-                  <td>{{ $assignment['title'] }}</td>
-                  <td><a href="{{ url('uploads/assignments', $assignment['file']) }}" class="btn btn-primary" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></td>
-                  
-                   {{ Form::open(['url' => route('admin.assignment.create', $assignment['hashid']), 'autocomplete' => 'off', 'class' => 'assignment-form']) }} 
-                   <td>{{ Form::text('mark', $assignment['mark'], ['id' => 'mark','class' => 'form-control', 'placeholder' => 'Enter Mark']) }}</td>
-                   <td>{{ Form::text('remark', $assignment['remark'], ['class' => 'form-control', 'id' => 'remark', 'placeholder' => 'Enter Remark']) }}</td>
-                  <td class="text-center table-actions">
-                    {!! Form::submit('Save', ['class' => 'btn btn-primary assignment-button']) !!}
-                  </td>
-                  {{ Form::close() }}
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-         
-            <div id="response-assignment" style="display: none;"></div>
+                  <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th style="width: 20px;">No.</th>
+                          <th>Student Name</th>
+                          <th> Assignment Title</th>
+                          <th>Assignment File</th>
+                          <th>Score</th>
+                          <th>Remark</th>
+                          <th class="text-center" style="width: 200px;">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      @foreach ($assignments as $key => $assignment)
+                        <tr>
+                          <td>{{ ++$key }}</td>
+                          <td>{{ $students['name']}}</td>
+                          <td>{{ $assignment['title'] }}</td>
+                          <td><a href="{{ url('uploads/assignments', $assignment['file']) }}" class="btn btn-primary" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></td>
+                          
+                           {{ Form::open(['url' => route('admin.assignment.create', $assignment['hashid']), 'autocomplete' => 'off', 'class' => 'assignment-form']) }} 
+                           <td>{{ Form::text('mark', $assignment['mark'], ['id' => 'mark','class' => 'form-control', 'placeholder' => 'Enter Mark']) }}</td>
+                           <td>{{ Form::text('remark', $assignment['remark'], ['class' => 'form-control', 'id' => 'remark', 'placeholder' => 'Enter Remark']) }}</td>
+                          <td class="text-center table-actions">
+                            {!! Form::submit('Save', ['class' => 'btn btn-primary assignment-button']) !!}
+                          </td>
+                          {{ Form::close() }}
+                        </tr>
+                      @endforeach
+                      </tbody>
+                </table>
+                <div id="response-assignment" style="display: none;"></div>
             </div>
             <!-- /.box-body -->
             <div class="overlay">
-            <i class="fa fa-refresh fa-spin"></i>
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
           </div>
         </div>
-      </div>
-      </div><!-- ./Row -->    
-  </section>
+        </div><!-- ./Row -->    
+    </section>
      
-</div><!-- ./Content Wrapper -->  
+  </div><!-- ./Content Wrapper -->  
 @stop
 
 @section('script')

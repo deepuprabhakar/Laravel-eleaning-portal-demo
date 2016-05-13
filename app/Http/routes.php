@@ -15,7 +15,7 @@
 Route::group(['middleware' => ['web']], function () {
 
     // Home Page - Dashboard
-    Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+    Route::get('', ['as' => 'home', 'uses' => 'HomeController@index']);
     Route::get('dashboard', ['as' => 'dashboard', 'uses' => 'HomeController@index']);
     
     // Authorization

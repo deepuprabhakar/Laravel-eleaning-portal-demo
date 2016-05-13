@@ -87,10 +87,10 @@
             <li><a href="#tab_2" data-toggle="tab">Discussion Prompt</a></li>
             <li><a href="#tab_3" data-toggle="tab">Quiz</a></li>
             <li><a href="#tab_4" data-toggle="tab">Assignment</a></li>
-            <li class="pull-right"><a href="#" class="text-muted"></a></li>
           </ul>
           <div class="tab-content">
-            <!--units-->
+
+            <!-- units -->
             <div class="tab-pane fade in active" id="tab_1">
               @if($units->count() == 0)
                 @include('errors.empty', ['item' => $units, 'title' => 'units'])
@@ -111,41 +111,46 @@
                 @endforeach
               @endif
             </div><!--end units-->
-            <!--discussion-->
+            
+            <!-- discussion -->
             <div class="tab-pane fade" id="tab_2">
-              @if(empty($discussion))
-                @include('errors.empty', ['item' => $discussion, 'title' => 'discussion'])
-              @else
-                <blockquote>
-                  <p>{{ $discussion['question'] }}</p>
-                </blockquote>
-                {!! Form::open(['url' => route('modules.store',[$subject->semester,$subject->slug]), 'autocomplete' => 'off', 'id' => 'discussion-form' ]) !!}
-                {!! Form::textarea('answer', null, ['class' => 'form-control', 'id' => 'answer', 'placeholder' => 'Enter Your Answer Here!!!']) !!}
-                {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
-                {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
-                <div id="response-discussion" style="display: none;"></div>
-                <button type="submit" class="btn btn-primary news-button" id="discussionprompt" style="width: 150px; margin-top: 5px;">Reply</button>
-                {{ Form::close() }}
-                <br>
-                  <div id="post-list">
-                    @foreach($discussions as $key=>$discussion)
-                      <div class="post">
-                        <div class="user-block">
-                          <img class="img-circle img-bordered-sm" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="user image">
-                          <span class="username"><a href="#">{{ $discussion['student']['name'] }}</a></span>
-                          <span class="description">{{ $discussion['created_at']->diffForHumans() }}</span>
-                        </div><!-- /.user-block -->
-                        <p>
-                          {!! $discussion->answer !!}
-                        </p>
-                      </div>
-                    @endforeach
+            @if(empty($discussion))
+              @include('errors.empty', ['item' => $discussion, 'title' => 'discussion'])
+            @else
+              <blockquote>
+                <p>{{ $discussion['question'] }}</p>
+              </blockquote>
+              {!! Form::open(['url' => route('modules.store',[$subject->semester,$subject->slug]), 'autocomplete' => 'off', 'id' => 'discussion-form' ]) !!}
+              {!! Form::textarea('answer', null, ['class' => 'form-control', 'id' => 'answer', 'placeholder' => 'Enter Your Answer Here!!!']) !!}
+              {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
+              {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
+              <div id="response-discussion" style="display: none;"></div>
+              <button type="submit" class="btn btn-primary news-button" id="discussionprompt" style="width: 150px; margin-top: 5px;">Reply</button>
+              {{ Form::close() }}
+              <br>
+
+              <div id="post-list">
+                @foreach($discussions as $key=>$discussion)
+                <div class="post">
+                  <div class="user-block">
+                    <img class="img-circle img-bordered-sm" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="user image">
+                        <span class="username">
+                          <a href="#">{{ $discussion['student']['name'] }}</a>
+                         </span>
+                    <span class="description">{{ $discussion['created_at']->diffForHumans() }}</span>
                   </div>
-                @endif
-              </div><!--end discussion-->
-              <!--quiz-->
-              <div class="tab-pane fade" id="tab_3">
-                <h3><div class="text-center">Quiz</div></h3>
+                  <!-- /.user-block -->
+                  <p>
+                    {!! $discussion->answer !!}
+                  </p>
+                </div>
+                @endforeach
+              </div>
+            @endif  
+            </div><!-- ./discussion -->
+            
+            <!-- quiz -->
+            <div class="tab-pane fade" id="tab_3">
                 @if(is_null($quizResult))
                   @if(is_null($quiz))
                     <div class="question">
@@ -215,69 +220,77 @@
                 </div>
               @endif
             </div>
-          </div><!-- end quiz-->
-          <!--assignment-->
-          <div class="tab-pane" id="tab_4">
-              <div class="box box-success box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Add Assignment</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
-                  @include('errors.list')
-                  @include('errors.success')
-                    <div class="form-group">
-                      {!! Form::label('title', 'Assignment Title') !!}
-                      {!! Form::text('title', $assignment['title'], ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
+
+            <!-- ./end quiz -->
+
+            <!-- assignment -->
+            <div class="tab-pane fade" id="tab_4">
+              <div id="assignment-content">
+                  <div class="box box-success box-solid">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Add Assignment</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
+                        @include('errors.list')
+                        @include('errors.success')
+                        <div class="form-group">
+                          {!! Form::label('title', 'Assignment Title') !!}
+                          {!! Form::text('title', $assignment['title'], ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('file', 'Assignment File') !!}
+                          {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
+                          {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
+                          {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
+                           <div id="response-assignment" style="display: none;"></div>
+                        </div>
+                        <div class="form-group">
+                            @if($assignment['file']!= '')
+                              <a href="{{ url('uploads/assignment', $assignment['file']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $assignment['file'] }}</a>
+                            @endif
+                        </div>
+                        
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                     
+                      <button type="submit" class="btn btn-primary news-button" id= "assignment">Create</button>
                     </div>
-                    <div class="form-group">
-                      {!! Form::label('file', 'Assignment File') !!}
-                      {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
-                      {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
-                      {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
-                      <div id="response-assignment" style="display: none;"></div>
-                    </div>
-                    <div class="form-group">
-                      @if($assignment['file']!= '')
-                        <a href="{{ url('uploads/assignment', $assignment['file']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $assignment['file'] }}</a>
-                      @endif
-                    </div>
+                  </div>
+                    {{ Form::close() }}
+                </div><!-- ./assignment-content -->
+
+                <div class="box box-success box-solid">
+                  <div class="box-header with-border">
+                    <h3 class="box-title">Assignments</h3>
+                  </div><!-- /.box-header -->
+                  <div class="box-body">
+                    <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th style="width: 20px;">No.</th>
+                          <th>Title</th>
+                          <th>Score</th>
+                          <th>Remarks</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div><!-- /.box-body -->
-                 <div class="box-footer">
-                   <button type="submit" class="btn btn-primary news-button" id= "assignment">Create</button>
-                 </div>
                 </div>
-                {{ Form::close() }}
-              <div class="box box-success box-solid">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Assignments</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
-                    <thead>
-                      <tr>
-                        <th style="width: 20px;">No.</th>
-                        <th>Title</th>
-                        <th>Score</th>
-                        <th>Remarks</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div><!-- /.box-body -->
-              </div>
-            </div><!--end assignment-->
-          </div><!--tab content-->
+                
+            </div><!-- ./assignment -->
+          </div><!-- ./tab content -->
+          </div>
         </div>
       </div>
-    </div><!--end row-->
   </section>
 </div><!--content wrapper
 @stop

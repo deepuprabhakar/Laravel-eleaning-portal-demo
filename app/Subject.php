@@ -62,7 +62,7 @@ class Subject extends Model implements SluggableInterface
 
     public function assignment()
     {
-        return $this->hasMany('App\Assignment', 'subject_id');
+        return $this->hasOne('App\Assignment');
     }
 
     public function quizresult()
