@@ -71,16 +71,17 @@ class ProfileController extends Controller
             if(!(File::exists($filepath)))
                 File::makeDirectory($filepath, 0775, true);
 
-            $img->resize(240, null, function ($constraint) {
-                $constraint->aspectRatio();
-                //$constraint->upsize();
+            $img->resize(240, 240, function ($constraint) {
+                //$constraint->aspectRatio();
+                $constraint->upsize();
             });
 
             $img->save($filepath . $filename);
             if($user->image != "")
                 File::delete($filepath . $user->image);
             $data = [];
-            $data['image'] = '<img src="'.url($filepath . $filename).'">';
+            $data['image'] = $filename;
+            $data['path'] = url('uploads/profile/' . $filename);
             $user->image = $filename;
             $user->save();
         }

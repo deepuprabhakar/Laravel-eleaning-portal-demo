@@ -20,12 +20,13 @@ $(function() {
     		'processData': false,
 			success: function(response)
 			{
-				$('#preview').html(response.image).fadeIn();
-				$('#save-image').fadeIn();
+				$('#preview').html('<img src="'+url+'/'+response.image+'">').fadeIn();
+				$('.profile-user-img, .side-profile-pic, .header-profile-image').prop('src', response.path);
+				//('#save-image').fadeIn();
 				$('.overlay').fadeOut();
 				form.reset();
 
-				var image = $(document).find("#preview > img");
+				/*var image = $(document).find("#preview > img");
 				originalData = {};
 				image.cropper({
 				  aspectRatio: 1/1,
@@ -55,7 +56,7 @@ $(function() {
 		        			$('.overlay').fadeOut();
 		        		} 
 		        	});
-		        }); 
+		        });*/ 
 		        
 			}
 		});

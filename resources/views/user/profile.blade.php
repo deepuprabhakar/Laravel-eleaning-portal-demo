@@ -106,11 +106,16 @@
                             Upload
                             {!! Form::open(['id' => 'profile-pic-form']) !!}
                               {!! Form::file('profile-pic', ['id' => 'profile-input']) !!}
-                              {!! Form::hidden('cropped', '', ['id' => 'cropped-image']) !!}
                             {!! Form::close() !!}
                           </a>
                         </div>
+                        @if($student['image'] != "")
+                        <div id="preview" style="margin-top: 10px">
+                          <img src="{{ url('uploads/profile', $student['image']) }}" alt="">
+                        </div>
+                        @else
                         <div id="preview" style="display: none; margin-top: 10px"></div>
+                        @endif
                         <button type="button"  class="btn btn-success btn-flat" style="display: none; margin-top: 10px;" id="save-image">Save</button>
                       </div><!-- /.box-body -->
                       <!-- Loading (remove the following to stop the loading)-->
@@ -134,6 +139,7 @@
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
+      var url = '{{ url('/uploads/profile/') }}';
     </script>
     <!-- FastClick -->
     {!! Html::script('plugins/fastclick/fastclick.min.js') !!}
