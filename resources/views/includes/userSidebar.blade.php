@@ -102,11 +102,20 @@
             <span>Course Info</span>
         </a>
       </li>
-      <li class="{{ Request::is('progress') ? 'active' : '' }}">
-        <a href="{{ route('progress') }}">
-          <i class="fa fa-tasks" aria-hidden="true"></i>
-          <span>Progress</span>
+      <li class="treeview {{ Request::is('progress') ? 'active' : '' }}{{ Request::is('progress/*') ? 'active' : '' }}">
+        <a href="#">
+          <i class="fa fa-book" aria-hidden="true"></i>
+          <span>Progress</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
+        <ul class="treeview-menu">
+          @for($i=0; $i<$course->semester; $i++)
+              <li class="{{ Request::is('progress/') ? 'active' : '' }}">
+
+                <a href="{{ route('progress.index', $i+1) }}"><i class="fa fa-circle-o"></i>{{'Semester '.($i+1) }}</a>
+
+              </li>
+          @endfor   
+        </ul>
       </li>
     </ul>
   </section>

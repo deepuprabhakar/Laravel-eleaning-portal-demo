@@ -145,7 +145,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('courseInfo', ['as' => 'courseInfo.index', 'uses' => 'User\CourseInfoController@index']);
 
     //progress
-        Route::get('progress', ['as' => 'progress', 'uses' => 'User\ProgressController@progress']);
+        Route::get('progress/semester/{id}', ['as' => 'progress.index', 'uses' => 'User\ProgressController@index']);
     
 
 
