@@ -156,8 +156,8 @@ class StudentController extends Controller
     {
         if($request->ajax())
         {
-            $subject = Course::find($request->get('course'));
-            return $subject->subject()->lists('batch', 'batch');
+            $course = Course::find($request->get('course'));
+            return $course->subject()->lists('batch', 'batch');
         }
     }
 }
