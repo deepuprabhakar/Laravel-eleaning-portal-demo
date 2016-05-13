@@ -92,7 +92,7 @@ Route::group(['middleware' => ['web']], function () {
      * end of EL Admin Routes
      */
     
-    // Ajax Fetch for Select2
+    // Ajax Fetch 
     Route::post('/fetchBatch', 'Admin\StudentController@fetchBatch');
     Route::post('/fetchSem', 'Admin\SubjectController@fetchSem');
     Route::post('createDiscussion','Admin\DiscussionPromptController@create');
@@ -100,6 +100,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/fetchProjects', 'Admin\ProjectController@fetchProjects');
     Route::post('/fetchSubjects', 'Admin\ProgressController@fetchSubjects');
     Route::post('/fetchProgress', 'Admin\ProgressController@fetchProgress');
+    Route::post('/uploadProfilePic', 'User\ProfileController@uploadProfilePic');
+    Route::post('/cropImage', 'User\ProfileController@cropImage');
 
 
     /**

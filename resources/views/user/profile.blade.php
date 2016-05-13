@@ -9,8 +9,10 @@
     <title>Coheart E-learning - Profile</title>
 @stop
 @section('style')
-<!-- for DatePicker css-->
-      {{ Html::style('plugins/datepicker/datepicker3.css') }}
+  <!-- for DatePicker css-->
+  {{ Html::style('plugins/datepicker/datepicker3.css') }}
+  <!-- Croppie -->
+  {{ Html::style('plugins/cropper/cropper.css') }}
 @stop
 
 @section('content')
@@ -50,6 +52,7 @@
               <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class=""><a href="#profile-photo" data-toggle="tab">Profile Photo</a></li>
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane active" id="settings">
@@ -85,6 +88,32 @@
                       </div>
                   {{ Form::close() }}
                   </div><!-- /.tab-pane -->
+
+                  <div class="tab-pane" id="profile-photo">
+                    <div class="box box-success box-solid">
+                      <div class="box-header">
+                        <h3 class="box-title">Upload your profile pic</h3>
+                      </div>
+                      <div class="box-body">
+                        <div class="profile-pic-upload">
+                          <a href="" class="btn btn-primary">
+                            Upload
+                            {!! Form::open(['id' => 'profile-pic-form']) !!}
+                              {!! Form::file('profile-pic', ['id' => 'profile-input']) !!}
+                              {!! Form::hidden('cropped', '', ['id' => 'cropped-image']) !!}
+                            {!! Form::close() !!}
+                          </a>
+                        </div>
+                        <div id="preview" style="display: none;"></div>
+                        <button type="button"  class="btn btn-success" style="display: none; z-index: 999;" id="save-image">Save</button>
+                      </div><!-- /.box-body -->
+                      <!-- Loading (remove the following to stop the loading)-->
+                      <div class="overlay" style="display: none;">
+                        <i class="fa fa-refresh fa-spin"></i>
+                      </div>
+                      <!-- end loading -->
+                    </div>
+                  </div><!-- /.tab-pane -->
                 </div><!-- /.tab-content -->
               </div><!-- /.nav-tabs-custom -->
             </div><!-- /.col -->
@@ -95,7 +124,11 @@
 @stop
 
 @section('script')
-
+    <script>
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+    </script>
     <!-- FastClick -->
     {!! Html::script('plugins/fastclick/fastclick.min.js') !!}
     <!-- App -->
@@ -103,11 +136,8 @@
     {!! Html::script('dist/js/script.js') !!}
     <!-- Datepicker -->
     {{ Html::script('plugins/datepicker/bootstrap-datepicker.js') }}
+    <!-- Croppie -->
+    {{ Html::script('plugins/cropper/cropper.min.js') }}
+
     {{ Html::script('dist/js/custom/profile.js') }}
-    <script>
-      $.ajaxSetup({
-         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      });
-    </script>
-    
 @stop
