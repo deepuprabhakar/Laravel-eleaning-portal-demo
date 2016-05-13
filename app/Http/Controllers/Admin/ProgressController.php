@@ -58,11 +58,7 @@ class ProgressController extends Controller
         $course = $request->get('course');
         $batch = $request->get('batch');
         $subject = $request->get('subject');
-        //$students = Student::with(array('assignment','replyDiscussion','quizresult'))->where('course', $course)->where('batch', $batch)->get();
         $students = Student::where('course', $course)->where('batch', $batch)->select('id', 'name')->get();
-        /*return $students->quizresult()->where('subject_id', $subject)->select('id', 'score')->first();
-        return $students->assignment()->where('subject_id', $subject)->select('id', 'mark')->first();
-        return $students->replyDiscussion()->where('subject_id', $subject)->select('id', 'created_at')->first();*/
         $response = [];
         foreach ($students as $key => $student) {
             $response[$key]['no'] = $key+1;
