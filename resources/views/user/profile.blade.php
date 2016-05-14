@@ -12,7 +12,7 @@
   <!-- for DatePicker css-->
   {{ Html::style('plugins/datepicker/datepicker3.css') }}
   <!-- Croppie -->
-  {{ Html::style('plugins/cropper/cropper.css') }}
+  {{ Html::style('plugins/jCrop/css/jquery.Jcrop.css') }}
 @stop
 
 @section('content')
@@ -98,24 +98,34 @@
                   <div class="tab-pane" id="profile-photo">
                     <div class="box box-success box-solid">
                       <div class="box-header">
-                        <h3 class="box-title">Upload your profile pic</h3>
+                        <h4 class="box-title">Upload Your Profile Photo</h4>
                       </div>
                       <div class="box-body">
                         <div class="profile-pic-upload">
-                          <a href="" class="btn btn-primary btn-flat">
+                          <a href="" class="btn btn-primary btn-flat" style="width: 100px;">
+                            <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;
                             Upload
                             {!! Form::open(['id' => 'profile-pic-form']) !!}
-                              {!! Form::file('profile-pic', ['id' => 'profile-input']) !!}
+                              {!! Form::file('profilePic', ['id' => 'profile-input', 'style' => 'curson: pointer;']) !!}
                             {!! Form::close() !!}
                           </a>
                         </div>
                         @if($student['image'] != "")
-                        <div id="preview" style="margin-top: 10px">
-                          <img src="{{ url('uploads/profile', $student['image']) }}" alt="">
+                        <div id="preview-image-container" style="margin-top: 10px">
+                          <img src="{{ url('uploads/profile', $student['image']) }}" alt="" id="preview-image">
+                          <div>
+                            <button type="button" value="{{ $student['image'] }}" class="btn btn-danger btn-flat btn-xs" id="remove-profile-photo">Remove Profile Photo</button>
+                          </div>
                         </div>
                         @else
-                        <div id="preview" style="display: none; margin-top: 10px"></div>
+                        <div id="preview-image-container" style="display: none; margin-top: 10px"></div>
                         @endif
+                        {!! Form::open(['id' => 'profile-pic-save']) !!}
+                          {!! Form::hidden('x', null, ['id' => 'x']) !!}
+                          {!! Form::hidden('y', null, ['id' => 'y']) !!}
+                          {!! Form::hidden('w', null, ['id' => 'w']) !!}
+                          {!! Form::hidden('h', null, ['id' => 'h']) !!}
+                        {!! Form::close() !!}
                         <button type="button"  class="btn btn-success btn-flat" style="display: none; margin-top: 10px;" id="save-image">Save</button>
                       </div><!-- /.box-body -->
                       <!-- Loading (remove the following to stop the loading)-->
@@ -149,7 +159,7 @@
     <!-- Datepicker -->
     {{ Html::script('plugins/datepicker/bootstrap-datepicker.js') }}
     <!-- Croppie -->
-    {{ Html::script('plugins/cropper/cropper.min.js') }}
+    {{ Html::script('plugins/jCrop/js/jquery.Jcrop.js') }}
 
     {{ Html::script('dist/js/custom/profile.js') }}
 @stop

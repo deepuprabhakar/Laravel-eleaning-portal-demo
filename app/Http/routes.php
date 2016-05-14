@@ -102,6 +102,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/fetchProgress', 'Admin\ProgressController@fetchProgress');
     Route::post('/uploadProfilePic', 'User\ProfileController@uploadProfilePic');
     Route::post('/cropImage', 'User\ProfileController@cropImage');
+    Route::post('/deleteProfilePhoto', 'User\ProfileController@deleteProfilePhoto');
 
 
     /**

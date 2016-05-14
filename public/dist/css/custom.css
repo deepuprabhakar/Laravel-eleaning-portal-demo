@@ -164,3 +164,9 @@ label::first-letter{
 #profile-photo #preview img{
 	max-width: 100%;
 }
+#preview-image-container{
+	
+}
+#preview-image-container img{
+	//max-width: 300px;
+}
