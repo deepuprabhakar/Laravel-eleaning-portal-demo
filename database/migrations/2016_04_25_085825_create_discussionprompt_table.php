@@ -13,6 +13,7 @@ class CreateDiscussionpromptTable extends Migration
     public function up()
     {
         Schema::create('discussionprompt', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->text('question');
             $table->unsignedInteger('subject_id');
