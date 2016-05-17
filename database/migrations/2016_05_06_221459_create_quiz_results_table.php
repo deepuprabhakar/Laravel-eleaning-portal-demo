@@ -13,6 +13,7 @@ class CreateQuizResultsTable extends Migration
     public function up()
     {
         Schema::create('quiz_results', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('student_id');
             $table->unsignedInteger('subject_id');

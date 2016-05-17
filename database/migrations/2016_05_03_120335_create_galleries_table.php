@@ -13,6 +13,7 @@ class CreateGalleriesTable extends Migration
     public function up()
     {
         Schema::create('gallery', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('image');
             $table->timestamps();

@@ -13,6 +13,7 @@ class CreateReplyDiscussionsTable extends Migration
     public function up()
     {
         Schema::create('reply_discussions', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->text('answer');
             $table->unsignedInteger('subject_id');

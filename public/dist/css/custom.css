@@ -168,5 +168,11 @@ label::first-letter{
 	
 }
 #preview-image-container img{
-	//max-width: 300px;
+	
+}
+.coheart-logo{
+	text-align: center;
+}
+.coheart-logo img{
+	display: inline-block;
 }

@@ -5,7 +5,12 @@
 @section('content')
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ url('/') }}"><b>Coheart E-Learning</b></a>
+    <a href="{{ url('/') }}">
+      <div class="coheart-logo">
+        <img src="{{ url('kvasu-coheart-logo-200x212.png') }}" alt="Kvasu Coheart Logo" class="img-responsive">
+      </div>
+      <b>Coheart E-Learning</b>
+    </a>
   </div><!-- /.login-logo -->
   <div class="login-box-body">
     <h4 class="login-box-msg"><b>Log In</b></h4>
