@@ -13,6 +13,7 @@ use App\Assignment;
 use Sentinel;
 use File;
 use Hashids;
+use Validator;
 
 class AssignmentsController extends Controller
 {
@@ -27,7 +28,7 @@ class AssignmentsController extends Controller
         $this->middleware('sentinel.role:user');
     }
 
-    public function createAssignment(AssignmentRequest $request)
+    public function createAssignment(Request $request)
     {
         $student = Student::where('user_id', Sentinel::getUser()->id)->first();
         $input = $request->all();
@@ -35,6 +36,16 @@ class AssignmentsController extends Controller
         $assignment = $student->assignment()->first();
         if($student->assignment()->count())
         {
+            //validation
+            $validator = Validator::make($request->all(), [
+                        'title' => 'required',
+                        'file' => 'mimes:pdf,doc,docx'
+
+                    ]);
+            if ($validator->fails()) 
+            {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             if($request->hasFile('file'))
             {
                 File::delete($filepath.'/'.$assignment->file);
@@ -58,6 +69,16 @@ class AssignmentsController extends Controller
         }
         else
         {
+
+             $validator = Validator::make($request->all(), [
+                        'title' => 'required',
+                        'file' => 'required|mimes:pdf,doc,docx'
+
+                    ]);
+            if ($validator->fails()) 
+            {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
             $input = $request->all();
             $filepath = 'uploads/assignments';
             $extension = $request->file('file')->getClientOriginalExtension();
