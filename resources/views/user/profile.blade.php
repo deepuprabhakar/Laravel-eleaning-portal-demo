@@ -59,6 +59,7 @@
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
                   <li class=""><a href="#profile-photo" data-toggle="tab">Profile Photo</a></li>
+                  <li class=""><a href="#change-password" data-toggle="tab">Change Password</a></li>
                 </ul>
                 <div class="tab-content">
                   <div class="tab-pane active" id="settings">
@@ -134,6 +135,28 @@
                       </div>
                       <!-- end loading -->
                     </div>
+                  </div><!-- /.tab-pane -->
+                  <!--change password tab-->
+                  <div class="tab-pane" id="change-password">
+                    <div class="box-body">
+                      {!! Form::open(['url' => route('profile.changePassword'), 'id' => 'password_form']) !!}
+                      <div id="response-password" style="display: none;"></div>
+                      <div class="form-group">
+                        {!! Form::label('current_password', 'Current Password') !!}
+                        {!! Form::password('current_password', ['class' => 'form-control', 'id' => 'current_password', 'placeholder' => 'Enter current password']) !!}
+                      </div>
+                      <div class="form-group">
+                        {!! Form::label('new_password', 'New Password') !!}
+                        {!! Form::password('new_password', ['class' => 'form-control', 'id' => 'new_password', 'placeholder' => 'Enter new password']) !!}
+                      </div>
+                      <div class="form-group">
+                        {!! Form::label('confirm_password', 'Confirm Password') !!}
+                        {!! Form::password('confirm_password', ['class' => 'form-control', 'id' => 'confirm_password', 'placeholder' => 'Enter new password again']) !!}
+                      </div>
+                    </div><!--box bod-->
+                      <div class="box-footer">
+                        <button type="submit" class="btn btn-primary news-button" id="password">Save</button>
+                      </div>
                   </div><!-- /.tab-pane -->
                 </div><!-- /.tab-content -->
               </div><!-- /.nav-tabs-custom -->

@@ -16,6 +16,7 @@ use Image;
 use File;
 use Storage;
 use Validator;
+use Hash;
 
 class ProfileController extends Controller
 {
@@ -160,4 +161,44 @@ class ProfileController extends Controller
 
         return $data;
     }
+
+    /**
+     * change password
+     *
+     * @param      Request  $request  (description)
+     * @param      <type>   $id       (description)
+     */
+    public function changePassword(Request $request)
+    {
+        $user = User::find(Sentinel::getUser()->id);
+        $password = Hash::make('password');
+        $input['current_password'] = $request['current_password'];
+
+        $validator = Validator::make($request->all(), [
+                        'current_password' => 'required',
+                        'new_password' => 'required',
+                        'confirm_password' => 'required'
+
+                    ]);
+            if ($validator->fails()) 
+            {
+               return response()->json($validator->errors(), 422);
+            }
+            else
+            {
+               if(Hash::check($input['current_password'], $user->password))
+                {
+                   $input['password'] = Hash::make('new_password'); 
+                   $user = User::find(Sentinel::getUser()->id);
+                   $user->update($input); 
+                   $response['data']['success'] = 'Password Updated Successfully';
+                   return $response;
+                }
+                else
+                {
+                    
+                } 
+            }
+        
+   }
 }

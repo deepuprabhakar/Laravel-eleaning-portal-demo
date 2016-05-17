@@ -134,6 +134,7 @@ Route::group(['middleware' => ['web']], function () {
     //profile
     Route::get('profile', ['as' =>'profile', 'uses' => 'User\ProfileController@profileView']);
     Route::patch('profile/{id}', ['as' => 'profile.update', 'uses' => 'User\ProfileController@update']);
+    Route::post('profile', ['as' =>'profile.changePassword', 'uses' => 'User\ProfileController@changePassword']);
 
     //messages
     Route::get('messages/sent', ['as' => 'messages.sent', 'uses' => 'User\MessageController@sent']);

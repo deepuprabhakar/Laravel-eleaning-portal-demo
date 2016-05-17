@@ -36,7 +36,11 @@
               <!-- Profile Image -->
               <div class="box box-primary">
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User profile picture">
+                @if($students['image'] == "")
+                  <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="profile-user-img img-responsive img-circle side-profile-pic" alt="User profile picture">
+                @else
+                  <img src="{{ asset('uploads/profile/'.$students['image']) }}" class="profile-user-img img-responsive img-circle side-profile-pic" alt="User profile picture">
+                @endif
                   <h3 class="profile-username text-center">{{ $students['name'] }}</h3>
                   <p class="text-muted text-center">{{ $course['title'] }}</p>
                 </div><!-- /.box-body -->
