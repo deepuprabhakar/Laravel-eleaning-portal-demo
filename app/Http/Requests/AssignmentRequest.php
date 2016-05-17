@@ -23,10 +23,23 @@ class AssignmentRequest extends Request
      */
     public function rules()
     {
-        return [
-            
-            'title' => 'required',
-            'file' => 'required|mimes:pdf,doc,docx',
-        ];
+
+
+         if(Request::is('assignment/*'))
+        {
+            $rules = [
+                'title' => 'required',
+            ];
+        }
+        else
+        {
+            $rules = [
+                'title' => 'required',
+                'file' => 'required|mimes:pdf,doc,docx',
+            ];
+        }
+
+        return $rules;
+       
     }
 }

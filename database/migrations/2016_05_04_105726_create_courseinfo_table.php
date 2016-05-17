@@ -13,6 +13,7 @@ class CreateCourseinfoTable extends Migration
     public function up()
     {
         Schema::create('course_info', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('course_id');
             $table->text('content');

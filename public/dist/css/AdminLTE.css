@@ -4729,3 +4729,10 @@ table.text-center th {
     white-space: normal!important;
   }
 }
+.coheart-logo{
+  text-align: center;
+}
+.coheart-logo img{
+  display: inline-block;
+  width: 110px;
+}

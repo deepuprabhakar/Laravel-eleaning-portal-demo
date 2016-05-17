@@ -57,8 +57,9 @@ class QuizController extends Controller
     {
         $id = Hashids::connection('quiz')->decode($id);
         Quiz::destroy($id);
-        $subject = Subject::find($id)->first()->toArray();
-        return redirect()->route('admin.quiz.index',$subject['slug'])->with('success', 'Quiz deleted succesfully');
+        return redirect()->back()->with('success', 'Quiz deleted succesfully');
+        //$subject = Subject::find($id)->first()->toArray();
+        //return redirect()->route('admin.quiz.index',$subject['slug'])->with('success', 'Quiz deleted succesfully');
     } 
 
     public function edit($id)
