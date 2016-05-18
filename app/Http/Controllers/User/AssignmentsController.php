@@ -64,7 +64,7 @@ class AssignmentsController extends Controller
             }
             $assignment = Assignment::find($assignment->id)->first();
             $assignment->update($input);
-            $response['data']['success'] = 'Assignment Created Successfully';
+            $response['data']['success'] = 'Assignment Updated Successfully';
             return $response;
         }
         else
@@ -90,10 +90,12 @@ class AssignmentsController extends Controller
             $request->file('file')->move($filepath, $newFilename);
             $input['file'] = $newFilename;
             Assignment::create($input);
-            $response['data']['success'] = 'Assignment Updated Successfully';
+            $response['data']['success'] = 'Assignment Created Successfully';
+            $response['data']['file'] = $newFilename;
             return $response;
 
         }
+
         
         
     }

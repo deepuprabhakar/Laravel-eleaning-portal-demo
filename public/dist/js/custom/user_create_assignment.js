@@ -54,8 +54,10 @@ $('#assignment-form').submit(function(e){
 	          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>\
 	          <i class="fa fa-check" aria-hidden="true"></i> '+response.data.success+'\
 	          </div>').slideDown().delay(5000).slideUp();
-         	$('#assignment-form')[0].reset();
-
+			if(response.data.file)
+			var file = '<a href="'+url_file+'/'+response.data.file+'" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>'+response.data.file+'</a>';
+			$('#file-display').html(file);
+         	//$('#assignment-form')[0].reset();
          	$('#assignment-table').DataTable().ajax.reload();		
 		},			
 		error: function(response)
