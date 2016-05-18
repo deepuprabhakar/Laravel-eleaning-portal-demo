@@ -123,8 +123,6 @@ $(function() {
             'data': data,
             'type': 'POST',
             'dataType': 'json',
-            'contentType': false,
-            'processData': false,
             success: function(response)
             {
                // Display success message
@@ -133,7 +131,7 @@ $(function() {
                   <i class="fa fa-check" aria-hidden="true"></i> '+response.data.success+'\
                   </div>').slideDown().delay(5000).slideUp();
 
-                $('#password-form')[0].reset();
+                $('#password_form')[0].reset();
 
             },          
             error: function(response)
@@ -148,8 +146,8 @@ $(function() {
                   <i class="fa fa-ban" aria-hidden="true"></i> Alert \
                   <ul>'+error+'</ul>\
                   </div>').slideDown();
-                $('#title').focus();   
-                console.log(error);   
+                 
+                 
             },
             complete: function()
             {

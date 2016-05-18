@@ -146,16 +146,16 @@
                         {!! Form::password('current_password', ['class' => 'form-control', 'id' => 'current_password', 'placeholder' => 'Enter current password']) !!}
                       </div>
                       <div class="form-group">
-                        {!! Form::label('new_password', 'New Password') !!}
-                        {!! Form::password('new_password', ['class' => 'form-control', 'id' => 'new_password', 'placeholder' => 'Enter new password']) !!}
+                        {!! Form::label('password', 'New Password') !!}
+                        {!! Form::password('password', ['class' => 'form-control', 'id' => 'new_password', 'placeholder' => 'Enter new password']) !!}
                       </div>
                       <div class="form-group">
-                        {!! Form::label('confirm_password', 'Confirm Password') !!}
-                        {!! Form::password('confirm_password', ['class' => 'form-control', 'id' => 'confirm_password', 'placeholder' => 'Enter new password again']) !!}
+                        {!! Form::label('password_confirmation', 'Confirm Password') !!}
+                        {!! Form::password('password_confirmation', ['class' => 'form-control', 'id' => 'confirm_password', 'placeholder' => 'Enter new password again']) !!}
                       </div>
                     </div><!--box bod-->
                       <div class="box-footer">
-                        <button type="submit" class="btn btn-primary news-button" id="password">Save</button>
+                        <button type="submit" class="btn btn-primary" id="password">Save</button>
                       </div>
                   </div><!-- /.tab-pane -->
                 </div><!-- /.tab-content -->

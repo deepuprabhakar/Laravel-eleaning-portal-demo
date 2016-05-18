@@ -173,32 +173,38 @@ class ProfileController extends Controller
         $user = User::find(Sentinel::getUser()->id);
         $password = Hash::make('password');
         $input['current_password'] = $request['current_password'];
-
         $validator = Validator::make($request->all(), [
                         'current_password' => 'required',
-                        'new_password' => 'required',
-                        'confirm_password' => 'required'
-
+                        'password' => 'required|min:6|confirmed',
+                        'password_confirmation' => 'required|min:6'
                     ]);
-            if ($validator->fails()) 
+        if ($validator->fails()) 
+        {
+            return response()->json($validator->errors(), 422);
+        }
+        else
+        {
+            if(Hash::check($input['current_password'], $user->password))
             {
-               return response()->json($validator->errors(), 422);
-            }
-            else
-            {
-               if(Hash::check($input['current_password'], $user->password))
+                if($request['current_password'] != $request['password'])
                 {
-                   $input['password'] = Hash::make('new_password'); 
-                   $user = User::find(Sentinel::getUser()->id);
-                   $user->update($input); 
-                   $response['data']['success'] = 'Password Updated Successfully';
-                   return $response;
+                    $input['password'] = Hash::make($request['password']); 
+                    $user = User::find(Sentinel::getUser()->id);
+                    $user->update($input); 
+                    $response['data']['success'] = 'Password Updated Successfully';
+                    return $response;
                 }
                 else
                 {
-                    
-                } 
+                    $response['data']['error'] = 'This is your current password..Please choose another one';
+                    return response()->json($response['data'], 422);
+                }
             }
-        
-   }
+            else
+            {
+                $response['data']['error'] = "Current password doesn't match";
+                return response()->json($response['data'], 422); 
+            } 
+        }
+    }
 }
