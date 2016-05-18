@@ -16,6 +16,8 @@ use Session;
 use Mail;
 use Hash;
 use Hashids;
+use File;
+use Form;
 
 class StudentController extends Controller
 {
@@ -147,13 +149,22 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        $id = Hashids::connection('student')->decode($id);
-        $student = Student::find($id)->first();
-        $user = Sentinel::findById($student->user_id);
-        $user->delete();
-        return redirect()->route('admin.students.index')->with('success', 'Student details deleted succesfully');
+        if($request->ajax())
+        {
+            $id = Hashids::connection('student')->decode($id);
+            $student = Student::find($id)->first();
+            $user = Sentinel::findById($student->user_id);
+            $user->delete();
+            if($student->image)
+            {
+                $filepath = 'uploads/profile';
+                File::delete($filepath.'/'.$student->image);
+            }
+            return redirect()->route('admin.students.index')->with('success', 'Student details deleted succesfully');  
+        }
+        
     }
     /*
     List batch based on courses
@@ -167,4 +178,31 @@ class StudentController extends Controller
             return $course->subject()->lists('batch', 'batch');
         }
     }
+
+    /*
+    List student based on course and batch
+    */
+    
+    public function fetchStudents(Request $request)
+    {
+        $course = $request->get('course');
+        $batch = $request->get('batch');
+        $students = Student::with('getCourse')->where('course', $course)->where('batch', $batch)->get();
+        $response = [];
+        foreach ($students as $key => $value) {
+            $response[$key]['no'] = $key+1;
+            $response[$key]['name'] ='<td class="text-center">'. $value->name.'</td>';
+            $response[$key]['course'] = '<td class="text-center">'.$value['getCourse']['title'].'</td>';
+            $response[$key]['batch'] = '<td class="text-center">'.$value->batch.'</td>';
+            $id = Hashids::connection('student')->encode($value->id);
+            $response[$key]['action'] ='<div class="text-center"><a class="btn bg-purple btn-xs btn-flat" href="'.route('admin.students.show', $value->slug).'">View</a>
+            <a class="btn bg-olive btn-xs btn-flat" href="'.route('admin.students.edit', $value->slug).'">Edit</a>'.'   '.
+            Form::open(['url' => route('admin.students.destroy', $id), 'method' => 'DELETE', 'class' => 'delete-form']).
+            '<button type="submit"  class="btn btn-danger btn-xs btn-flat btn-delete" id="delete-student">Delete</button>
+            </form></div>';
+        }
+        $data['data'] = $response;
+        return response()->json($data, 200);
+    }
+    
 }
