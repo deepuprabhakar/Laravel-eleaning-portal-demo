@@ -191,9 +191,9 @@ class StudentController extends Controller
         $response = [];
         foreach ($students as $key => $value) {
             $response[$key]['no'] = $key+1;
-            $response[$key]['name'] ='<td class="text-center">'. $value->name.'</td>';
-            $response[$key]['course'] = '<td class="text-center">'.$value['getCourse']['title'].'</td>';
-            $response[$key]['batch'] = '<td class="text-center">'.$value->batch.'</td>';
+            $response[$key]['name'] = $value->name;
+            $response[$key]['course'] = '<div class="text-center">'.$value['getCourse']['title'].'</div>';
+            $response[$key]['batch'] = '<div class="text-center">'.$value->batch.'</div>';
             $id = Hashids::connection('student')->encode($value->id);
             $response[$key]['action'] ='<div class="text-center"><a class="btn bg-purple btn-xs btn-flat" href="'.route('admin.students.show', $value->slug).'">View</a>
             <a class="btn bg-olive btn-xs btn-flat" href="'.route('admin.students.edit', $value->slug).'">Edit</a>'.'   '.

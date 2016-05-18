@@ -32,7 +32,7 @@ class User extends Authenticatable
         return Hashids::connection('message')->encode($this->attributes['id']);
     }
 
-    public function getNameAttribute($value)
+    public function getFirstNameAttribute($value)
     {
         return ucwords($value);
     }
