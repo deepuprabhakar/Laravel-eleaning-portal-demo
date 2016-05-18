@@ -62,6 +62,11 @@ class Student extends Model implements SluggableInterface
         return $this->belongsTo('App\Course', 'course', 'id');
     }
 
+    public function getCourse()
+    {
+        return $this->belongsTo('App\Course', 'course', 'id');
+    }
+
     public function replyDiscussion()
     {
         return $this->hasMany('App\ReplyDiscussion');
