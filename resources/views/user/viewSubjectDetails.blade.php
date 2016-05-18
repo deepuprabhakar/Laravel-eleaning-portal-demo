@@ -235,6 +235,7 @@
                       {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
                         @include('errors.list')
                         @include('errors.success')
+                        @if($assignment)
                         <div class="form-group">
                           {!! Form::label('title', 'Assignment Title') !!}
                           {!! Form::text('title', $assignment['title'], ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
@@ -251,6 +252,20 @@
                               <a href="{{ url('uploads/assignment', $assignment['file']) }}" class="btn btn-primary btn-sm" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>  {{ $assignment['file'] }}</a>
                             @endif
                         </div>
+                        @else
+                        <div class="form-group">
+                          {!! Form::label('title', 'Assignment Title') !!}
+                          {!! Form::text('title', $assignment['title'], ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Enter Assignment Title']) !!}
+                        </div>
+                        <div class="form-group">
+                          {!! Form::label('file', 'Assignment File') !!}
+                          {!! Form::file('file', ['class' => 'form-control', 'id' => 'file']) !!}<br>
+                          {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
+                          {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
+                           <div id="response-assignment" style="display: none;"></div>
+                        </div>
+                       
+                         @endif
                         
                     </div><!-- /.box-body -->
                     <div class="box-footer">
