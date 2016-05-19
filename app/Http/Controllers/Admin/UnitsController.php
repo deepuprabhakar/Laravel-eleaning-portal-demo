@@ -76,7 +76,8 @@ class UnitsController extends Controller
     public function show($id)
     {
         $unit = Unit::findBySlug($id);
-        return view('admin.unitview', compact('unit'));
+        $subject = $unit->subject;
+        return view('admin.unitview', compact('unit','subject'));
     }
 
     /**

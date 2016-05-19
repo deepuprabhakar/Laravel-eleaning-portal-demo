@@ -34,7 +34,7 @@ class ModulesController extends Controller
     }
     
      
-     public function index($id)
+    public function index($id)
     {
         $semester = $id;
         $student = Student::where('user_id', Sentinel::getUser()->id)->get()->first();
