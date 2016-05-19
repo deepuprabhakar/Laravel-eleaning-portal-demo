@@ -62,6 +62,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('messages/destroyMany', ['as' => 'admin.messages.destroyMany', 'uses' => 'Admin\MessageController@destroyMany']);
         Route::delete('messages/destroySent/{id}', ['as' => 'admin.messages.destroySent', 'uses' => 'Admin\MessageController@destroySent']);
         Route::post('messages/reply', ['as' => 'admin.messages.reply', 'uses' => 'Admin\MessageController@reply']);
+        Route::post('searchMails', ['as' => 'admin.messages.search', 'uses' => 'Admin\MessageController@search']);
+        Route::post('messages/searchMails', ['as' => 'admin.messages.search', 'uses' => 'Admin\MessageController@searchSent']);
         Route::resource('messages', 'Admin\MessageController');
 
         // Units
@@ -152,6 +154,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('messages/destroyMany', ['as' => 'messages.destroyMany', 'uses' => 'User\MessageController@destroyMany']);
     Route::delete('messages/destroySent/{id}', ['as' => 'messages.destroySent', 'uses' => 'User\MessageController@destroySent']);
     Route::post('messages/reply', ['as' => 'messages.reply', 'uses' => 'User\MessageController@reply']);
+    Route::post('searchMails', ['as' => 'messages.search', 'uses' => 'User\MessageController@search']);
+        Route::post('messages/searchMails', ['as' => 'messages.search', 'uses' => 'User\MessageController@searchSent']);
     Route::resource('messages', 'User\MessageController');
 
     //quiz

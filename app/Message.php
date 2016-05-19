@@ -5,12 +5,25 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Hashids;
 use Carbon\Carbon;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Message extends Model
 {
+    use SearchableTrait;
+    
     protected $fillable =[
    		 'to', 'subject', 'message', 'sender', 
    ];
+
+   protected $searchable = [
+        'columns' => [
+            'messages.subject' => 10,
+            'users.first_name' => 10,
+        ],
+        'joins' => [
+            'users' => ['messages.sender','users.id'],
+        ],
+    ];
 
    protected $appends = ['hashid', 'time','create'];
 
