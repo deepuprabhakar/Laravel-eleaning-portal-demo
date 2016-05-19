@@ -174,7 +174,7 @@
           @endif
 
             <span class="hidden-xs">
-              {{ Sentinel::getUser()->first_name}}
+              {{ ucwords(Sentinel::getUser()->first_name)}}
             </span>
           </a>
           <ul class="dropdown-menu">

@@ -12,7 +12,7 @@
       @endif
       </div>
       <div class="pull-left info">
-        <p>{{ Sentinel::getUser()->first_name }}</p>
+        <p>{{ ucwords(Sentinel::getUser()->first_name) }}</p>
         <a href="" onclick="return false"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
