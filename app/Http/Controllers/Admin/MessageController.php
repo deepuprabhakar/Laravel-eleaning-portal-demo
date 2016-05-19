@@ -37,7 +37,8 @@ class MessageController extends Controller
     public function index()
     {
         $user = Sentinel::getUser();
-        $messages = User::find($user->id)->messages()->with('user')->latest()->get()->toArray();
+        $messages = User::find($user->id)->messages()->with('user')->latest()->Paginate(2);
+        //dd($messages);
         $count = User::find($user->id)->messages()->where('status', 0)->count();
         return view('admin.inbox', compact('messages', 'count'));
     }
