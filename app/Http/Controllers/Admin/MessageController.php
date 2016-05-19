@@ -10,6 +10,7 @@ use App\Student;
 use App\Http\Requests\MessageRequest;
 use Auth;
 use App\Message;
+use App\MessageSent;
 use Session;
 use Sentinel;
 use Hashids;
@@ -196,4 +197,64 @@ class MessageController extends Controller
         Session::flash('success', 'Message sent.');
         return redirect()->back();
     }
+
+     /**
+     * Search through inbox
+     */
+    
+    public function search(Request $request)
+    {
+        $messages = Message::search($request->get('search'))->where('sender', '!=', Sentinel::getUser()->id)->latest()->get();
+        $response = [];
+        $str = '';
+        if($messages->isEmpty())
+        {
+            $str ='<tr>'.'<td colspan="4" class="text-center">'.'No Records Found..'.'</td>'.'</tr>';
+        }
+        else
+        {
+            foreach ($messages as $key => $value) {
+                $response[$key]['checkbox'] = '<input type="checkbox" class="message-check" name="message-check[]" value="'.$value['hashid'].'">';
+                if($value->status != 0)
+                    $response[$key]['name'] = '<a href="'.route('admin.messages.show', $value['hashid']).'">'.$value['user']['first_name'].'</a>';
+                else
+                  $response[$key]['name'] = '<b><a href="'.route('admin.messages.show', $value['hashid']).'">'.$value['user']['first_name'].'</a></b>';  
+                $response[$key]['subject'] = $value->subject;
+                $response[$key]['time'] = $value->time;
+                $str .= '<tr>'.'<td>'.$response[$key]['checkbox'].'</td>'.'<td>'.$response[$key]['name'].'</td>'.'<td>'.$response[$key]['subject'].'</td>'.'<td>'.$response[$key]['time'].'</td>'.'</tr>';
+            }
+        }
+        $data['data'] = $str;
+        return response()->json($data, 200);
+    }
+
+    /**
+     * Search through sent items
+     */
+    
+    public function searchSent(Request $request)
+    {
+        $messages = MessageSent::search($request->get('search'))->where('to', '!=', Sentinel::getUser()->id)->latest()->get();
+        //dd($messages);
+        $response = [];
+        $str = '';
+        if($messages->isEmpty())
+        {
+            $str ='<tr>'.'<td colspan="4" class="text-center">'.'No Records Found..'.'</td>'.'</tr>';
+        }
+        else
+        {
+            foreach ($messages as $key => $value) {
+                $response[$key]['checkbox'] = '<input type="checkbox" class="message-check" name="message-check[]" value="'.$value['hashid'].'">';
+                $receiver = $value->sender()->first();
+                $response[$key]['name'] = '<a href="'.route('admin.messages.show', $value['hashid']).'">'.$receiver->first_name.'</a>';  
+                $response[$key]['subject'] = $value->subject;
+                $response[$key]['time'] = $value->time;
+                $str .= '<tr>'.'<td>'.$response[$key]['checkbox'].'</td>'.'<td>'.$response[$key]['name'].'</td>'.'<td>'.$response[$key]['subject'].'</td>'.'<td>'.$response[$key]['time'].'</td>'.'</tr>';
+            }
+        }
+        $data['data'] = $str;
+        return response()->json($data, 200);
+    }
+
 }

@@ -66,9 +66,12 @@
               <h3 class="box-title">Inbox</h3>
 
               <div class="box-tools pull-right">
-                <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                <div class="">
+                  {!! Form::open(['id' => 'search-mail-form']) !!}
+                  <input type="text" name="search" id="search-mail" class="form-control input-sm" placeholder="Search Mail.." autocomplete="off">
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  {!! Form::submit('search-submit', ['style' => 'display: none', 'id' => 'search-button' ]) !!}
+                  {!! Form::close() !!}
                 </div>
               </div>
               <!-- /.box-tools -->
@@ -96,31 +99,9 @@
                 <!-- /.pull-right -->
               </div>
               <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped" id="mail-table">
                   <tbody>
-                  @if(empty($messages))
-                    <tr>
-                      <td colspan="4" class="text-center">Inbox empty!</td>
-                    </tr>  
-                  @else 
-                  @foreach($messages as $message)
-                  @if($message['status'] == 0)
-                    <tr>
-                      <td><input type="checkbox" class="message-check" name="message-check[]" value="{{ $message['hashid'] }}"></td>
-                      <td class="mailbox-name"><a href="{{ route('admin.messages.show', $message['hashid']) }}"><b>{{ $message['user']['first_name'] }}</b></a></td>
-                      <td class="mailbox-subject"><b>{!! $message['subject'] !!}</b></td>
-                      <td class="mailbox-date">{{ $message['time'] }}</td>
-                     </tr>
-                  @else
-                    <tr>
-                      <td><input type="checkbox" class="message-check" name="message-check[]" value="{{ $message['hashid'] }}"></td>
-                      <td class="mailbox-name"><a href="{{ route('admin.messages.show', $message['hashid']) }}">{{ $message['user']['first_name'] }}</a></td>
-                      <td class="mailbox-subject">{!! $message['subject'] !!}</td>
-                      <td class="mailbox-date">{{ $message['time'] }}</td>
-                     </tr>
-                    @endif
-                  @endforeach
-                  @endif
+                    <tr><td colspan="4" class="text-muted text-center">Loading...</td></tr>
                   </tbody>
                 </table>
                 <!-- /.table -->
