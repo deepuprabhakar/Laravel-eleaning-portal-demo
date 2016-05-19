@@ -31,42 +31,67 @@
         <section class="content">
 
           <div class="row">
-            <div class="col-md-3">
-
-              <!-- Profile Image -->
-              <div class="box box-primary">
-                <div class="box-body box-profile">
-                @if($students['image'] == "")
-                  <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="profile-user-img img-responsive img-circle side-profile-pic" alt="User profile picture">
-                @else
-                  <img src="{{ asset('uploads/profile/'.$students['image']) }}" class="profile-user-img img-responsive img-circle side-profile-pic" alt="User profile picture">
-                @endif
-                  <h3 class="profile-username text-center">{{ $students['name'] }}</h3>
-                  <p class="text-muted text-center">{{ $course['title'] }}</p>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-
-              <!-- About Me Box -->
-            <!-- /.box -->
-            </div><!-- /.col -->
-            <div class="col-md-9">
-              <div class="nav-tabs-custom">
-                
-                
-                  <div class="active tab-pane" id="activity">
-                   <!-- Post -->
-                    
-                  </div><!-- /.tab-pane -->
-                  <div class="tab-pane" id="timeline">
-                   
-                  </div><!-- /.tab-pane -->
-                
-              </div><!-- /.nav-tabs-custom -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
+              <div class="col-md-8 col-md-offset-2">
+                  <div class="nav-tabs-custom">
+                      <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab_1" data-toggle="tab">Basic Info</a></li>
+                        <li><a href="#tab_2" data-toggle="tab">Tab 2</a></li>
+                        <li><a href="#tab_3" data-toggle="tab">Tab 3</a></li>
+                      </ul>
+                  <div class="tab-content">
+                      <div class="tab-pane active" id="tab_1">
+                             <div class="box box-widget widget-user">
+                                      <div class="widget-user-header bg-aqua-active">
+                                        <h3 class="widget-user-username">{{ $students['name'] }}</h3>
+                                        <h5 class="widget-user-desc">{{ $course['title'] }}</h5>
+                                      </div>
+                                      <div class="widget-user-image">
+                                      @if($students['image'] == "")
+                                        <img class="img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User Avatar">
+                                      @else
+                                      <img class="img-circle" src="{{ asset('uploads/profile/'.$students['image']) }}" alt="User Avatar">
+                                      @endif
+                                      </div>
+                                  <div class="box-footer">
+                                    <div class="row">
+                                        <div class="col-sm-4 border-right">
+                                          <div class="description-block">
+                                            <h5 class="description-header">{{ $students['address'] }}</h5>
+                                            <span class="description-text">Address</span>
+                                          </div>
+                                          <!-- /.description-block -->
+                                        </div>  
+                                        <!-- /.col -->
+                                        <div class="col-sm-4 border-right">
+                                          <div class="description-block">
+                                            <h5 class="description-header">{{ $students['admission'] }}</h5>
+                                            <span class="description-text">Admission Number</span>
+                                          </div>
+                                          <!-- /.description-block -->
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-sm-4">
+                                          <div class="description-block">
+                                            <h5 class="description-header">{{ $students['phone'] }}</h5>
+                                            <span class="description-text">Phone</span>
+                                          </div>
+                                          <!-- /.description-block -->
+                                        </div>
+                                        <!-- /.col -->
+                                 
+                                  </div>
+                                </div>
+                              </div>
+          
+                          </div>
+                          <div class="tab-pane active" id="tab_2"></div>
+                          <div class="tab-pane active" id="tab_3"></div>
+                      </div>
+                  </div>
+            </div>
+        </div>
+    </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
  
 @stop
 
