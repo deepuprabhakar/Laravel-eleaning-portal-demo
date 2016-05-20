@@ -59,12 +59,17 @@
               </li>
               <!-- END timeline item -->
               <!-- timeline item -->
+              @if($key == $news->total())
+                <li>
+                  <i class="fa fa-clock-o bg-blue"></i>
+                </li>
+              @endif
             @endforeach
+            
           </ul>
-          
         </div><!-- ./col-md-10 -->
         <div class="col-md-10 col-md-offset-1">
-          <div class="overlay text-center text-muted">
+          <div class="overlay text-center text-muted" style="display: none;">
             <i class="fa fa-refresh fa-spin"></i>
           </div>
         </div>
