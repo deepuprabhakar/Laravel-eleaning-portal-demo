@@ -28,13 +28,14 @@ class AssignmentsController extends Controller
         $this->middleware('sentinel.role:user');
     }
 
-    public function createAssignment(Request $request)
+    public function createAssignment(Request $request, $id)
     {
+        $id = Hashids::connection('subject')->decode($id);
         $student = Student::where('user_id', Sentinel::getUser()->id)->first();
         $input = $request->all();
         $filepath = 'uploads/assignments';
-        $assignment = $student->assignment()->first();
-        if($student->assignment()->count())
+        $assignment = $student->assignment()->where('subject_id', $id)->first();
+        if($assignment)
         {
             //validation
             $validator = Validator::make($request->all(), [
@@ -96,8 +97,6 @@ class AssignmentsController extends Controller
 
         }
 
-        
-        
     }
 
     public function fetch(Request $request)

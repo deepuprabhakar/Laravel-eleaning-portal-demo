@@ -81,33 +81,8 @@
             </div>
             <!-- /.box-header -->
              {!! Form::open(['route' => ['admin.messages.destroyMany'], 'class' => 'message-destroy-form']) !!}
-            <div class="box-body no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="submit" class="btn btn-default btn-sm" id="delete"><i class="fa fa-trash-o"></i></button>
-                </div>
-                <div class="pull-right">
-                  <div class="btn-group">
-                    <a href="" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></a>
-                    <a href="" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></a>
-                  </div>
-                  
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
-              </div>
-              <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped" id="mail-table">
-                  <tbody>
-                    <tr><td colspan="4" class="text-muted text-center">Loading...</td></tr>
-                  </tbody>
-                </table>
-                <!-- /.table -->
-              </div>
-              <!-- /.mail-box-messages -->
+            <div class="box-body no-padding div-messages">
+              @include('includes.sentMessages')
             </div>
           {!! Form::close() !!}
           @include('errors.success')  

@@ -14,6 +14,8 @@ use App\MessageSent;
 use Session;
 use Sentinel;
 use Hashids;
+use Response;
+use View;
 use App\User;
 use DB;
 
@@ -34,12 +36,24 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Sentinel::getUser();
-        $messages = User::find($user->id)->messages()->with('user')->latest()->get()->toArray();
-        $count = User::find($user->id)->messages()->where('status', 0)->count();
-        return view('user.inbox', compact('messages', 'count'));
+        $messages = Message::search($request->get('search'))->with('user')->where('to', Sentinel::getUser()->id)->latest()->paginate(10);
+        //dd($messages);
+        //$messages = Message::search($request->get('search'))->with('user')->where('sender', '!=', Sentinel::getUser()->id)->latest()->Paginate(10);
+        $pages = $messages->toArray();
+        
+        if($request->ajax())
+        {
+            return Response::json(View::make('includes.userMessages', array('messages' => $messages, 'pages' => $pages))->render());
+        }
+        else
+        {
+            $count = User::find($user->id)->messages()->where('status', 0)->count();
+            return view('user.inbox', compact('messages', 'count', 'pages'));
+        }
+
     }
 
     /**
@@ -129,12 +143,22 @@ class MessageController extends Controller
      * view sent messages
      *
      */
-    public function sent()
+    public function sent(Request $request)
     {
         $user = Sentinel::getUser();
-        $messages = User::find($user->id)->sent()->with('sender')->latest()->get()->toArray();
-        $count = User::find($user->id)->messages()->where('status', 0)->count();
-        return view('user.sent', compact('messages', 'count'));
+        $messages = Message::search($request->get('search'))->with('sender')->where('sender', '=', Sentinel::getUser()->id)->latest()->Paginate(10);
+        $pages = $messages->toArray();
+        
+        if($request->ajax())
+        {
+            return Response::json(View::make('includes.userSendMessages', array('messages' => $messages, 'pages' => $pages))->render());
+        }
+        else
+        {
+            $count = User::find($user->id)->messages()->where('status', 0)->count();
+            return view('user.sent', compact('messages', 'count', 'pages'));
+        }
+
     }
 
     /**
