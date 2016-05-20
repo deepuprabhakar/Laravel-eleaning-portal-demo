@@ -9,7 +9,7 @@ class Pagination extends BasePagination {
 	 *
 	 * @var string
 	 */
-	protected $paginationWrapper = '<div class="">%s %s %s</div>';
+	protected $paginationWrapper = '<span class="">%s %s %s</span>';
 
 	/**
 	 * Available page wrapper HTML.
