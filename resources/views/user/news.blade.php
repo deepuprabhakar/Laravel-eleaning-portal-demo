@@ -30,6 +30,7 @@
         @include('errors.empty', ['item' => $news, 'title' => 'news'])
           <!-- The time line -->
           <ul class="timeline news" data-next-page="{{ $news->nextPageUrl() }}">
+          {{ dump($news) }}
             @foreach($news as $key => $content)
               <!-- timeline time label -->
               <li class="time-label">
@@ -60,11 +61,15 @@
               <!-- END timeline item -->
               <!-- timeline item -->
             @endforeach
+            @if($news->currentPage() == $news->total())
+              <li>
+                <i class="fa fa-clock-o bg-blue"></i>
+              </li>
+            @endif
           </ul>
-          
         </div><!-- ./col-md-10 -->
         <div class="col-md-10 col-md-offset-1">
-          <div class="overlay text-center text-muted">
+          <div class="overlay text-center text-muted" style="display: none;">
             <i class="fa fa-refresh fa-spin"></i>
           </div>
         </div>
