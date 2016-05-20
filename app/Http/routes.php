@@ -53,6 +53,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('courses/{id}', ['as' => 'admin.courses.storeInfo', 'uses' => 'Admin\CourseController@storeInfo']);
         Route::resource('courses', 'Admin\CourseController');
         Route::resource('subjects', 'Admin\SubjectController');
+        Route::get('news/deleteImage/{id}', ['as' => 'deleteImage', 'uses' => 'Admin\NewsController@deleteImage']);
         Route::resource('news', 'Admin\NewsController');
         Route::resource('students', 'Admin\StudentController');
 
@@ -123,6 +124,8 @@ Route::group(['middleware' => ['web']], function () {
     //news
     Route::get('news', ['as' => 'news', 'uses' => 'User\NewsController@newsView']);
     Route::get('news/{id}', ['as' =>'news.show', 'uses' =>'User\NewsController@newsShow']);
+
+    
 
     //articles
     Route::get('articles/list', ['as' => 'listArticles', 'uses' => 'User\ArticleController@listArticles']);
