@@ -1,3 +1,4 @@
+var search = "";
 $(document).ready(function(){
 
   $('input[type=checkbox]').iCheck({
@@ -6,7 +7,7 @@ $(document).ready(function(){
   });
 
   //Enable check and uncheck all functionality
-   $(".checkbox-toggle").click(function () {
+   $(document).on('click', ".checkbox-toggle", function () {
       var clicks = $(this).data('clicks');
       if (clicks) {
         //Uncheck all checkboxes
@@ -22,8 +23,51 @@ $(document).ready(function(){
 
 });
 
+$(window).on('hashchange', function() {
+    if (window.location.hash) {
+        var page = window.location.hash.replace('#', '');
+        if (page == Number.NaN || page <= 0) {
+            return false;
+        } else {
+            //getPosts(page, search);
+        }
+    }
+});
 
-$(function(){
+$(document).ready(function() {
+    $(document).on('click', '.pages a', function (e) {
+        $('#mail-table tbody').html('<tr><td colspan="4" class="text-muted text-center">Loading...</td></tr>');
+        search = $('#search-mail').val();
+        getPosts($(this).attr('href').split('page=')[1], search);
+        console.log($(this).attr('href').split('page=')[1]);
+        e.preventDefault();
+    });
+    $(document).on('keyup', '#search-mail', function (e) {
+        search = $('#search-mail').val();
+        $('#mail-table tbody').html('<tr><td colspan="4" class="text-muted text-center">Loading...</td></tr>');
+        getPosts(1, search);
+        e.preventDefault();
+    });
+});
+
+function getPosts(page, search) {
+    $.ajax({
+        url : '?search=' + search + '&page=' + page,
+        dataType: 'json',
+    }).done(function (data) {
+        $('.div-messages').html(data);
+        $('input[type=checkbox]').iCheck({
+          checkboxClass: 'icheckbox_flat-blue',
+          radioClass: 'iradio_flat-blue'
+        });
+        location.hash = page;
+    }).fail(function () {
+        alert('Posts could not be loaded.');
+    });
+}
+
+
+/*$(function(){
  
   var form = document.querySelector('#search-mail-form');
 
@@ -38,6 +82,7 @@ $(function(){
   request.addEventListener('load',function(e)
     {
         var result = (JSON.parse(e.target.responseText));
+        console.log(result);
         $('.overlay').hide();
         
         $('#mail-table tbody').html(result.data);
@@ -64,4 +109,4 @@ $(function(){
     $('#search-button').trigger('click');
   });
 
-});
+});*/
