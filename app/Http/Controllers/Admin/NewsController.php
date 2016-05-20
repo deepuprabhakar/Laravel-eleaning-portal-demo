@@ -220,4 +220,21 @@ class NewsController extends Controller
             return $subject->subject()->lists('batch', 'batch');
         }
     }
+
+    /**
+     * to remove file in edit
+     *
+     * @param      <type>  $id     (description)
+     */
+    public function deleteImage($id)
+    {
+        $id = Hashids::connection('news')->decode($id);
+        $news = News::find($id)->first();
+        $filename = $news->image;
+        $filepath = 'uploads/news';
+        File::delete($filepath.'/'.$news['image']);
+        $news->image = '';
+        $news->save();
+        return redirect()->back();
+    }
 }
