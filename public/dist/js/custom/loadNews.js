@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+    $.get(window.location.href, function(data){
+        $('.news').append(data.news);
+        $('.timeline').data('next-page', data.next_page);
+        if(data.next_page == null)
+        {
+          $('.news').append('<li>\
+            <i class="fa fa-clock-o bg-blue"></i>\
+          </li>');
+          $('.overlay').html('No more news!');
+        }
+    });
+    
     $(window).scroll(fetchPosts);
 
     function fetchPosts() {
