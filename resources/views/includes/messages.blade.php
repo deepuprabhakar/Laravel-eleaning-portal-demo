@@ -6,10 +6,15 @@
     <button type="submit" class="btn btn-default btn-sm" id="delete"><i class="fa fa-trash-o"></i></button>
   </div>
   <!-- /.btn-group -->
+  @if($messages->hasPages())
   <div class="pull-right pages">
+  	<span class="text-muted">
+  		{{ $pages['from'] }}-{{ $pages['to'] }}/{{ $pages['total'] }}
+  </span>
   	{!! $messages->appends(['search' => 'de'])->render(new App\Pagination($messages)) !!}
   </div>
   <!-- /.pull-right -->
+  @endif
 </div>
 <div class="table-responsive mailbox-messages">
   <table class="table table-hover table-striped" id="mail-table">
