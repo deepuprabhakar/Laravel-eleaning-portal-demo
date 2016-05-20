@@ -97,8 +97,6 @@ class AssignmentsController extends Controller
 
         }
 
-        
-        
     }
 
     public function fetch(Request $request)
