@@ -29,7 +29,7 @@ class Message extends Model
 
    public function getHashidAttribute()
    {
-   	return Hashids::connection('message')->encode($this->attributes['id']);
+   	  return Hashids::connection('message')->encode($this->attributes['id']);
    }
 
    public function getTimeAttribute()
