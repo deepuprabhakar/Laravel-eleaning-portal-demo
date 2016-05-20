@@ -58,7 +58,7 @@
               <div class="well"> 
                 <img src="{{ url('uploads/gallery/thumbs', $image->image) }}" alt="" class="img-responsive">
                 <div class="img-path">
-                  {{ url('uploads/gallery', $image->image) }}
+                  {{ url('uploads/gallery/thumbs', $image->image) }}
                 </div>
               </div>
             </div>
@@ -84,6 +84,7 @@
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
       });
       var url = "{{ url('uploads/gallery/') }}";
+      var base_url = "{{ url('admin') }}";
     </script>
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}

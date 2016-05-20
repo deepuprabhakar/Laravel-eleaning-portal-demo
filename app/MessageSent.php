@@ -7,8 +7,10 @@ use Hashids;
 use Carbon\Carbon;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
-class Message extends Model
+class MessageSent extends Model
 {
+	protected $table = "messages";
+
     use SearchableTrait;
     
     protected $fillable =[
@@ -21,7 +23,7 @@ class Message extends Model
             'users.first_name' => 10,
         ],
         'joins' => [
-            'users' => ['messages.sender','users.id'],
+            'users' => ['messages.to','users.id'],
         ],
     ];
 
@@ -29,7 +31,7 @@ class Message extends Model
 
    public function getHashidAttribute()
    {
-   	  return Hashids::connection('message')->encode($this->attributes['id']);
+   	return Hashids::connection('message')->encode($this->attributes['id']);
    }
 
    public function getTimeAttribute()

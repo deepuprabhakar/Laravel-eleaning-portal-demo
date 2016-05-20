@@ -85,7 +85,7 @@ Route::group(['middleware' => ['web']], function () {
         
         //Gallery
         Route::get('gallery', ['as' => 'admin.gallery', 'uses' => 'Admin\GalleryController@index']);
-        Route::post('uploadImages', ['as' => 'admin.gallery.upload', 'uses' => 'Admin\GalleryController@upload']);
+        Route::post('/uploadImages', ['as' => 'admin.gallery.upload', 'uses' => 'Admin\GalleryController@upload']);
         Route::post('searchImages', ['as' => 'admin.gallery.search', 'uses' => 'Admin\GalleryController@search']);
 
         //Projects

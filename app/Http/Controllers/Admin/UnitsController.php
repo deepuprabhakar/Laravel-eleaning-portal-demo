@@ -11,6 +11,7 @@ use Hashids;
 use Session;
 use App\Unit;
 use App\Subject;
+use App\Gallery;
 
 
 class UnitsController extends Controller
@@ -45,7 +46,8 @@ class UnitsController extends Controller
     public function create($slug, $hash)
     {
         $data = array('hashid' => $hash, 'slug' => $slug);
-        return view('admin.createUnit')->with('data',$data);
+        $images = Gallery::latest()->take(15)->get();
+        return view('admin.createUnit', compact('data', 'images'));
     }
 
     /**
