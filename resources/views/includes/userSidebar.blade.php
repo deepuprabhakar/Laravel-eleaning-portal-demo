@@ -51,7 +51,7 @@
         </ul>
       </li>
 
-      <li class="treeview {{ Request::is('news') ? 'active' : '' }}">
+      <li class="treeview {{ Request::is('news') ? 'active' : '' }}{{ Request::is('news/*') ? 'active' : '' }}">
         <a href="{{ route('news') }}">
           <i class="fa fa-newspaper-o" aria-hidden="true"></i>
           <span>News</span>
