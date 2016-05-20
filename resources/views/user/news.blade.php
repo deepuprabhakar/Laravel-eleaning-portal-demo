@@ -29,8 +29,8 @@
       <div class="col-md-offset-1 col-md-10">
         @include('errors.empty', ['item' => $news, 'title' => 'news'])
           <!-- The time line -->
-          <ul class="timeline">
-            @foreach($news as $content)
+          <ul class="timeline news" data-next-page="{{ $news->nextPageUrl() }}">
+            @foreach($news as $key => $content)
               <!-- timeline time label -->
               <li class="time-label">
                   <span class="bg-red">
@@ -48,12 +48,9 @@
                   </span>
                       <h3 class="timeline-header"><a href="{{ route('news.show', $content['slug']) }}">{{ str_limit($content['title'], 100) }}</a></h3>
                   <div class="timeline-body" style="overflow: auto;">
-                  @if($content['image'] != "")
-                    {{ Html::image("uploads/news/thumbs/".$content['image'], 'image', ['class' => 'img-responsive pull-right float-img']) }}
-                  @endif
-                    <div class="">
+                  <div class="">
                       {!! str_limit((Purifier::clean($content['content'])), 300) !!}
-                    </div>
+                  </div>
                   </div>
                   <div class="timeline-footer" style="padding-top: 0;">
                     <a class="btn btn-primary btn-xs btn-flat" href="{{ route('news.show', $content['slug']) }}">Read more</a>
@@ -63,17 +60,15 @@
               <!-- END timeline item -->
               <!-- timeline item -->
             @endforeach
-            @if($news->count()>0)
-              <li>
-                <i class="fa fa-clock-o bg-blue"></i>
-              </li>
-            @endif
           </ul>
-          <!-- <div class="overlay text-center">
+          
+        </div><!-- ./col-md-10 -->
+        <div class="col-md-10 col-md-offset-1">
+          <div class="overlay text-center text-muted">
             <i class="fa fa-refresh fa-spin"></i>
-          </div> -->
+          </div>
         </div>
-      </div>
+      </div><!-- ./row --> 
   </section><!-- ./section -->  
 </div><!-- ./Content Wrapper -->  
 @stop
@@ -88,4 +83,8 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
+    {!! Html::script('dist/js/custom/loadNews.js') !!}
+    <script>
+      
+    </script>
 @stop
