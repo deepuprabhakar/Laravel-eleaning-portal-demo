@@ -29,10 +29,11 @@
       <div class="col-md-offset-1 col-md-10">
         @include('errors.empty', ['item' => $news, 'title' => 'news'])
           <!-- The time line -->
+        @if($news->count() > 0)
           <ul class="timeline news" data-next-page="{{ $news->nextPageUrl() }}">
             
-            
           </ul>
+        @endif
         </div><!-- ./col-md-10 -->
         <div class="col-md-10 col-md-offset-1">
           <div class="overlay text-center text-muted" style="display: none;">
