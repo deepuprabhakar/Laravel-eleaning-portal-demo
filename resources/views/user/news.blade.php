@@ -59,7 +59,7 @@
               </li>
               <!-- END timeline item -->
               <!-- timeline item -->
-              @if($key == $news->total())
+              @if($news->total() == ($key+1))
                 <li>
                   <i class="fa fa-clock-o bg-blue"></i>
                 </li>
