@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    $('.overlay').show();
+
     $.get(window.location.href, function(data){
         $('.news').append(data.news);
         $('.timeline').data('next-page', data.next_page);
@@ -11,7 +13,7 @@ $(document).ready(function() {
           $('.overlay').html('No more news!');
         }
     });
-    
+
     $(window).scroll(fetchPosts);
 
     function fetchPosts() {
