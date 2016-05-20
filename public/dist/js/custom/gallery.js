@@ -31,7 +31,7 @@ $(function(){
 		    $.each(result, function(key, value){
 		    	block += ('<div class="item"><div class="well">\
 		    				<img src="'+url+'/thumbs/'+value.image+'" class="img-responsive">\
-		    				<div class="img-path">'+url+'/'+value.image+'</div>\
+		    				<div class="img-path">'+url+'/thumbs/'+value.image+'</div>\
 		    				</div></div>');
 		    });
 		    if(block == "")
@@ -45,14 +45,14 @@ $(function(){
 	form.addEventListener('submit', function(e){
 	    e.preventDefault();
 	    var formdata = new FormData(form);
-	    request.open('post','uploadImages');
+	    request.open('post', base_url+'/uploadImages');
 	    request.send(formdata);
 	},false);
 
 	form2.addEventListener('submit', function(e){
 	    e.preventDefault();
 	    var formdata = new FormData(form2);
-	    request.open('post','searchImages');
+	    request.open('post', base_url+'/searchImages');
 	    request.send(formdata);
 	},false);
 
