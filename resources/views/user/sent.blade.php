@@ -122,7 +122,7 @@
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('plugins/iCheck/icheck.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
-    {!! Html::script('dist/js/custom/inbox.js') !!}
+    {!! Html::script('dist/js/custom/userInbox.js') !!}
     <script>
       $.ajaxSetup({
          headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
