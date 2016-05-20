@@ -141,7 +141,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('modules/semester/{sem}/{subject}/discussion',['as' => 'modules.store', 'uses' => 'User\ModulesController@store' ]);
 
     // Assignment create
-    Route::post('modules/createAssignment',['as' => 'modules.createAssignment', 'uses' => 'User\AssignmentsController@createAssignment' ]);
+    Route::post('modules/createAssignment/{id}',['as' => 'modules.createAssignment', 'uses' => 'User\AssignmentsController@createAssignment' ]);
     Route::post('fetchAssignments', 'User\AssignmentsController@fetch');
     Route::post('assignment/{id}',['as' => 'modules.destroy', 'uses' => 'User\AssignmentsController@destroy' ]);
 

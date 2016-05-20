@@ -232,7 +232,7 @@
                       <h3 class="box-title">Add Assignment</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                      {!! Form::open(['url' => route('modules.createAssignment'), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
+                      {!! Form::open(['url' => route('modules.createAssignment',$subject->hashid), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
                         @include('errors.list')
                         @include('errors.success')
                         <div class="form-group">
