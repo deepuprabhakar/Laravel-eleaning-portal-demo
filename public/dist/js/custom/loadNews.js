@@ -1,5 +1,24 @@
 $(document).ready(function() {
 
+    $('.overlay').show();
+
+    $.get(window.location.href, function(data){
+        $('.news').append(data.news);
+        $('.timeline').data('next-page', data.next_page);
+        if(data.next_page == null)
+        {
+          if(data.news != "")
+          {
+            $('.news').append('<li>\
+                <i class="fa fa-clock-o bg-blue"></i>\
+              </li>');
+            $('.overlay').html('No more news!');
+          }
+          else
+            $('.overlay').hide();
+        }
+    });
+
     $(window).scroll(fetchPosts);
 
     function fetchPosts() {

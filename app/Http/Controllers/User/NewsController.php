@@ -49,7 +49,7 @@ class NewsController extends Controller
             ];
         }
 
-        return view('user.news',compact('news'));
+        return view('user.news', compact('news'));
     }
 
     /**

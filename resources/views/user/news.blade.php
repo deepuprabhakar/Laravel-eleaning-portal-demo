@@ -29,44 +29,11 @@
       <div class="col-md-offset-1 col-md-10">
         @include('errors.empty', ['item' => $news, 'title' => 'news'])
           <!-- The time line -->
+        @if($news->count() > 0)
           <ul class="timeline news" data-next-page="{{ $news->nextPageUrl() }}">
-            @foreach($news as $key => $content)
-              <!-- timeline time label -->
-              <li class="time-label">
-                  <span class="bg-red">
-                    {{ $content['date'] }}
-                  </span>
-              </li>
-              <!-- /.timeline-label -->
-              <!-- timeline item -->
-              <li>
-                <i class="fa fa-newspaper-o bg-blue"></i>
-                <div class="timeline-item">
-                  <span class="time">
-                    <i class="fa fa-clock-o"></i> 
-                    {{ $content['time'] }}
-                  </span>
-                      <h3 class="timeline-header"><a href="{{ route('news.show', $content['slug']) }}">{{ str_limit($content['title'], 100) }}</a></h3>
-                  <div class="timeline-body" style="overflow: auto;">
-                  <div class="">
-                      {!! str_limit((Purifier::clean($content['content'])), 300) !!}
-                  </div>
-                  </div>
-                  <div class="timeline-footer" style="padding-top: 0;">
-                    <a class="btn btn-primary btn-xs btn-flat" href="{{ route('news.show', $content['slug']) }}">Read more</a>
-                  </div>
-                </div>
-              </li>
-              <!-- END timeline item -->
-              <!-- timeline item -->
-              @if($key == $news->total())
-                <li>
-                  <i class="fa fa-clock-o bg-blue"></i>
-                </li>
-              @endif
-            @endforeach
             
           </ul>
+        @endif
         </div><!-- ./col-md-10 -->
         <div class="col-md-10 col-md-offset-1">
           <div class="overlay text-center text-muted" style="display: none;">
