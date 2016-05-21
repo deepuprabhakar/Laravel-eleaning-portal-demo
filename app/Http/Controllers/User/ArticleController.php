@@ -32,15 +32,21 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Sentinel::getUser()->id;
         date_default_timezone_set('Asia/Kolkata');
-        $articles = Articles::with('author')->active()->get();
+        $articles = Articles::with('author')->active()->paginate(3);
         foreach($articles as $item)
         {
             $item->date = $item->publish->format('d M. Y');
             $item->time = $item->publish->diffForHumans();
+        }
+         if($request->ajax()) {
+            return [
+                'article' => view('includes.article')->with(compact('articles'))->render(),
+                'next_page' => $articles->nextPageUrl()
+            ];
         }
         return view('user.viewArticles', compact('articles', 'user'));
     }
@@ -94,11 +100,13 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Articles::with('author')->where('slug', $id)->first();
+        $article = Articles::with('author')->where('slug', $id)->first()->active()->Paginate(3);
         if($article)
-            return view('user.viewArticleDetails',compact('article'));
+           return view('user.viewArticleDetails',compact('article'));
         else
             abort(404);
+
+
     }
 
     /**

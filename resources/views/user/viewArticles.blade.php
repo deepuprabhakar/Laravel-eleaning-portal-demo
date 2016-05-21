@@ -34,55 +34,20 @@
       <div class="col-md-offset-1 col-md-10">
         @include('errors.empty', ['item' => $articles, 'title' => 'articles'])
           <!-- The time line -->
-          <ul class="timeline">
-            @foreach($articles as $content)
-              <!-- timeline time label -->
-              <li class="time-label">
-                  <span class="bg-red">
-                    {{ $content['date'] }}
-                  </span>
-              </li>
-              <!-- /.timeline-label -->
-              <!-- timeline item -->
-              <li>
-                <i class="fa fa-file-text-o bg-blue"></i>
-                <div class="timeline-item">
-                  <span class="time">
-                    <i class="fa fa-clock-o"></i> 
-                    {{ $content['time'] }}
-                  </span>
-                      <h3 class="timeline-header">
-                        <a href="{{ route('articles.show', $content['slug']) }}">
-                          {{ str_limit($content['title'], 100) }}
-                        </a>
-                        <div class="article-author">
-                          By {{ $content['author']['first_name'] }}
-                        </div>
-                      </h3>
-                      
-                  <div class="timeline-body" style="overflow: auto;">
-                    <div>{!! str_limit((Purifier::clean($content['content'])), 300) !!}</div>
-                  </div>
-                  <div class="timeline-footer" style="padding-top: 0;">
-                    <a class="btn btn-primary btn-xs btn-flat" href="{{ route('articles.show', $content['slug']) }}">Read more</a>
-                  </div>
+          @if($articles->count() > 0)
+              <ul class="timeline article" data-next-page="{{ $articles->nextPageUrl() }}">
+                
+              </ul>
+          @endif
+      </div>     
+            <div class="col-md-10 col-md-offset-1">
+                <div class="overlay text-center text-muted" style="display: none;">
+                  <i class="fa fa-refresh fa-spin"></i>
                 </div>
-              </li>
-              <!-- END timeline item -->
-              <!-- timeline item -->
-            @endforeach
-            @if($articles->count()>0)
-              <li>
-                <i class="fa fa-clock-o bg-blue"></i>
-              </li>
-            @endif
-          </ul>
-          <!-- <div class="overlay text-center">
-            <i class="fa fa-refresh fa-spin"></i>
-          </div> -->
-        </div>
-      </div>
-  </section><!-- ./section -->  
+            </div>
+    </div>
+    </section><!-- ./section -->
+    
 </div><!-- ./Content Wrapper -->  
 @stop
 
@@ -96,4 +61,5 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
+    {!! Html::script('dist/js/custom/loadArticle.js') !!}
 @stop
