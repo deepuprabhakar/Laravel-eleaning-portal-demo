@@ -35,8 +35,6 @@
                   <div class="nav-tabs-custom">
                       <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" data-toggle="tab">Basic Info</a></li>
-                        <li><a href="#tab_2" data-toggle="tab">Tab 2</a></li>
-                        <li><a href="#tab_3" data-toggle="tab">Tab 3</a></li>
                       </ul>
                   <div class="tab-content">
                       <div class="tab-pane active" id="tab_1">
@@ -82,10 +80,8 @@
                                   </div>
                                 </div>
                               </div>
-          
                           </div>
-                          <div class="tab-pane active" id="tab_2"></div>
-                          <div class="tab-pane active" id="tab_3"></div>
+                        
                       </div>
                   </div>
             </div>
