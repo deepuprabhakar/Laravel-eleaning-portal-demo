@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Articles;
+use App\Student;
 use Auth;
 use Session;
 use Image;
@@ -100,13 +101,13 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $article = Articles::with('author')->where('slug', $id)->first()->active()->Paginate(3);
+        $article = Articles::with('author')->where('slug', $id)->active()->first();
+        $student = Student::where('user_id', $article->student_id)->first();
+        
         if($article)
-           return view('user.viewArticleDetails',compact('article'));
+           return view('user.viewArticleDetails',compact('article', 'student'));
         else
             abort(404);
-
-
     }
 
     /**

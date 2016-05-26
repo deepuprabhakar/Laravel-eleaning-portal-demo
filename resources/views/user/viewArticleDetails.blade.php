@@ -38,7 +38,15 @@
               </div>
             @endif
               <div class="user-block">
+              @if(is_null($student))
                 <img class="img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User Image">
+              @else
+                @if($student->image != "")
+                  <img class="img-circle" src="{{ url('uploads/profile', $student->image) }}" alt="User Image">
+                @else
+                  <img class="img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User Image">
+                @endif
+              @endif
                 <span class="username"><a href="#">{{ $article['author']['first_name'] }}</a></span>
                 <span class="description">{{ $article['publish']->diffForHumans() }}</span>
               </div>
