@@ -642,7 +642,7 @@
  * -----------
  */
 .skin-green .main-header .navbar {
-  background-color: #00a65a;
+  background-color: #1E90FF;
 }
 .skin-green .main-header .navbar .nav > li > a {
   color: #ffffff;
@@ -682,7 +682,7 @@
   }
 }
 .skin-green .main-header .logo {
-  background-color: #008d4c;
+  background-color: #1E90FF;
   color: #ffffff;
   border-bottom: 0 solid transparent;
 }

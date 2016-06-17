@@ -1641,7 +1641,7 @@ a:focus {
 .box.box-solid.box-success > .box-header {
   color: #ffffff;
   background: #00a65a;
-  background-color: #00a65a;
+  background-color: #1E90FF;
 }
 .box.box-solid.box-success > .box-header a,
 .box.box-solid.box-success > .box-header .btn {
