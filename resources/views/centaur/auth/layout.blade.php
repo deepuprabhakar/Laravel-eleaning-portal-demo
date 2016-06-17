@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="{{ asset('dist/img/favicon.ico') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('dist/img/favicon.ico') }}" type="image/x-icon"/>
-    <title>Coheart E-learning | @yield('title')</title>
+    <title>E-learning | @yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 

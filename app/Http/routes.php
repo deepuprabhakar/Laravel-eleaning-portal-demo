@@ -82,6 +82,15 @@ Route::group(['middleware' => ['web']], function () {
         
         //Assignment
         Route::post('assignment/save/{id}', ['as' => 'admin.assignment.create', 'uses' => 'Admin\AssignmentController@create']);
+
+        //test
+        
+        Route::get('test/category', ['as' => 'admin.test.category', 'uses' => 'Admin\TestController@index']);
+        Route::get('test/createcategory', ['as' => 'admin.test.createcategory','uses' => 'Admin\TestController@create']);
+        Route::post('test/storecategory', ['as' => 'admin.test.categorystore','uses' => 'Admin\TestController@store']);
+        Route::get('test/editcategory/{id}',['as' => 'admin.test.editcategory', 'uses' => 'Admin\TestController@edit']);
+        Route::patch('test/updatecategory/{id}',['as' => 'admin.test.updatecategory', 'uses' => 'Admin\TestController@update']);
+        Route::delete('test/deletecategory/{id}', ['as' => 'admin.test.deletecategory', 'uses' => 'Admin\TestController@destroy']);
         
         //Gallery
         Route::get('gallery', ['as' => 'admin.gallery', 'uses' => 'Admin\GalleryController@index']);

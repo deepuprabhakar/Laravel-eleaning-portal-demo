@@ -5,7 +5,7 @@
 @section('content')
 <div class="login-box">
   <div class="login-logo">
-    <a href="{{ url('/') }}"><b>Coheart E-Learning</b></a>
+    <a href="{{ url('/') }}"><b>E-Learning</b></a>
   </div><!-- /.login-logo -->
   <div class="login-box-body">
     <h4 class="login-box-msg"><b>Forgot Password?</b></h4>

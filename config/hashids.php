@@ -101,6 +101,13 @@ return [
             'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
         ],
 
+        'category' => [
+            'salt' => 'WQErjaghtengwsqDKKlfbmdfbkjgfwqefwyedSSnvdhfddjfsfjsfjfjsdf',
+            'length' => 6,
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
+        ],
+
+
     ],
 
 ];

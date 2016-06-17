@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-learning - {{ $student['name'] }}</title>
+    <title>E-learning - {{ $student['name'] }}</title>
 @stop
 
 @section('style')

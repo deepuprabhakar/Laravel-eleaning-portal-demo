@@ -9,7 +9,7 @@
       <div class="coheart-logo">
         <img src="{{ url('kvasu-coheart-logo-200x212.png') }}" alt="Kvasu Coheart Logo" class="img-responsive">
       </div>
-      <b>Coheart E-Learning</b>
+      <b>E-Learning</b>
     </a>
   </div><!-- /.login-logo -->
   <div class="login-box-body">

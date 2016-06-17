@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>E-learning - Quiz</title>
+    <title>E-learning - List of Test Category</title>
 @stop
 
 @section('style')
@@ -23,12 +23,12 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Quiz
+      Category
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="{{ route('admin.quiz.index', $subject->slug) }}">Quiz</a></li>
-      <li class="active">View Quiz</li>
+      <li><a href="{{ route('admin.courses.index') }}">Test</a></li>
+      <li class="active">View Test Category</li>
     </ol>
   </section>
 
@@ -38,28 +38,28 @@
       <div class="col-md-12">
         <div class="box box-success box-solid">
           <div class="box-header with-border">
-            <h3 class="box-title">List Quiz</h3>
+            <h3 class="box-title">List of Test Categories</h3>
           </div><!-- /.box-header -->
           <div class="box-body">
             @include('errors.success')
-            <table id="quiz-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+            <table id="category-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th style="width: 20px;">No.</th>
-                  <th>Question</th>
+                  <th>Name</th>
                   <th class="text-center" style="width: 200px;">Actions</th>
                 </tr>
               </thead>
               <tbody>
-              @foreach ($quizzes as $key => $quiz)
+              @foreach ($categories as $key => $category)
                 <tr>
                   <td>{{ ++$key }}</td>
-                  <td>{{ $quiz['question'] }}</td>
+                  <td>{{ $category['name'] }}</td>
                   <td class="text-center table-actions">
-                      <a class="btn bg-olive btn-xs btn-flat" href="{{ route('admin.quiz.edit', $quiz['hashid']) }}" style="margin: 0 3px 0 2px;">Edit</a>
-                       {!! Form::open(['route' => ['admin.quiz.destroy', $quiz['hashid']], 'method' => 'DELETE', 'class' => 'delete-form']) !!}
-                      {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs btn-flat btn-delete']) !!}
-                      {!! Form::close() !!}
+                    <a class="btn bg-olive btn-xs btn-flat" href="{{ route('admin.test.editcategory', $category['slug']) }}" style="margin: 0 3px 0 2px;">Edit</a>
+                    {!! Form::open(['route' => ['admin.test.deletecategory', $category['hashid']], 'method' => 'DELETE', 'class' => 'delete-form']) !!}
+                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs btn-flat btn-delete']) !!}
+                    {!! Form::close() !!}
                   </td>
                 </tr>
               @endforeach
@@ -91,8 +91,5 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
-
-    <!--Ajax Load for Quiz -->
-     {!! Html::script('dist/js/custom/quiz.js') !!}
-    
+    {!! Html::script('dist/js/custom/category.js') !!}
 @stop

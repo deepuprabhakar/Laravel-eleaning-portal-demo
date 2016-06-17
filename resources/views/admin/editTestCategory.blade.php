@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>E-learning - Course Info</title>
+    <title>E-learning - {{ $category->name }}</title>
 @stop
 
 @section('content')
@@ -15,12 +15,12 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Course Info
+      Edit {{ $category->name }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="{{ route('admin.courses.index') }}">Courses</a></li>
-      <li class="active">Course Info</li>
+      <li><a href="{{ route('admin.courses.index') }}">Test Category</a></li>
+      <li class="active">Edit Category</li>
     </ol>
   </section>
 
@@ -31,11 +31,11 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">{{ $course['title'] }}</h3>
+            <h3 class="box-title">Category Form</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
-          {!! Form::open(['url' => route('admin.courses.storeInfo', $course['slug']), 'autocomplete' => 'off']) !!}
-            @include('forms.courseInfo', ['button' => 'Save'])
+          {!! Form::model($category, ['url' => route('admin.test.updatecategory', $category->hash), 'autocomplete' => 'off', 'id' => 'category-form', 'method' => 'PATCH']) !!}
+            @include('forms.testcategory', ['button' => 'Update Category', 'flag' => true])
           {!! Form::close() !!}<!-- /.Form ends -->
         </div><!-- /.box -->
       </div>
@@ -50,12 +50,4 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
-    <!--Tinymc-->
-    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
-    {!! Html::script('dist/js/custom/courseinfo.js') !!}
-    <script>
-      $.ajaxSetup({
-         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      });
-    </script>
 @stop
