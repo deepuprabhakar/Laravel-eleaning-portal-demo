@@ -13,7 +13,7 @@ $(function () {
     "responsive" : true,
     "columnDefs": [
         {
-            "targets": [ 3 ],
+            "targets": [ 2 ],
             "sortable": false
         }
     ]

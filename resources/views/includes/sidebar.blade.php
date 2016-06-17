@@ -74,20 +74,6 @@
           </li>
         </ul>
       </li>
-      <li class="treeview {{ Request::is('projects') ? 'active' : '' }}{{ Request::is('projects/*') ? 'active' : '' }}">
-        <a href="#">
-          <i class="fa fa-file-text-o" aria-hidden="true"></i>
-          <span>Projects</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-          <li class="{{ Request::is('projects/create') ? 'active' : '' }}">
-            <a href="{{ route('admin.projects.create') }}"><i class="fa fa-circle-o"></i> Create Project</a>
-          </li>
-          <li class="{{ Request::is('projects') ? 'active' : '' }}">
-            <a href="{{ route('admin.projects.index') }}"><i class="fa fa-circle-o"></i> View Projects</a>
-          </li>
-        </ul>
-      </li>
       <li class="treeview {{ Request::is('admin/news') ? 'active' : '' }}{{ Request::is('admin/news/*') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-newspaper-o" aria-hidden="true"></i>
@@ -126,13 +112,27 @@
           <li class="{{ Request::is('articles') ? 'active' : '' }}">
             <a href="{{ route('articles.index') }}"><i class="fa fa-circle-o"></i> View Articles</a>
           </li>
-
+          <li class="{{ Request::is('articles/list') ? 'active' : '' }}">
+            <a href="{{ route('listArticles') }}"><i class="fa fa-circle-o"></i> Edit Articles</a>
+          </li>
         </ul>
+      </li>
+      <li class="{{ Request::is('admin/projects') ? 'active' : '' }}">
+        <a href="{{ route('admin.projects') }}">
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          <span>Projects</span>
+        </a>
       </li>
       <li class="{{ Request::is('admin/gallery') ? 'active' : '' }}">
         <a href="{{ route('admin.gallery') }}">
           <i class="fa fa-file-image-o" aria-hidden="true"></i>
           <span>Gallery</span>
+        </a>
+      </li>
+       <li class="{{ Request::is('admin/progress') ? 'active' : '' }}">
+        <a href="{{ route('admin.progress') }}">
+          <i class="fa fa-tasks" aria-hidden="true"></i>
+          <span>Progress</span>
         </a>
       </li>
     </ul>

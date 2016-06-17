@@ -23,7 +23,8 @@
         Mailbox
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="{{ route('admin.messages.index') }}"> Messages</a></li>
         <li class="active">Inbox</li>
       </ol>
     </section>
@@ -73,7 +74,7 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3>{{ $messages['subject'] }}</h3>
-                <h5>From:{{ $user['email'] }} 
+                <h5>From: {{ $user['email'] }} 
                   <span class="mailbox-read-time pull-right">{{ $messages['create']}}</span></h5>
               </div>
               <!-- /.mailbox-read-info -->

@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-learning - List of Articles</title>
+    <title>Coheart E-learning - Articles</title>
 @stop
 
 @section('style')
@@ -24,58 +24,30 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="{{ route('articles.index') }}">Articles</a></li>
-      <li class="active">View Articles</li>
+      <li><a href="{{ route('articles.index') }}" class="active">Articles</a></li>
     </ol>
   </section>
 
   <!-- Main content -->
-  <section class="content" style="min-height: 600px;">
+  <section class="content" >
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
+        @include('errors.empty', ['item' => $articles, 'title' => 'articles'])
           <!-- The time line -->
-          <ul class="timeline">
-            @foreach($articles as $content)
-              <!-- timeline time label -->
-              <li class="time-label">
-                  <span class="bg-red">
-                    {{ $content['date'] }}
-                  </span>
-              </li>
-              <!-- /.timeline-label -->
-              <!-- timeline item -->
-              <li>
-                <i class="fa fa-file-text-o bg-blue"></i>
-                <div class="timeline-item">
-                  <span class="time">
-                    <i class="fa fa-clock-o"></i> 
-                    {{ $content['time'] }}
-                  </span>
-                      <h3 class="timeline-header"><a href="{{ route('articles.show', $content['slug']) }}">{{ $content['title'] }}</a></h3>
-                  <div class="timeline-body" style="overflow: auto;">
-                    <p>{!! str_limit($content['content'], 200) !!}</p>
-                  </div>
-                  <div class="timeline-footer" style="padding-top: 0;">
-                    <a class="btn btn-primary btn-xs btn-flat" href="{{ route('articles.show', $content['slug']) }}">Read more</a>
-                    @if($content['student_id'] == $user)
-                    <a class="btn bg-olive btn-xs btn-flat"  style="margin: 0 3px 0 2px;" href="{{ route('articles.edit', $content['slug']) }}">Edit</a>
-                      {!! Form::open(['route' => ['articles.destroy', $content['hashid']], 'method' => 'DELETE', 'class' => 'delete-form']) !!}
-                      {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs btn-flat btn-delete']) !!}
-                      {!! Form::close() !!}
-                    @endif
-                  </div>
+          @if($articles->count() > 0)
+              <ul class="timeline article" data-next-page="{{ $articles->nextPageUrl() }}">
+                
+              </ul>
+          @endif
+      </div>     
+            <div class="col-md-10 col-md-offset-1">
+                <div class="overlay text-center text-muted" style="display: none;">
+                  <i class="fa fa-refresh fa-spin"></i>
                 </div>
-              </li>
-              <!-- END timeline item -->
-              <!-- timeline item -->
-            @endforeach
-          </ul>
-          <div class="overlay text-center">
-            <i class="fa fa-refresh fa-spin"></i>
-          </div>
-        </div>
-      </div>
-  </section><!-- ./section -->  
+            </div>
+    </div>
+    </section><!-- ./section -->
+    
 </div><!-- ./Content Wrapper -->  
 @stop
 
@@ -89,5 +61,5 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
-    {!! Html::script('dist/js/custom/articles.js') !!}
+    {!! Html::script('dist/js/custom/loadArticle.js') !!}
 @stop

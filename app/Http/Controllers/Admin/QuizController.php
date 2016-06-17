@@ -37,8 +37,7 @@ class QuizController extends Controller
         
     	if($request->ajax())
     	{
-    		//$quizzes = Quiz::get()->count();
-            if(1)
+    		if(1)
             {
                 Quiz::create($request->all());
                 $response['success'] = 'Created Successfully';
@@ -58,16 +57,17 @@ class QuizController extends Controller
     {
         $id = Hashids::connection('quiz')->decode($id);
         Quiz::destroy($id);
-        $subject = Subject::find($id)->first()->toArray();
-        return redirect()->route('admin.quiz.index',$subject['slug'])->with('success', 'Quiz deleted succesfully');
+        return redirect()->back()->with('success', 'Quiz deleted succesfully');
+        //$subject = Subject::find($id)->first()->toArray();
+        //return redirect()->route('admin.quiz.index',$subject['slug'])->with('success', 'Quiz deleted succesfully');
     } 
 
     public function edit($id)
     {
         $id = Hashids::connection('quiz')->decode($id);
-        $quiz = Quiz::find($id)->first()->toArray();
+        $quiz = Quiz::with('subject')->where('id', $id)->first()->toArray();
         $subject = Subject::find($id)->first();
-        return view('admin.editQuiz')->with(['quiz' => $quiz, 'subject' => $subject]);
+        return view('admin.editQuiz')->with(['quiz' => $quiz]);
     }
 
     public function update($id, QuizRequest $request)

@@ -26,7 +26,7 @@ class ArticleRequest extends Request
         return [
             'title' => 'required',
             'content' => 'required',
-            'article' => 'mimes:pdf'
+            'article' => 'mimes:pdf,doc'
         ];
     }
 }

@@ -31,15 +31,17 @@
   <div class="form-group">
     {!! Form::select('batch', [null => 'Select Batch'], null, ['id' => 'batches', 'class' => 'form-control', 'style' => 'width: 100%']) !!}
   </div>
-  
   <div class="form-group">
     {!! Form::label('image', 'Image') !!}
-    {!! Form::file('image', null, ['class' => 'form-control', 'id' => 'image', 'placeholder' => 'Upload Image']) !!}<br>
+    {!! Form::file('image', ['class' => 'form-control', 'id' => 'image', 'placeholder' => 'Upload Image']) !!}<br>
 
     @if($flag && $news['image'] != "")
-     
-     {{ Html::image("uploads/news/thumbs/".$news['image'], 'image', ['class' => 'attachment-img']) }}
-
+     <div class="img-wrap" style="position: relative; display: inline-block;">
+        {{ Html::image("uploads/news/thumbs/".$news['image'], 'image', ['class' => 'attachment-img']) }}
+        <a href="{{ route('deleteImage', $news['hashid']) }}" class="btn bg-maroon margin delete-news-image">
+          <i class="fa fa-close"></i>
+        </a>
+      </div>
     @endif 
 
   </div>

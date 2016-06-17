@@ -24,7 +24,7 @@
   </section>
   <section class="content-header">
     <div class="callout callout-success">
-      <h4>{{ Sentinel::getUser()->first_name }}</h4>
+      <h4>{{ ucwords(Sentinel::getUser()->first_name) }}</h4>
       <p>Logged in as User!!</p>
     </div>
   </section>

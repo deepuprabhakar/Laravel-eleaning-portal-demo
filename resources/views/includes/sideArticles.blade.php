@@ -16,10 +16,12 @@
     @foreach ($latest as $articles)
       <li class="item">
         <div class="product-info">
-          <a href="{{ route('articles.show', $articles->slug) }}" class="product-title">{{ $articles->title }} <span class="label label-info pull-right">{{ $articles->created_at->diffForHumans() }}</span></a>
-          <span class="product-description" style="margin-top: 2px;">
-            {{ ucfirst(str_limit($articles->content, 40)) }}
-          </span>
+          <a href="{{ route('articles.show', $articles->slug) }}" class="product-title">
+            {{ str_limit($articles->title, 30) }} 
+            <span class="label label-info pull-right">
+              {{ $articles->created_at->diffForHumans() }}
+            </span>
+          </a>
         </div>
       </li><!-- /.item -->
     @endforeach

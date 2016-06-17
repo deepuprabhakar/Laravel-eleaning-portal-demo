@@ -38,7 +38,7 @@
             <h3 class="box-title">Subject Form</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
-          {!! Form::model($subject, ['url' => route('admin.subjects.update', $subject['hashid']), 'autocomplete' => 'off', 'id' => 'subject-form', 'method' => 'PATCH']) !!}
+          {!! Form::model($subject, ['url' => route('admin.subjects.update', $subject['hashid']), 'autocomplete' => 'off', 'id' => 'subject-form', 'files' => true, 'method' => 'PATCH']) !!}
             @include('forms.subject', ['button' => 'Update Subject', 'flag' => true])
           {!! Form::close() !!}<!-- /.Form ends -->
         </div><!-- /.box -->

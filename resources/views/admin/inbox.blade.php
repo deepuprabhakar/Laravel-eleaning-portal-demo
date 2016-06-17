@@ -66,66 +66,20 @@
               <h3 class="box-title">Inbox</h3>
 
               <div class="box-tools pull-right">
-                <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                <div class="">
+                  {!! Form::open(['id' => 'search-mail-form']) !!}
+                  <input type="text" name="search" id="search-mail" class="form-control input-sm" placeholder="Search Mail.." autocomplete="off">
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  {!! Form::submit('search-submit', ['style' => 'display: none', 'id' => 'search-button' ]) !!}
+                  {!! Form::close() !!}
                 </div>
               </div>
               <!-- /.box-tools -->
             </div>
             <!-- /.box-header -->
             {!! Form::open(['route' => ['admin.messages.destroyMany'], 'class' => 'message-destroy-form']) !!}
-            <div class="box-body no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
-                <div class="btn-group">
-                  <button type="submit" class="btn btn-default btn-sm" id="delete"><i class="fa fa-trash-o"></i></button>
-                </div>
-                <!-- /.btn-group -->
-                <div class="pull-right">
-                  
-                  <div class="btn-group">
-                    <a href="" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></a>
-                    <a href="" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></a>
-                  </div>
-                  
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
-              </div>
-              <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped">
-                  <tbody>
-                  @if(empty($messages))
-                    <tr>
-                      <td colspan="4" class="text-center">Inbox empty!</td>
-                    </tr>  
-                  @else 
-                  @foreach($messages as $message)
-                  @if($message['status'] == 0)
-                    <tr>
-                      <td><input type="checkbox" class="message-check" name="message-check[]" value="{{ $message['hashid'] }}"></td>
-                      <td class="mailbox-name"><a href="{{ route('admin.messages.show', $message['hashid']) }}"><b>{{ $message['user']['first_name'] }}</b></a></td>
-                      <td class="mailbox-subject"><b>{!! $message['subject'] !!}</b></td>
-                      <td class="mailbox-date">{{ $message['time'] }}</td>
-                     </tr>
-                  @else
-                    <tr>
-                      <td><input type="checkbox" class="message-check" name="message-check[]" value="{{ $message['hashid'] }}"></td>
-                      <td class="mailbox-name"><a href="{{ route('admin.messages.show', $message['hashid']) }}">{{ $message['user']['first_name'] }}</a></td>
-                      <td class="mailbox-subject">{!! $message['subject'] !!}</td>
-                      <td class="mailbox-date">{{ $message['time'] }}</td>
-                     </tr>
-                    @endif
-                  @endforeach
-                  @endif
-                  </tbody>
-                </table>
-                <!-- /.table -->
-              </div>
-              <!-- /.mail-box-messages -->
+            <div class="box-body no-padding div-messages">
+              @include('includes.messages')
             </div><!-- end of mailbox body-->
             {!! Form::close() !!}
             @include('errors.success')

@@ -5,22 +5,26 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle" alt="User Image">
+      @if($student->image == "")
+        <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle side-profile-pic" alt="User Image">
+      @else
+        <img src="{{ asset('uploads/profile/'.$student->image) }}" class="img-circle side-profile-pic" alt="User Image">
+      @endif
       </div>
       <div class="pull-left info">
-        <p>{{ Sentinel::getUser()->first_name }}</p>
+        <p>{{ ucwords(Sentinel::getUser()->first_name) }}</p>
         <a href="" onclick="return false"><i class="fa fa-circle text-success"></i> Online</a>
       </div>
     </div>
     <!-- search form -->
-    <form action="#" method="get" class="sidebar-form">
+    <!-- <form action="#" method="get" class="sidebar-form">
       <div class="input-group">
         <input type="text" name="q" class="form-control" placeholder="Search...">
         <span class="input-group-btn">
           <button type="submit" name="search" id="search-btn" class="btn btn-flat" style="min-width: auto;"><i class="fa fa-search"></i></button>
         </span>
       </div>
-    </form>
+    </form> -->
     <!-- /.search form -->
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
@@ -31,7 +35,23 @@
           <span>Home</span>
         </a>
       </li>
-      <li class="treeview {{ Request::is('news') ? 'active' : '' }}">
+      <li class="treeview {{ Request::is('modules') ? 'active' : '' }}{{ Request::is('modules/*') ? 'active' : '' }}">
+        <a href="#">
+          <i class="fa fa-book" aria-hidden="true"></i>
+          <span>Modules</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          @for($i=0; $i<$course->semester; $i++)
+              <li class="{{ Request::is('modules/') ? 'active' : '' }}">
+
+                <a href="{{ route('modules.index', $i+1) }}"><i class="fa fa-circle-o"></i>{{'Semester '.($i+1) }}</a>
+
+              </li>
+          @endfor   
+        </ul>
+      </li>
+
+      <li class="treeview {{ Request::is('news') ? 'active' : '' }}{{ Request::is('news/*') ? 'active' : '' }}">
         <a href="{{ route('news') }}">
           <i class="fa fa-newspaper-o" aria-hidden="true"></i>
           <span>News</span>
@@ -49,23 +69,24 @@
           <li class="{{ Request::is('articles') ? 'active' : '' }}">
             <a href="{{ route('articles.index') }}"><i class="fa fa-circle-o"></i> View Articles</a>
           </li>
-
+          <li class="{{ Request::is('articles/list') ? 'active' : '' }}">
+            <a href="{{ route('listArticles') }}"><i class="fa fa-circle-o"></i> Edit Articles</a>
+          </li>
         </ul>
       </li>
-      <li class="treeview {{ Request::is('modules') ? 'active' : '' }}{{ Request::is('modules/*') ? 'active' : '' }}">
+      <li class="treeview {{ Request::is('project') ? 'active' : '' }}{{ Request::is('project/*') ? 'active' : '' }}">
         <a href="#">
-          <i class="fa fa-book" aria-hidden="true"></i>
-          <span>Modules</span> <i class="fa fa-angle-left pull-right"></i>
+          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+          <span>Project</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
-          @for($i=0; $i<$course->semester; $i++)
-              <li class="{{ Request::is('modules/') ? 'active' : '' }}">
-
-                <a href="{{ route('modules.index', $i+1) }}"><i class="fa fa-circle-o"></i>{{'Semester '.($i+1) }}</a>
-
-              </li>
-          @endfor   
-        </ul>
+          <li class="{{ Request::is('project/create') ? 'active' : '' }}">
+            <a href="{{ route('project.create') }}"><i class="fa fa-circle-o"></i> Create Project</a>
+          </li>
+          <li class="{{ Request::is('project') ? 'active' : '' }}">
+            <a href="{{ route('project.index') }}"><i class="fa fa-circle-o"></i> View Project</a>
+          </li>
+         </ul>
       </li>
       <li class="{{ Request::is('messages') ? 'active' : '' }}{{ Request::is('messages/*') ? 'active' : '' }}">
         <a href="{{ route('messages.index') }}">
@@ -84,6 +105,21 @@
             <i class="fa fa-graduation-cap"></i> 
             <span>Course Info</span>
         </a>
+      </li>
+      <li class="treeview {{ Request::is('progress') ? 'active' : '' }}{{ Request::is('progress/*') ? 'active' : '' }}">
+        <a href="#">
+          <i class="fa fa-book" aria-hidden="true"></i>
+          <span>Progress</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          @for($i=0; $i<$course->semester; $i++)
+              <li class="{{ Request::is('progress/') ? 'active' : '' }}">
+
+                <a href="{{ route('progress.index', $i+1) }}"><i class="fa fa-circle-o"></i>{{'Semester '.($i+1) }}</a>
+
+              </li>
+          @endfor   
+        </ul>
       </li>
     </ul>
   </section>

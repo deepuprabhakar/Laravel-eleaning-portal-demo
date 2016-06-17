@@ -13,7 +13,7 @@ class Subject extends Model implements SluggableInterface
 	use SluggableTrait;
 
 	protected $fillable = [
-		'name', 'batch', 'course', 'semester', 'slug'
+		'name', 'batch', 'course', 'semester', 'slug', 'file'
 	];
 
 	protected $sluggable = [
@@ -58,4 +58,17 @@ class Subject extends Model implements SluggableInterface
     {
         return $this->hasMany('App\Quiz');
     }
+
+    public function assignment()
+    {
+        return $this->hasOne('App\Assignment');
+    }
+
+    public function quizresult()
+    {
+        return $this->hasMany('App\QuizResult');
+    }
+    
+
+  
 }

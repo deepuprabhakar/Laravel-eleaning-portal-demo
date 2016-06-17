@@ -31,47 +31,22 @@
             @endif
             <li>
               <!-- inner menu: contains the actual data -->
-              <ul class="menu">
-                @foreach($latest as $message)
-                  @if($message['status'] == 0)
-                    <li class="message"><!-- start message -->
-                      <a href="{{ route('admin.messages.show', $message['hashid']) }}">
-                        <div class="pull-left">
-                          <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          {{ $message['user']['first_name'] }}
-                          <small><i class="fa fa-clock-o"></i> {{ $message['time'] }}</small>
-                        </h4>
-                        <p>{!! str_limit($message['message'], 30) !!}</p>
-                      </a>
-                    </li><!-- end message -->
-                    @else
-                      <li><!-- start message -->
-                      <a href="{{ route('admin.messages.show', $message['hashid']) }}">
-                        <div class="pull-left">
-                          <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle" alt="User Image">
-                        </div>
-                        <h4>
-                          {{ $message['user']['first_name'] }}
-                          <small><i class="fa fa-clock-o"></i>{{ $message['time'] }}</small>
-                        </h4>
-                        <p>{!! str_limit($message['message'], 30) !!}</p>
-                      </a>
-                    </li><!-- end message -->
-                    @endif
-                @endforeach
-              </ul>
+            @include('includes.topMessages')
             </li>
             @if($latest)
-            <li class="footer"><a href="{{ route('admin.messages.index') }}">See All Messages</a></li>
+
+            @if(Sentinel::inRole('admin'))
+             <li class="footer"><a href="{{ route('admin.messages.index') }}">See All Messages</a></li>
+           @else
+              <li class="footer"><a href="{{ route('messages.index') }}">See All Messages</a></li>
+            @endif
             @else
             <li class="footer"></li>
             @endif
           </ul>
         </li>
         <!-- Notifications: style can be found in dropdown.less -->
-        <li class="dropdown notifications-menu">
+        <!--<li class="dropdown notifications-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-bell-o"></i>
             <span class="label label-warning">10</span>
@@ -80,7 +55,7 @@
             <li class="header">You have 10 notifications</li>
             <li>
               <!-- inner menu: contains the actual data -->
-              <ul class="menu">
+              <!--<ul class="menu">
                 <li>
                   <a href="#">
                     <i class="fa fa-users text-aqua"></i> 5 new members joined today
@@ -110,9 +85,9 @@
             </li>
             <li class="footer"><a href="#">View all</a></li>
           </ul>
-        </li>
+        </li>-->
         <!-- Tasks: style can be found in dropdown.less -->
-        <li class="dropdown tasks-menu">
+        <!--<li class="dropdown tasks-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-flag-o"></i>
             <span class="label label-danger">9</span>
@@ -121,9 +96,9 @@
             <li class="header">You have 9 tasks</li>
             <li>
               <!-- inner menu: contains the actual data -->
-              <ul class="menu">
+              <!--<ul class="menu">
                 <li><!-- Task item -->
-                  <a href="#">
+                  <!---<a href="#">
                     <h3>
                       Design some buttons
                       <small class="pull-right">20%</small>
@@ -135,8 +110,8 @@
                     </div>
                   </a>
                 </li><!-- end task item -->
-                <li><!-- Task item -->
-                  <a href="#">
+                <!--<li><!-- Task item -->
+                  <!--<a href="#">
                     <h3>
                       Create a nice theme
                       <small class="pull-right">40%</small>
@@ -148,8 +123,8 @@
                     </div>
                   </a>
                 </li><!-- end task item -->
-                <li><!-- Task item -->
-                  <a href="#">
+                <!--<li><!-- Task item -->
+                  <!--<a href="#">
                     <h3>
                       Some task I need to do
                       <small class="pull-right">60%</small>
@@ -161,8 +136,8 @@
                     </div>
                   </a>
                 </li><!-- end task item -->
-                <li><!-- Task item -->
-                  <a href="#">
+                <!--<li><!-- Task item -->
+                  <!--<a href="#">
                     <h3>
                       Make beautiful transitions
                       <small class="pull-right">80%</small>
@@ -174,25 +149,50 @@
                     </div>
                   </a>
                 </li><!-- end task item -->
-              </ul>
+              <!-- </ul>
             </li>
             <li class="footer">
               <a href="#">View all tasks</a>
             </li>
           </ul>
-        </li>
+        </li>-->
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="user-image" alt="User Image">
+          
+          @if(Sentinel::inRole('admin'))
+            <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="user-image header-profile-image" alt="User Image">
+          
+          @elseif(Sentinel::inRole('user'))
+          
+            @if($student->image != "")
+              <img src="{{ asset('uploads/profile/'.$student->image) }}" class="user-image header-profile-image" alt="User Image">
+            @else
+              <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="user-image header-profile-image" alt="User Image">
+            @endif
+          
+          @endif
+
             <span class="hidden-xs">
-              {{ Sentinel::getUser()->first_name}}
+              {{ ucwords(Sentinel::getUser()->first_name)}}
             </span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle" alt="User Image">
+              @if(Sentinel::inRole('admin'))
+                <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle header-profile-image" alt="User Image">
+              
+              @elseif(Sentinel::inRole('user'))
+              
+                @if($student->image != "")
+                  <img src="{{ asset('uploads/profile/'.$student->image) }}" class="img-circle header-profile-image" alt="User Image">
+                @else
+                  <img src="{{ asset('dist/img/default-160x160.jpg') }}" class="img-circle header-profile-image" alt="User Image">
+                @endif
+              
+              @endif
+              
               <p>
                 {{ Sentinel::getUser()->first_name }}
                 <small>Member since {{ Sentinel::getUser()->created_at->format('F, Y') }}</small>
@@ -200,12 +200,19 @@
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
+            @if(Sentinel::inRole('user'))
               <div class="pull-left">
                 <a href="{{ route('profile') }}" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="pull-right">
                 <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">Sign out</a>
               </div>
+            @else
+              <div class="pull-right">
+                <a href="{{ url('/logout') }}" class="btn btn-default btn-flat btn-sx">Sign out</a>
+              </div>
+            @endif
+              
             </li>
           </ul>
         </li>

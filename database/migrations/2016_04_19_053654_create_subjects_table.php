@@ -13,10 +13,12 @@ class CreateSubjectsTable extends Migration
     public function up()
     {
         Schema::create('subjects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('batch');
+            $table->string('file');
             $table->unsignedInteger('course');
             $table->unsignedInteger('semester');
             $table->unique(array('name', 'batch', 'course', 'semester'));

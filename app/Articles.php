@@ -55,8 +55,6 @@ class Articles extends Model implements SluggableInterface
         return ucfirst($value);
     }
 
-    
-
     public function getHashidAttribute()
     {
         return Hashids::connection('article')->encode($this->attributes['id']);

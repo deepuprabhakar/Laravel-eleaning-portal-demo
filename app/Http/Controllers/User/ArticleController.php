@@ -8,12 +8,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArticleRequest;
 use App\Articles;
+use App\Student;
 use Auth;
 use Session;
 use Image;
 use Carbon\Carbon;
 use Hashids;
-use sentinel;
+use Sentinel;
 use File;
 
 class ArticleController extends Controller
@@ -32,17 +33,22 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = Sentinel::getUser()->id;
         date_default_timezone_set('Asia/Kolkata');
-        $articles = Articles::active()->get();
+        $articles = Articles::with('author')->active()->paginate(3);
         foreach($articles as $item)
         {
             $item->date = $item->publish->format('d M. Y');
             $item->time = $item->publish->diffForHumans();
         }
-        $articles = $articles->toArray();
+         if($request->ajax()) {
+            return [
+                'article' => view('includes.article')->with(compact('articles'))->render(),
+                'next_page' => $articles->nextPageUrl()
+            ];
+        }
         return view('user.viewArticles', compact('articles', 'user'));
     }
 
@@ -72,9 +78,9 @@ class ArticleController extends Controller
             $extension = $article->getClientOriginalExtension();
             $filename = str_slug($request->get('title'), "-").'-'.time().'.'.$extension;
             $filepath = 'uploads/articles';
-            if(!(FILE::exists($filepath)))
+            if(!(File::exists($filepath)))
             {
-                File::makeDirectory($filepath);
+                File::makeDirectory($filepath, 0775, true);
             }            
             $request->file('article')->move($filepath, $filename);
             $input['article'] = $filename;
@@ -95,8 +101,13 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-       $article = Articles::with('author')->where('slug', $id)->first();
-       return view('user.viewArticleDetails',compact('article'));
+        $article = Articles::with('author')->where('slug', $id)->active()->first();
+        $student = Student::where('user_id', $article->student_id)->first();
+        
+        if($article)
+           return view('user.viewArticleDetails',compact('article', 'student'));
+        else
+            abort(404);
     }
 
     /**
@@ -109,9 +120,16 @@ class ArticleController extends Controller
     {
         $article = Articles::findBySlug($slug);
         if($article)
-        {
-            $article->hash = Hashids::connection('article')->encode($article->id);
-            return view('user.editArticle', compact('article'));
+        {   
+            if($article->student_id == Sentinel::getUser()->id)
+            {    
+                $article->hash = Hashids::connection('article')->encode($article->id);
+                $publish = new Carbon($article->publish);
+                $publish = $publish->format('m/d/Y');
+                return view('user.editArticle', compact('article', 'publish'));
+            }
+            else
+                return redirect()->back();
         }
         else
             abort(404);
@@ -147,7 +165,7 @@ class ArticleController extends Controller
            $articles->update($input);
         }
 
-        return redirect()->route('articles.edit', $articles->slug)->with('success', 'News updated succesfully'); 
+        return redirect()->route('articles.edit', $articles->slug)->with('success', 'Article updated succesfully'); 
 
     }
 
@@ -165,7 +183,7 @@ class ArticleController extends Controller
         File::delete($filepath.'/'.$articles['article']);
         Articles::destroy($id);
         Session::flash('success', 'Article deleted!');
-        return redirect()->route('articles.index');
+        return redirect()->route('listArticles');
     }
     /**
      * to remove file in edit
@@ -182,6 +200,20 @@ class ArticleController extends Controller
         $article->article = '';
         $article->save();
         return redirect()->back();
+    }
+
+    public function listArticles()
+    {
+        $user = Sentinel::getUser()->id;
+        $articles = Articles::with('author')->where('student_id', $user)->latest()->get();
+        foreach($articles as $item)
+        {
+            $item->date = $item->publish->format('d M, Y');
+            $item->time = $item->publish->diffForHumans();
+        }
+        $articles = $articles->toArray();
+        return view('user.listArticles', compact('articles'));
+        
     }
         
 }

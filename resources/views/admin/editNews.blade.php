@@ -20,7 +20,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Edit {{ $news['title'] }}
+      Edit - {{ str_limit($news['title'], 20) }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
@@ -37,6 +37,11 @@
         <div class="box box-primary">
           <div class="box-header with-border">
             <h3 class="box-title">News Form</h3>
+            <div class="box-tools pull-right">
+              <a href="{{ route('admin.news.show', $news['slug']) }}" class="btn btn-primary btn-sm" title="Edit">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> Preview
+              </a>
+            </div>
           </div><!-- /.box-header -->
           <!-- form start -->
           {!! Form::model($news, ['url' => route('admin.news.update', $news['hashid']), 'autocomplete' => 'off', 'id' => 'news-form', 'method' => 'PATCH', 'files' => true]) !!}

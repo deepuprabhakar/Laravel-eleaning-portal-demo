@@ -29,20 +29,27 @@ class NewsController extends Controller
     /**
 	 * to view news
 	 */
-    public function newsView()
+    public function newsView(Request $request)
     {
     	date_default_timezone_set('Asia/Kolkata');
     	$user = User::find(Sentinel::getUser()->id);
     	$student = $user->student->toArray();
-        $news = News::orderBy('publish', 'desc')->where('audience', 'all')->orWhere('course', $student['course'])->where('batch', $student['batch'])->active()->get();
+        $news = News::orderBy('publish', 'desc')->where('audience', 'all')->orWhere('course', $student['course'])->where('batch', $student['batch'])->active()->Paginate(3);
 
-    	foreach($news as $item)
+        foreach($news as $item)
         {
             $item->date = $item->publish->format('d M, Y');
             $item->time = $item->publish->diffForHumans();
         }
-        $news = $news->toArray();
-    	return view('user.news',compact('news'));
+
+        if($request->ajax()) {
+            return [
+                'news' => view('includes.news')->with(compact('news'))->render(),
+                'next_page' => $news->nextPageUrl()
+            ];
+        }
+
+        return view('user.news', compact('news'));
     }
 
     /**

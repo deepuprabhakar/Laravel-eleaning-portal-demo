@@ -12,6 +12,7 @@ use File;
 use Storage;
 use App\Gallery;
 use App\User;
+use Image;
 
 class GalleryController extends Controller
 {
@@ -43,14 +44,40 @@ class GalleryController extends Controller
     		$messages = ['file.image' => 'Please select only images!'];
     		$validator = Validator::make(array('file'=> $file), $rules, $messages);
     		if($validator->passes()){
-    			$destination = 'uploads/gallery';
-    			if(!(Storage::exists($destination)))
-    				$folder = Storage::makeDirectory($destination, 0775, true);
-    			$filename = $file->getClientOriginalName();
+    			
+                $destination = 'uploads/gallery/';
+                $thumbs = 'uploads/gallery/thumbs/';
+                
+                // Create Image instance
+                $img = Image::make($file);
+                
+                // Save Original Image
+                $img->resize(1024, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                // Create directory
+    			if(!(File::exists($destination)))
+    				$folder = File::makeDirectory($destination, 0775, true);
+                if(!(File::exists($thumbs)))
+                    $folder = File::makeDirectory($thumbs, 0775, true);
+
+                $filename = $file->getClientOriginalName();
     			$ext = $file->getClientOriginalExtension();
     			$filename = pathinfo($filename, PATHINFO_FILENAME).'-'.time().'.'.$ext;
-    			$uploaded = $file->move($destination, $filename);
-    			if($uploaded)
+                $uploaded = $img->save($destination.$filename);
+
+                // Save Thumbnail Image
+                $img->resize(770, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                });
+
+                $uploaded = $img->save($thumbs.$filename);
+    			
+    			
+                if($uploaded)
     			{
     				Gallery::create(['image' => $filename]);
     			}

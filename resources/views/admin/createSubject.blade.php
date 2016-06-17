@@ -38,7 +38,7 @@
             <h3 class="box-title">Subject Form</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
-          {!! Form::open(['url' => route('admin.subjects.store'), 'autocomplete' => 'off', 'id' => 'subject-form']) !!}
+          {!! Form::open(['url' => route('admin.subjects.store'), 'autocomplete' => 'off', 'id' => 'subject-form', 'files' => true]) !!}
             @include('forms.subject', ['button' => 'Create Subject', 'flag' => false])
           {!! Form::close() !!}<!-- /.Form ends -->
         </div><!-- /.box -->

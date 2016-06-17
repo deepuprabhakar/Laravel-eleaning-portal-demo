@@ -113,7 +113,6 @@
                 <tr>
                   <th style="width: 20px;">No.</th>
                   <th> Unit Title</th>
-                  <th style="width: 100px;" class="text-center">Subject Name</th>
                   <th class="text-center" style="width: 200px;">Actions</th>
                 </tr>
               </thead>
@@ -122,11 +121,6 @@
                 <tr>
                   <td>{{ ++$key }}</td>
                   <td>{{ $unit['title'] }}</td>
-                  <td>
-                    <a href="{{ route('admin.subjects.show', $unit['subject']['slug']) }}">
-                      {{ $unit['subject']['name'] }}  
-                    </a>
-                  </td>
                   <td class="text-center table-actions">
                     <a class="btn bg-purple btn-xs btn-flat" href="{{ route('admin.units.show', $unit['slug']) }}">View</a>
                     <a class="btn bg-olive btn-xs btn-flat" href="{{ route('admin.units.edit', $unit['slug']) }}" style="margin: 0 3px 0 2px;">Edit</a>
@@ -157,10 +151,11 @@
             <!-- /.box-header -->
             {{ Form::open(['url' => 'createDiscussion', 'autocomplete' => 'off', 'id' => 'discussion-prompt-form']) }}
             <div class="box-body">
+              <div id="response-discussion" style="display: none;"></div>
               {{ Form::textarea('question', $subject['discussionprompt']['question'], ['class'=>'form-control', 'id' => 'discussion', 'placeholder' => 'Enter Question For Discussion Here']) }}
               {!! Form::hidden('subject_id', $subject['hashid'], ['id' => 'subjectid']) !!}
               {!! Form::hidden('course_id', $subject['course']['id'], ['id' => 'courseid']) !!}
-              <div id="response-discussion" style="display: none;"></div>
+              
             </div>
             <div class="box-footer">
                 <button type="submit" class="btn btn-primary news-button" id="discussionprompt">Create</button>
@@ -200,15 +195,49 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              The body of the box
+                  <table id="assignment-table" class="table table-bordered table-hover display dt-responsive nowrap" width="100%" cellspacing="0">
+                      <thead>
+                        <tr>
+                          <th style="width: 20px;">No.</th>
+                          <th>Student Name</th>
+                          <th> Assignment Title</th>
+                          <th>Assignment File</th>
+                          <th>Score</th>
+                          <th>Remark</th>
+                          <th class="text-center" style="width: 200px;">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      @foreach ($assignments as $key => $assignment)
+                        <tr>
+                          <td>{{ ++$key }}</td>
+                          <td>{{ $students['name']}}</td>
+                          <td>{{ $assignment['title'] }}</td>
+                          <td><a href="{{ url('uploads/assignments', $assignment['file']) }}" class="btn btn-primary" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></td>
+                          
+                           {{ Form::open(['url' => route('admin.assignment.create', $assignment['hashid']), 'autocomplete' => 'off', 'class' => 'assignment-form']) }} 
+                           <td>{{ Form::text('mark', $assignment['mark'], ['id' => 'mark','class' => 'form-control', 'placeholder' => 'Enter Mark']) }}</td>
+                           <td>{{ Form::text('remark', $assignment['remark'], ['class' => 'form-control', 'id' => 'remark', 'placeholder' => 'Enter Remark']) }}</td>
+                          <td class="text-center table-actions">
+                            {!! Form::submit('Save', ['class' => 'btn btn-primary assignment-button']) !!}
+                          </td>
+                          {{ Form::close() }}
+                        </tr>
+                      @endforeach
+                      </tbody>
+                </table>
+                <div id="response-assignment" style="display: none;"></div>
             </div>
             <!-- /.box-body -->
+            <div class="overlay">
+              <i class="fa fa-refresh fa-spin"></i>
+            </div>
+          </div>
         </div>
-      </div>
-      </div><!-- ./Row -->    
-  </section>
+        </div><!-- ./Row -->    
+    </section>
      
-</div><!-- ./Content Wrapper -->  
+  </div><!-- ./Content Wrapper -->  
 @stop
 
 @section('script')
@@ -243,5 +272,5 @@
     {!! Html::script('plugins/datatables/media/js/jquery.dataTables.min.js') !!}
     {!! Html::script('plugins/datatables/media/js/dataTables.bootstrap.min.js') !!}
     {!! Html::script('plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js') !!}
-    
+    {!! Html::script('dist/js/custom/viewAssignment.js') !!}
 @stop

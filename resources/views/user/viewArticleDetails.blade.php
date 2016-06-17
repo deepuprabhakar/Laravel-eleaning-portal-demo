@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-learning - {{ ucwords($article['title']) }}</title>
+    <title>Coheart E-learning - Article - {{ ucfirst($article['title']) }}</title>
 @stop
 
 @section('content')
@@ -15,12 +15,12 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Articles
+      Article - {{ str_limit(ucfirst($article['title']), 50) }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
       <li><a href="{{ route('articles.index') }}">Articles</a></li>
-      <li class="active">View Articles</li>
+      <li class="active">{{ str_limit(ucfirst($article['title']), 20) }}</li>
     </ol>
   </section>
 
@@ -30,8 +30,23 @@
       <div class="col-md-8">
             <div class="box box-widget">
             <div class="box-header with-border">
+            @if($article->student_id == Sentinel::getUser()->id)
+              <div class="box-tools pull-right">
+                <a href="{{ route('articles.edit', $article['slug']) }}" class="btn btn-primary btn-sm" title="Edit">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                </a>
+              </div>
+            @endif
               <div class="user-block">
+              @if(is_null($student))
                 <img class="img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User Image">
+              @else
+                @if($student->image != "")
+                  <img class="img-circle" src="{{ url('uploads/profile', $student->image) }}" alt="User Image">
+                @else
+                  <img class="img-circle" src="{{ asset('dist/img/default-160x160.jpg') }}" alt="User Image">
+                @endif
+              @endif
                 <span class="username"><a href="#">{{ $article['author']['first_name'] }}</a></span>
                 <span class="description">{{ $article['publish']->diffForHumans() }}</span>
               </div>

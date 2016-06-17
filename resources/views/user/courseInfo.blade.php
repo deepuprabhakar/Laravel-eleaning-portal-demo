@@ -12,18 +12,34 @@
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+<section class="content-header">
+      <h1>
+        CourseInfo
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="{{ route('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">CourseInfo</li>
+      </ol>
+    </section>
    <!-- Main content -->
   <section class="content" style="min-height: 700px;">
     <div class="row">
       <div class="col-md-offset-1 col-md-10">
         <!-- general form elements -->
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">{{ $course['title'] }}</h3>
-          </div><!-- /.box-header -->
-           {!! Purifier::clean($courseInfo['content']) !!}
-        </div><!-- /.box -->
-      </div>
+        @if(!$courseInfo)
+            @include('errors.empty', ['item' => $courseInfo, 'title' => 'info'])
+        @else
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">{{ $course['title'] }}</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+             {!! Purifier::clean($courseInfo['content']) !!}
+            
+            </div>
+          </div><!-- /.box -->
+        </div>
+      @endif
     </div> 
   </section><!-- ./section -->  
 </div><!-- ./Content Wrapper -->  

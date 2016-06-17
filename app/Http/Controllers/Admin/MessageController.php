@@ -10,8 +10,11 @@ use App\Student;
 use App\Http\Requests\MessageRequest;
 use Auth;
 use App\Message;
+use App\MessageSent;
 use Session;
 use Sentinel;
+use Response;
+use View;
 use Hashids;
 use App\User;
 
@@ -34,12 +37,22 @@ class MessageController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
         $user = Sentinel::getUser();
-        $messages = User::find($user->id)->messages()->with('user')->latest()->get()->toArray();
-        $count = User::find($user->id)->messages()->where('status', 0)->count();
-        return view('admin.inbox', compact('messages', 'count'));
+        //$messages = User::find($user->id)->messages()->with('user')->latest()->Paginate(2)->toArray();
+        $messages = Message::search($request->get('search'))->with('user')->where('sender', '!=', Sentinel::getUser()->id)->latest()->Paginate(2);
+        $pages = $messages->toArray();
+        
+        if($request->ajax())
+        {
+            return Response::json(View::make('includes.messages', array('messages' => $messages, 'pages' => $pages))->render());
+        }
+        else
+        {
+            $count = User::find($user->id)->messages()->where('status', 0)->count();
+            return view('admin.inbox', compact('messages', 'count', 'pages'));
+        }
     }
 
     /**
@@ -127,12 +140,27 @@ class MessageController extends Controller
      * view sent messages
      *
      */
-    public function sent()
+    public function sent(Request $request)
     {
         $user = Sentinel::getUser();
-        $messages = User::find($user->id)->sent()->with('sender')->latest()->get()->toArray();
-        $count = User::find($user->id)->messages()->where('status', 0)->count();
-        return view('admin.sent', compact('messages', 'count'));
+        $messages = MessageSent::search($request->get('search'))->with('user')->where('to', '!=', Sentinel::getUser()->id)->latest()->Paginate(2);
+        
+        foreach ($messages as $key => $message) {
+            $message->receiver = $message->sender()->first();
+        }
+
+        $pages = $messages->toArray();
+        
+        if($request->ajax())
+        {
+            return Response::json(View::make('includes.sentMessages', array('messages' => $messages, 'pages' => $pages))->render());
+        }
+        else
+        {
+            $count = User::find($user->id)->messages()->where('status', 0)->count();
+            return view('admin.sent', compact('messages', 'count', 'pages'));
+        }
+       
     }
 
     /**
@@ -196,4 +224,5 @@ class MessageController extends Controller
         Session::flash('success', 'Message sent.');
         return redirect()->back();
     }
+
 }
