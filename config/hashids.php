@@ -106,6 +106,11 @@ return [
             'length' => 6,
             'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
         ],
+        'question' => [
+            'salt' => 'QWIUOBJrjagmbfjskgffjfsfKKlfbmdfbkjgfwqefwyedSSnvdhfddjfsfjsfjfjsdf',
+            'length' => 6,
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
+        ],
 
 
     ],

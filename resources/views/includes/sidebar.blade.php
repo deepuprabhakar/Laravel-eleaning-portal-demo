@@ -111,10 +111,10 @@
           <i class="fa fa-newspaper-o" aria-hidden="true"></i>
           <span>Question</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
-            <a href="#"><i class="fa fa-circle-o"></i> Create Question</a>
+            <a href="{{ route('admin.test.createquestion') }}"><i class="fa fa-circle-o"></i> Create Question</a>
           </li>
           <li class="{{ Request::is('admin/test/question') ? 'active' : '' }}">
-            <a href="#"><i class="fa fa-circle-o"></i> View Question</a>
+            <a href="{{ route('admin.test.question') }}"><i class="fa fa-circle-o"></i> View Question</a>
           </li>
         </ul>
         <ul class="treeview-menu">
@@ -123,7 +123,7 @@
           <i class="fa fa-newspaper-o" aria-hidden="true"></i>
           <span>Set Question Paper</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
-            <a href="#"><i class="fa fa-circle-o"></i> Set Question paper</a>
+            <a href="{{ route('admin.test.setquestion') }}"><i class="fa fa-circle-o"></i> Set Question paper</a>
           </li>
           
 

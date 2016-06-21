@@ -10,6 +10,7 @@ use Sentinel;
 use App\User;
 use App\Articles;
 use App\Student;
+use App\TestCategory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -63,6 +64,18 @@ class AppServiceProvider extends ServiceProvider
             $articles = Articles::all()->lists('title', 'id')->toArray();
             asort($articles);
             $view->with('courses', $articles);
+        });
+        view()->composer('forms.testquestion', function($view)
+        {
+            $category = TestCategory::all()->lists('name', 'id')->toArray();
+            asort($category);
+            $view->with('category', $category);
+        });
+         view()->composer('forms.setquestion', function($view)
+        {
+            $category = TestCategory::all()->lists('name', 'id')->toArray();
+            asort($category);
+            $view->with('category', $category);
         });
         view()->composer('includes.sideNews', function($view)
         {

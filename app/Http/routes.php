@@ -83,7 +83,7 @@ Route::group(['middleware' => ['web']], function () {
         //Assignment
         Route::post('assignment/save/{id}', ['as' => 'admin.assignment.create', 'uses' => 'Admin\AssignmentController@create']);
 
-        //test
+        //test category
         
         Route::get('test/category', ['as' => 'admin.test.category', 'uses' => 'Admin\TestController@index']);
         Route::get('test/createcategory', ['as' => 'admin.test.createcategory','uses' => 'Admin\TestController@create']);
@@ -91,6 +91,16 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('test/editcategory/{id}',['as' => 'admin.test.editcategory', 'uses' => 'Admin\TestController@edit']);
         Route::patch('test/updatecategory/{id}',['as' => 'admin.test.updatecategory', 'uses' => 'Admin\TestController@update']);
         Route::delete('test/deletecategory/{id}', ['as' => 'admin.test.deletecategory', 'uses' => 'Admin\TestController@destroy']);
+        //test question
+        Route::get('test/question', ['as' => 'admin.test.question', 'uses' => 'Admin\QuestionController@index']);
+        Route::get('test/createquestion', ['as' => 'admin.test.createquestion','uses' => 'Admin\QuestionController@create']);
+        Route::post('test/storequestion', ['as' => 'admin.test.questionstore','uses' => 'Admin\QuestionController@store']);
+        Route::get('test/editquestion/{id}',['as' => 'admin.test.editquestion', 'uses' => 'Admin\QuestionController@edit']);
+        Route::patch('test/updatequestion/{id}',['as' => 'admin.test.updatequestion', 'uses' => 'Admin\QuestionController@update']);
+        Route::delete('test/deletequestion/{id}', ['as' => 'admin.test.deletequestion', 'uses' => 'Admin\QuestionController@destroy']);
+          //set Question Paper
+        Route::get('test/setquestion', ['as' => 'admin.test.setquestion' , 'uses' => 'Admin\SetQuestionController@create']);
+        Route::post('test/storesetquestion', ['as' => 'admin.test.setquestionstore','uses' => 'Admin\SetQuestionController@store']);  
         
         //Gallery
         Route::get('gallery', ['as' => 'admin.gallery', 'uses' => 'Admin\GalleryController@index']);
