@@ -8,6 +8,9 @@
     <meta name="format-detection" content="telephone=no"/>
     <title>E-learning - Set Question Paper</title>
 @stop
+@section('style')
+    {!! Html::style('plugins/select2/select2.min.css') !!}
+@stop
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
@@ -50,6 +53,8 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
+    <!-- Select 2 -->
+    {!! Html::script('plugins/select2/select2.full.min.js') !!}
 
     <script>
       $.ajaxSetup({
@@ -57,12 +62,20 @@
       });
     </script>
     <script>
+     $(function(){
+        $('#category').select2({
+          placeholder: 'Select Category'
+        });
+    });
       $('#add').click(function(e){
         e.preventDefault();
         $('#adddetails').fadeIn('slow');
       });
     </script>
     <script type="text/javascript">
+    $(document).ready(function(){
+
+
       $('#cat-form').submit(function(e){
           e.preventDefault();
           var data = $(this).serializeArray();
@@ -88,6 +101,7 @@
           });
   
 });
+       });
     </script>
     
 @stop

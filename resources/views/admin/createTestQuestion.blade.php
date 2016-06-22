@@ -9,6 +9,11 @@
     <title>E-learning - Create New Test Questions</title>
 @stop
 
+@section('style')
+    {!! Html::style('plugins/select2/select2.min.css') !!}
+@stop
+
+
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -47,6 +52,8 @@
 @section('script')
     <!-- FastClick -->
     {!! Html::script('plugins/fastclick/fastclick.min.js') !!}
+     <!-- Select 2 -->
+    {!! Html::script('plugins/select2/select2.full.min.js') !!}
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
