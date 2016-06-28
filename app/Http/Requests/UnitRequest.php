@@ -27,6 +27,7 @@ class UnitRequest extends Request
             
             'title' => 'required',
             'content' =>'required',
+            'video' => 'required',
         ];
     }
 }

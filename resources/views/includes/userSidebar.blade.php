@@ -35,16 +35,16 @@
           <span>Home</span>
         </a>
       </li>
-      <li class="treeview {{ Request::is('modules') ? 'active' : '' }}{{ Request::is('modules/*') ? 'active' : '' }}">
+      <li class="treeview {{ Request::is('course') ? 'active' : '' }}{{ Request::is('course/*') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-book" aria-hidden="true"></i>
-          <span>Modules</span> <i class="fa fa-angle-left pull-right"></i>
+          <span>Course</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
         <ul class="treeview-menu">
           @for($i=0; $i<$course->semester; $i++)
-              <li class="{{ Request::is('modules/') ? 'active' : '' }}">
+              <li class="{{ Request::is('course/') ? 'active' : '' }}">
 
-                <a href="{{ route('modules.index', $i+1) }}"><i class="fa fa-circle-o"></i>{{'Semester '.($i+1) }}</a>
+                <a href="{{ route('course.index', $i+1) }}"><i class="fa fa-circle-o"></i>{{'Semester '.($i+1) }}</a>
 
               </li>
           @endfor   
@@ -59,7 +59,7 @@
       </li>
       <li class="treeview {{ Request::is('exam') ? 'active' : '' }}{{ Request::is('exam/*') ? 'active' : '' }}">
         <a href="{{ route('exam') }}">
-          <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           <span>Exam</span>
         </a>
       </li>

@@ -89,48 +89,39 @@
         </ul>
       </li>
       <li class="treeview {{ Request::is('admin/test') ? 'active' : '' }}{{ Request::is('admin/test/*') ? 'active' : '' }}">
-        <a href="#">
-          <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-          <span>Test</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-        <ul class="treeview-menu">
-          <li class="treeview {{ Request::is('admin/test/category') ? 'active' : '' }}{{ Request::is('admin/test/category/*') ?'active' : ''}}">
-          <a href="#">
-          <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-          <span>Category</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-            <a href="{{ route('admin.test.createcategory') }}"><i class="fa fa-circle-o"></i> Create Category</a>
-          </li>
-          <li class="{{ Request::is('admin/test/category') ? 'active' : '' }}">
-            <a href="{{ route('admin.test.category') }}"><i class="fa fa-circle-o"></i> View Category</a>
-          </li>
-        </ul>
-        <ul class="treeview-menu">
-          <li class="{{ Request::is('admin/test/question') ? 'active' : '' }}{{ Request::is('admin/test/question/*') }}">
-          <a href="#">
-          <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-          <span>Question</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-            <a href="{{ route('admin.test.createquestion') }}"><i class="fa fa-circle-o"></i> Create Question</a>
-          </li>
-          <li class="{{ Request::is('admin/test/question') ? 'active' : '' }}">
-            <a href="{{ route('admin.test.question') }}"><i class="fa fa-circle-o"></i> View Question</a>
-          </li>
-        </ul>
-        <ul class="treeview-menu">
-          <li class="{{ Request::is('admin/test/setquestionpaper') ? 'active' : '' }}{{ Request::is('admin/test/setquestionpaper/*') }}">
-          <a href="#">
-          <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-          <span>Set Question Paper</span> <i class="fa fa-angle-left pull-right"></i>
-        </a>
-            <a href="{{ route('admin.test.setquestion') }}"><i class="fa fa-circle-o"></i> Set Question paper</a>
-          </li>
-          <li class="{{ Request::is('admin/test/viewsetquestion') ? 'active' : '' }}">
-            <a href="{{ route('admin.test.viewsetquestion') }}"><i class="fa fa-circle-o"></i> View  Set Question</a>
-          </li>
-
-        </ul>
-      </li>
+              <a href="#">
+                <i class="fa fa-pencil-square-o"></i> <span>Test</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="treeview {{ Request::is('admin/test/category') ? 'active' : '' }}{{ Request::is('admin/test/category/*') ?'active' : ''}}"><a href="#"><i class="fa fa-circle-o"></i> Category<i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                           <li><a href="{{ route('admin.test.createcategory') }}"><i class="fa fa-circle-o"></i> Create Category</a></li>
+                           <li>
+                           <a href="{{ route('admin.test.category') }}"><i class="fa fa-circle-o"></i> View Category </a>
+                          </li>
+                      </ul>
+                </li>
+                <li class="{{ Request::is('admin/test/question') ? 'active' : '' }}{{ Request::is('admin/test/question/*') ?'active' : ''}}">
+                  <a href="#"><i class="fa fa-circle-o"></i> Test Question <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+                    <li><a href="{{ route('admin.test.createquestion') }}"><i class="fa fa-circle-o"></i> Create Question</a></li>
+                    <li>
+                      <a href="{{ route('admin.test.question') }}"><i class="fa fa-circle-o"></i> View Question </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="{{ Request::is('admin/test/setquestionpaper') ? 'active' : '' }}{{ Request::is('admin/test/setquestionpaper/*') ?'active' : '' }}"><a href="#"><i class="fa fa-circle-o"></i> Set Question<i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('admin.test.setquestion') }}"><i class="fa fa-circle-o"></i> Set Question</a></li>
+                    <li>
+                      <a href="{{ route('admin.test.viewsetquestion') }}"><i class="fa fa-circle-o"></i> View Set Question </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+    </li>
+     
       <li class="{{ Request::is('admin/messages') ? 'active' : '' }}{{ Request::is('admin/messages/*') ? 'active' : '' }}">
         <a href="{{ route('admin.messages.index') }}">
           @if($count != 0)

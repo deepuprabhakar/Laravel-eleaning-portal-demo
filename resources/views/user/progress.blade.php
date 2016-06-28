@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-learning - Progress</title>
+    <title>E-learning - Progress</title>
 @stop
 
 @section('content')

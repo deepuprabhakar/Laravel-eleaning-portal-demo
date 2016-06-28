@@ -151,7 +151,7 @@ Route::group(['middleware' => ['web']], function () {
     //exam
     
     Route::get('exam',['as' => 'exam' ,'uses' => 'User\ExamController@exam']);
-    Route::post('exam\store',['as' => 'exam.store' ,'uses' => 'User\ExamController@examattend']);
+    Route::post('exam',['as' => 'exam.store' ,'uses' => 'User\ExamController@store']);
 
     //articles
     Route::get('articles/list', ['as' => 'listArticles', 'uses' => 'User\ArticleController@listArticles']);
@@ -159,15 +159,15 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('articles', 'User\ArticleController');
 
     //modules
-    Route::get('modules/semester/{id}',['as' => 'modules.index', 'uses' => 'User\ModulesController@index']);
+    Route::get('course/semester/{id}',['as' => 'course.index', 'uses' => 'User\ModulesController@index']);
 
-    Route::get('modules/semester/{sem}/{subject}',['as' => 'modules.show', 'uses' => 'User\ModulesController@show']);
-    Route::get('modules/semester/{sem}/{subject}/Quiz',['as' => 'modules.create', 'uses' => 'User\ModulesController@create' ]);
+    Route::get('course/semester/{sem}/{subject}',['as' => 'course.show', 'uses' => 'User\ModulesController@show']);
+    Route::get('course/semester/{sem}/{subject}/Quiz',['as' => 'course.create', 'uses' => 'User\ModulesController@create' ]);
 
-    Route::post('modules/semester/{sem}/{subject}/discussion',['as' => 'modules.store', 'uses' => 'User\ModulesController@store' ]);
+    Route::post('course/semester/{sem}/{subject}/discussion',['as' => 'course.store', 'uses' => 'User\ModulesController@store' ]);
 
     // Assignment create
-    Route::post('modules/createAssignment/{id}',['as' => 'modules.createAssignment', 'uses' => 'User\AssignmentsController@createAssignment' ]);
+    Route::post('course/createAssignment/{id}',['as' => 'course.createAssignment', 'uses' => 'User\AssignmentsController@createAssignment' ]);
     Route::post('fetchAssignments', 'User\AssignmentsController@fetch');
     Route::post('assignment/{id}',['as' => 'modules.destroy', 'uses' => 'User\AssignmentsController@destroy' ]);
 

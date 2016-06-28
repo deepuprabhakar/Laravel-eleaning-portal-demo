@@ -6,12 +6,14 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-learning - List of Modules</title>
+    <title>E-learning - List of Modules</title>
 @stop
 
 @section('style')
 <!-- jQuery Confirm -->
-    {!! Html::style('plugins/confirm/jquery-confirm.css') !!}    
+    {!! Html::style('plugins/confirm/jquery-confirm.css') !!} 
+    {!! Html::style('plugins/countdown/jquery.countdown.css') !!}
+    {!! Html::style('plugins/iCheck/all.css') !!}   
 @stop
 
 @section('content')
@@ -29,20 +31,32 @@
   <section class="content" style="min-height: 600px;">
     <div class="row">
       <div class="col-md-12">
-                  <div id="quiz-content">
+               @if(is_null($examResult))
+                  @if(is_null($questions))
+                    <div class="question">
+                      <div class="callout callout-info" style="margin: 15px 0">
+                        <p>Will be updated soon...</p>
+                      </div>
+                    </div>
+                  @else
+                  <div id="exam-content">
                       <p class="text-center">Please note exam can be taken only once.<br>
                       Click on start button to begin the Exam....</p>
                       <div class="text-center">
-                        <button class="btn btn-primary btn-flat" style="width: 150px;" id="quiz-start">Start</button>
+                        <button class="btn btn-primary btn-flat" style="width: 150px;" id="exam-start">Start</button>
                       </div>
                   </div>
                    <div class="row"><div class="col-md-10 col-md-offset-1">
-                    <div id="quiz-questions" style="display: none;">
+                    <div id="exam-questions" style="display: none;">
+                     <h1>{{ ucfirst($setquestion['title'] )}}</h1>
+                     <div style="float:right;margin-top: -31px;">Time:{{ $setquestion['timehr'] }} Hr {{ $setquestion['timemin'] }}Min</div>
                      <div class="timer-holder bg-red">
-                        <div id="countdown"></div>
+                        <div id="countdown">
+                          
+                        </div>
                         <i class="fa fa-clock-o"></i>
                      </div>
-                     {!! Form::open(['url' => route('exam.store'), 'id' => 'quiz-form']) !!}
+                     {!! Form::open(['url' => route('exam.store'), 'id' => 'exam-form']) !!}
                      
                      @foreach ($questions as $key => $question)
                         <div id="{{ $key }}">
@@ -69,15 +83,27 @@
                             <label for="radio-4-{{ $key }}" style="cursor: pointer;"> {{ ucfirst($question['D']) }}</label>&nbsp;&nbsp;
                             </div>
                           </div>
+                        
                         </div>
                       @endforeach
                     <div class="form-group text-center">
-                      {!! Form::button('Finish', ['class' => 'btn btn-success', 'style' => 'width: 150px; display: none;', 'id' => 'quiz-finish']) !!}
+                      {!! Form::button('Finish', ['class' => 'btn btn-success', 'style' => 'width: 150px; display: none;', 'id' => 'exam-finish']) !!}
                     </div>
                     {!! Form::close() !!}
                     </div>
                     </div>
                   </div><!-- ./row-->
+                  @endif
+              @else
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <div class="callout callout-success text-center">
+                      <p style="font-size: 15px;">Attended:{{ $examResult['attended'] }}</p style="font-size: 15px;">
+                      <h4>Your score:{{ $examResult['score'] }}</h4>
+                    </div>
+                  </div>
+                </div>
+              @endif
       </div>
     </div>
     </div>
@@ -86,14 +112,26 @@
 @stop
 
 @section('script')
+<script>
+      $.ajaxSetup({
+         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+      });
+      
+    </script>
     <!-- SlimScroll -->
     {!! Html::script('plugins/slimScroll/jquery.slimscroll.min.js') !!}
     <!-- FastClick -->
     {!! Html::script('plugins/fastclick/fastclick.min.js') !!}
     <!-- jQuery Confirm -->
     {!! Html::script('plugins/confirm/jquery-confirm.js') !!}
+    <!--iCheck -->
+    {!! Html::script('plugins/countdown/jquery.plugin.js') !!}
+    {!! Html::script('plugins/countdown/jquery.countdown.js') !!}
+    {!! Html::script('plugins/iCheck/icheck.min.js') !!}
+  
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
+    {!! Html::script('dist/js/custom/exam.js') !!}
     
 @stop

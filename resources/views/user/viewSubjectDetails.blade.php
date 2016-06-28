@@ -7,7 +7,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-Learning - {{ $subject->name }}</title>
+    <title>E-Learning - {{ $subject->name }}</title>
 @stop
     
 @section('style')
@@ -29,7 +29,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="{{ route('modules.index',$subject->semester) }}">Subjects</a></li>
+      <li><a href="{{ route('course.index',$subject->semester) }}">Subjects</a></li>
       <li class="active">View Subject</li>
     </ol>
   </section>
@@ -99,12 +99,14 @@
                   <div class="box box-success box-solid">
                     <div class="box-header with-border">
                       <h3 class="box-title">{{ $unit->title }}</h3>
+
                       <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                         </button>
                       </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
                     <div class="box-body" style="display: block;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ $unit->video }}" frameborder="0" allowfullscreen></iframe>
                       {!! $unit->content!!}
                     </div><!-- /.box-body -->
                   </div><!-- /.box -->
@@ -120,7 +122,7 @@
               <blockquote>
                 <p>{{ $discussion['question'] }}</p>
               </blockquote>
-              {!! Form::open(['url' => route('modules.store',[$subject->semester,$subject->slug]), 'autocomplete' => 'off', 'id' => 'discussion-form' ]) !!}
+              {!! Form::open(['url' => route('course.store',[$subject->semester,$subject->slug]), 'autocomplete' => 'off', 'id' => 'discussion-form' ]) !!}
               {!! Form::textarea('answer', null, ['class' => 'form-control', 'id' => 'answer', 'placeholder' => 'Enter Your Answer Here!!!']) !!}
               {!! Form::hidden('subject_id', $subject['id'], ['id' => 'subjectid']) !!}
               {!! Form::hidden('student_id', $student['id'], ['id' => 'studentid']) !!}
@@ -232,7 +234,7 @@
                       <h3 class="box-title">Add Assignment</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                      {!! Form::open(['url' => route('modules.createAssignment',$subject->hashid), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
+                      {!! Form::open(['url' => route('course.createAssignment',$subject->hashid), 'autocomplete' => 'off', 'id' => 'assignment-form', 'files' => true]) !!}
                         @include('errors.list')
                         @include('errors.success')
                         <div class="form-group">

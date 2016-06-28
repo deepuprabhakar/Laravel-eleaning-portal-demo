@@ -113,6 +113,7 @@
                 <tr>
                   <th style="width: 20px;">No.</th>
                   <th> Unit Title</th>
+                  <th>Unit Video</th>
                   <th class="text-center" style="width: 200px;">Actions</th>
                 </tr>
               </thead>
@@ -121,6 +122,7 @@
                 <tr>
                   <td>{{ ++$key }}</td>
                   <td>{{ $unit['title'] }}</td>
+                  <td><a href="{{ $unit['video'] }}" target="_blank">{{ $unit['video'] }}</a></td>
                   <td class="text-center table-actions">
                     <a class="btn bg-purple btn-xs btn-flat" href="{{ route('admin.units.show', $unit['slug']) }}">View</a>
                     <a class="btn bg-olive btn-xs btn-flat" href="{{ route('admin.units.edit', $unit['slug']) }}" style="margin: 0 3px 0 2px;">Edit</a>

@@ -6,7 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>Coheart E-learning - List of Modules</title>
+    <title>E-learning - List of Modules</title>
 @stop
 
 @section('style')
@@ -24,7 +24,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="{{ route('modules.index',$semester) }}">Modules</a></li>
+      <li><a href="{{ route('course.index',$semester) }}">Course</a></li>
       <li class="active">Semester {{$semester }}</li>
     </ol>
   </section>
@@ -55,7 +55,7 @@
                     <td>{{ ++$key }}</td>
                     <td>{{ $subject['name'] }}</td>
                     <td class="text-center table-actions">
-                      <a class="btn bg-purple btn-xs btn-flat" href="{{ route('modules.show', [$subject['semester'], $subject['slug']]) }}">View</a>
+                      <a class="btn bg-purple btn-xs btn-flat" href="{{ route('course.show', [$subject['semester'], $subject['slug']]) }}">View</a>
                       <a href="{{ url('uploads/subjects', $subject['file']) }}" class="btn bg-blue btn-xs btn-flat" id="download" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a>
                     </td>
                   </tr>

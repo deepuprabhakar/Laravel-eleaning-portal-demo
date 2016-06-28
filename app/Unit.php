@@ -13,7 +13,7 @@ class Unit extends Model implements SluggableInterface
 	use SluggableTrait;
 
 	protected $fillable = [
-		'title','subject_id', 'content',
+		'title','subject_id', 'content','video',
 	];
 	protected $sluggable = [
 	    'build_from' => 'title',

@@ -53,6 +53,11 @@ class ModulesController extends Controller
         {
             $course = $subject->course()->first();
             $units = $subject->unit;
+            foreach ($units as  $unit) {
+                $link = explode('/' ,$unit->video);
+                $unit->video =$link[3];
+
+            }
             $discussion = $subject->discussionprompt;
             $quizCount = $subject->quiz()->count();
             if($quizCount >= 5)
