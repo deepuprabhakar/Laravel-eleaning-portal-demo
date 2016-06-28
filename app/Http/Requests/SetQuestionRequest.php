@@ -28,7 +28,7 @@ class SetQuestionRequest extends Request
            'timehr' => 'required',
            'timemin' => 'required',
            'category' => 'required',
-           'number' => 'required',
+           'No Of Question' => 'required',
            'mark' => 'required',
            'negativemark' => 'required',
         ];

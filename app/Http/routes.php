@@ -99,8 +99,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::patch('test/updatequestion/{id}',['as' => 'admin.test.updatequestion', 'uses' => 'Admin\QuestionController@update']);
         Route::delete('test/deletequestion/{id}', ['as' => 'admin.test.deletequestion', 'uses' => 'Admin\QuestionController@destroy']);
           //set Question Paper
+        Route::get('test/viewsetquestion', ['as' => 'admin.test.viewsetquestion', 'uses' => 'Admin\SetQuestionController@index']);
         Route::get('test/setquestion', ['as' => 'admin.test.setquestion' , 'uses' => 'Admin\SetQuestionController@create']);
-        Route::post('test/storesetquestion', ['as' => 'admin.test.setquestionstore','uses' => 'Admin\SetQuestionController@store']);  
+        Route::post('test/storesetquestion', ['as' => 'admin.test.setquestionstore','uses' => 'Admin\SetQuestionController@store']);
+        Route::get('test/editsetquestion/{id}',['as' => 'admin.test.editsetquestion', 'uses' => 'Admin\SetQuestionController@edit']);
+        Route::patch('test/updatesetquestion/{id}',['as' => 'admin.test.updatesetquestion', 'uses' => 'Admin\SetQuestionController@update']);
+        Route::delete('test/deletesetquestion/{id}', ['as' => 'admin.test.deletesetquestion', 'uses' => 'Admin\SetQuestionController@destroy']);  
         
         //Gallery
         Route::get('gallery', ['as' => 'admin.gallery', 'uses' => 'Admin\GalleryController@index']);
@@ -144,7 +148,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('news', ['as' => 'news', 'uses' => 'User\NewsController@newsView']);
     Route::get('news/{id}', ['as' =>'news.show', 'uses' =>'User\NewsController@newsShow']);
 
+    //exam
     
+    Route::get('exam',['as' => 'exam' ,'uses' => 'User\ExamController@exam']);
+    Route::post('exam\store',['as' => 'exam.store' ,'uses' => 'User\ExamController@examattend']);
 
     //articles
     Route::get('articles/list', ['as' => 'listArticles', 'uses' => 'User\ArticleController@listArticles']);

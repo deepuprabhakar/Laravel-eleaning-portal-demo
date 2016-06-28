@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\SetQuestionRequest;
 use App\Http\Controllers\Controller;
+use App\SetQuestion;
 use Session;
 use Hashids;
 
@@ -25,8 +26,8 @@ class SetQuestionController extends Controller
 
     public function index()
     {
-    	$questions = TestQuestion::get()->toArray();
-        return view('admin.viewTestQuestion')->with(['questions' => $questions]);
+    	$setquestions = SetQuestion::get()->toArray();
+        return view('admin.viewSetQuestion')->with(['setquestions' => $setquestions]);
 
     }
 
@@ -35,36 +36,38 @@ class SetQuestionController extends Controller
     	return view('admin.setQuestion');
     }
 
-    public function store(SetQuestionRequest $request)
+    public function store(Request $request)
     {
-    	
+    	SetQuestion::create($request->all());
+    	Session::flash('success', 'Question Settings Added Successfully.');
+    	return redirect(route('admin.test.setquestion'));
     }
 
     public function edit($slug)
     {
-    	$question = TestQuestion::findBySlug($slug);
-    	if($question)
+    	$setquestion = SetQuestion::findBySlug($slug);
+    	if($setquestion)
     	{
-    		$question->hash = Hashids::connection('question')->encode($question->id);
-    		return view('admin.editTestQuestion',compact('question'));
+    		$setquestion->hash = Hashids::connection('setquestion')->encode($setquestion->id);
+    		return view('admin.editSetQuestion',compact('setquestion'));
     	}
     	else
             abort(404);
     }
-    public function update(TestQuestionRequest $request, $hash)
+    public function update(Request $request, $hash)
     {
-    	 $id = Hashids::connection('question')->decode($hash);
-    	 $question = TestQuestion::find($id)->first();
-    	 $question->update($request->all());
-    	 Session::flash('success', 'Question Updated Successfully.');
-    	 return redirect()->route('admin.test.editquestion',$question->slug);
+    	 $id = Hashids::connection('setquestion')->decode($hash);
+    	 $setquestion = SetQuestion::find($id)->first();
+    	 $setquestion->update($request->all());
+    	 Session::flash('success', 'Question Settings Updated Successfully.');
+    	 return redirect()->route('admin.test.editsetquestion',$setquestion->slug);
     }
 
     public function destroy($id)
     {
-        $id = Hashids::connection('question')->decode($id);
-        TestQuestion::destroy($id);
-        Session::flash('success', 'Question deleted!');
-        return redirect()->route('admin.test.category');
+        $id = Hashids::connection('setquestion')->decode($id);
+        SetQuestion::destroy($id);
+        Session::flash('success', 'Set Question deleted!');
+        return redirect()->route('admin.test.viewsetquestion');
     }
 }

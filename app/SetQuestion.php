@@ -7,16 +7,16 @@ use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
 use Hashids;
 
-class TestQuestion extends Model implements SluggableInterface
+
+class SetQuestion extends Model implements SluggableInterface
 {
    use SluggableTrait; 
 
     protected $fillable = [
-        'question','A','B','C','D'
-  		,'answer','slug','category',
+        'title','slug','timehr','timemin','category','noquestion','mark','negativemark',
     ];
     protected $sluggable = [
-	    'build_from' => 'question',
+	    'build_from' => 'title',
 	    'save_to'    => 'slug',
 	    'on_update'  => 'true',
 	    'unique'     => 'true'
@@ -25,6 +25,6 @@ class TestQuestion extends Model implements SluggableInterface
 
 	public function getHashidAttribute()
     {
-        return Hashids::connection('question')->encode($this->attributes['id']);
+        return Hashids::connection('setquestion')->encode($this->attributes['id']);
     }
 }

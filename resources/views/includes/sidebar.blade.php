@@ -125,7 +125,9 @@
         </a>
             <a href="{{ route('admin.test.setquestion') }}"><i class="fa fa-circle-o"></i> Set Question paper</a>
           </li>
-          
+          <li class="{{ Request::is('admin/test/viewsetquestion') ? 'active' : '' }}">
+            <a href="{{ route('admin.test.viewsetquestion') }}"><i class="fa fa-circle-o"></i> View  Set Question</a>
+          </li>
 
         </ul>
       </li>

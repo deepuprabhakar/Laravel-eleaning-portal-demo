@@ -57,6 +57,12 @@
           <span>News</span>
         </a>
       </li>
+      <li class="treeview {{ Request::is('exam') ? 'active' : '' }}{{ Request::is('exam/*') ? 'active' : '' }}">
+        <a href="{{ route('exam') }}">
+          <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+          <span>Exam</span>
+        </a>
+      </li>
       <li class="treeview {{ Request::is('articles') ? 'active' : '' }}{{ Request::is('articles/*') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-file-text" aria-hidden="true"></i>

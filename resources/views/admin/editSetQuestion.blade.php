@@ -6,10 +6,7 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <meta name="format-detection" content="telephone=no"/>
-    <title>E-learning - Set Question Paper</title>
-@stop
-@section('style')
-    {!! Html::style('plugins/select2/select2.min.css') !!}
+    <title>E-learning - {{ $setquestion->title }}</title>
 @stop
 
 @section('content')
@@ -18,12 +15,12 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Set Question paper
+      Edit {{ $setquestion->title }}
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ url('/') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a href="#">Test</a></li>
-      <li class="active">Set Question paper </li>
+      <li><a href="{{ route('admin.test.viewsetquestion') }}">Test </a></li>
+      <li class="active">Edit Set Question</li>
     </ol>
   </section>
 
@@ -34,11 +31,11 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">Set Question Paper Form</h3>
+            <h3 class="box-title">Set Question Form</h3>
           </div><!-- /.box-header -->
           <!-- form start -->
-          {!! Form::open(['url' => route('admin.test.setquestionstore'), 'autocomplete' => 'off', 'id' => 'setquestion-form']) !!}
-            @include('forms.setquestion', ['button' => 'Set Question Paper', 'flag' => false])
+          {!! Form::model($setquestion, ['url' => route('admin.test.updatesetquestion', $setquestion->hash), 'autocomplete' => 'off', 'id' => 'setquestion-form', 'method' => 'PATCH']) !!}
+            @include('forms.setquestion', ['button' => 'Update Set Question', 'flag' => true])
           {!! Form::close() !!}<!-- /.Form ends -->
         </div><!-- /.box -->
       </div>
@@ -53,22 +50,4 @@
     <!-- App -->
     {!! Html::script('dist/js/app.min.js') !!}
     {!! Html::script('dist/js/script.js') !!}
-    {!! Html::script('dist/js/custom/setquestion.js') !!}   
-    <!-- Select 2 -->
-    {!! Html::script('plugins/select2/select2.full.min.js') !!}
-
-    <script>
-      $.ajaxSetup({
-         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
-      });
-    </script>
-    <script type="text/javascript">
-      $(function(){
-        $('#category').select2({
-          placeholder: 'Select Category'
-        });
-      
- });
-    </script>
-    
 @stop

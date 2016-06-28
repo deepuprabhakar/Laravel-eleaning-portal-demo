@@ -112,6 +112,12 @@ return [
             'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
         ],
 
+        'setquestion' => [
+            'salt' => 'PPWIUOBJrjagmbfjskgffjfsfKKlfbmjhgsdkjgjdufwyedSSnvdhfddjfsfjsfjfjsdf',
+            'length' => 6,
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
+        ],
+
 
     ],
 
