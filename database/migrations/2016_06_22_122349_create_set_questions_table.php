@@ -13,6 +13,7 @@ class CreateSetQuestionsTable extends Migration
     public function up()
     {
         Schema::create('set_questions', function (Blueprint $table) {
+
             $table->increments('id');
             $table->string('title');
             $table->string('slug');

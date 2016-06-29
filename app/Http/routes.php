@@ -104,7 +104,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('test/storesetquestion', ['as' => 'admin.test.setquestionstore','uses' => 'Admin\SetQuestionController@store']);
         Route::get('test/editsetquestion/{id}',['as' => 'admin.test.editsetquestion', 'uses' => 'Admin\SetQuestionController@edit']);
         Route::patch('test/updatesetquestion/{id}',['as' => 'admin.test.updatesetquestion', 'uses' => 'Admin\SetQuestionController@update']);
-        Route::delete('test/deletesetquestion/{id}', ['as' => 'admin.test.deletesetquestion', 'uses' => 'Admin\SetQuestionController@destroy']);  
+        Route::delete('test/deletesetquestion/{id}', ['as' => 'admin.test.deletesetquestion', 'uses' => 'Admin\SetQuestionController@destroy']);
+        Route::post('test/viewCategory',['as' => 'admin.test.storecategory', 'uses' =>'Admin\SetQuestionController@storeCategory']);
         
         //Gallery
         Route::get('gallery', ['as' => 'admin.gallery', 'uses' => 'Admin\GalleryController@index']);

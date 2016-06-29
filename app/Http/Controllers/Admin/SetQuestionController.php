@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Requests\SetQuestionRequest;
 use App\Http\Controllers\Controller;
 use App\SetQuestion;
+use App\TestCategory;
 use Session;
 use Hashids;
 
@@ -33,12 +34,27 @@ class SetQuestionController extends Controller
 
     public function create()
     {
-    	return view('admin.setQuestion');
+        $categories = TestCategory::get();
+    	return view('admin.setQuestion', compact('categories'));
     }
 
     public function store(Request $request)
     {
-    	SetQuestion::create($request->all());
+        $input = $request->all();
+        for($i=0;$i<count($input['category']) ;$i++)
+        {
+           $data = [
+              'title' =>$input['title'],
+              'timehr' => $input['timehr'],
+              'timemin' => $input['timemin'],
+              'category' =>$input['category'][$i],
+              'noquestion' =>$input['noofquestion'][$i],
+              'mark' =>$input['mark'][$i],
+              'negativemark' => $input['negativemark'][$i],
+           ];
+           
+        }
+        SetQuestion::create($data);
     	Session::flash('success', 'Question Settings Added Successfully.');
     	return redirect(route('admin.test.setquestion'));
     }
@@ -70,4 +86,5 @@ class SetQuestionController extends Controller
         Session::flash('success', 'Set Question deleted!');
         return redirect()->route('admin.test.viewsetquestion');
     }
+    
 }
