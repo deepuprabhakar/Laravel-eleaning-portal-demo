@@ -59,7 +59,20 @@
           </li>
         </ul>
       </li>
-      
+      <li class="treeview {{ Request::is('admin/teachers') ? 'active' : '' }}{{ Request::is('admin/teachers/*') ? 'active' : '' }}">
+        <a href="#">
+          <i class="fa fa-female" aria-hidden="true"></i>
+          <span>Teachers</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li class="{{ Request::is('admin/teachers/create') ? 'active' : '' }}">
+            <a href="{{ route('admin.teachers.create') }}"><i class="fa fa-circle-o"></i> Add Teacher</a>
+          </li>
+          <li class="{{ Request::is('admin/teachers') ? 'active' : '' }}">
+            <a href="{{ route('admin.teachers.index') }}"><i class="fa fa-circle-o"></i> View Teachers</a>
+          </li>
+        </ul>
+      </li>
       <li class="treeview {{ Request::is('admin/students') ? 'active' : '' }}{{ Request::is('admin/students/*') ? 'active' : '' }}">
         <a href="#">
           <i class="fa fa-users" aria-hidden="true"></i>

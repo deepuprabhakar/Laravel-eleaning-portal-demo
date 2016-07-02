@@ -67,6 +67,12 @@ return [
             'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
         ],
 
+        'teacher' => [
+            'salt' => 'FjaddnaasdfghASabgqoKLtaffkeFkdflKlkdofekfefmdkpoyutkjBFJeufekAS',
+            'length' => 6,
+            'alphabet' => 'abcdefghijklmnopqrstuvwxyz1234567890',
+        ],
+
 
         'message' => [
             'salt' => 'SDSddtadajdadASDSDqwertykfkeFkdflKlkdofekfefmdkpoyutkjBFJeufekAS',

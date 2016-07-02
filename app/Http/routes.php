@@ -56,6 +56,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('news/deleteImage/{id}', ['as' => 'deleteImage', 'uses' => 'Admin\NewsController@deleteImage']);
         Route::resource('news', 'Admin\NewsController');
         Route::resource('students', 'Admin\StudentController');
+        Route::resource('teachers', 'Admin\TeacherController');
 
         // Messages
         Route::get('messages/sent', ['as' => 'admin.messages.sent', 'uses' => 'Admin\MessageController@sent']);
