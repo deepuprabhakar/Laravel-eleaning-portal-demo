@@ -35,6 +35,8 @@
         @include('includes.sidebar')
     @elseif(Sentinel::inRole('user'))
         @include('includes.userSidebar')
+    @elseif(Sentinel::inRole('teacher'))
+        @include('includes.teacherSidebar')
     @endif
         @yield('content')
         @include('includes.footer')

@@ -67,6 +67,12 @@ class AppServiceProvider extends ServiceProvider
             asort($courses);
             $view->with('courses', $courses);
         });
+        view()->composer('teacher.attendance', function($view)
+        {
+            $courses = Course::all()->lists('title', 'id')->toArray();
+            asort($courses);
+            $view->with('courses', $courses);
+        });
         view()->composer('forms.articles', function($view)
         {
             $articles = Articles::all()->lists('title', 'id')->toArray();

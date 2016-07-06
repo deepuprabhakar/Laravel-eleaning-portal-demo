@@ -128,6 +128,20 @@ Route::group(['middleware' => ['web']], function () {
     /**
      * end of EL Admin Routes
      */
+
+    /**
+     * EL Teacher Routes
+     */
+
+    Route::group(['prefix' => 'teacher'], function(){
+        //attendance
+        Route::get('attendance', ['as' =>'teacher.attendance', 'uses' => 'Teacher\AttendanceController@attendance']);
+
+    });
+    /**
+     * end of EL Teacher Routes
+     */
+
     
     // Ajax Fetch 
     Route::post('/fetchBatch', 'Admin\StudentController@fetchBatch');
@@ -141,6 +155,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/cropImage', 'User\ProfileController@cropImage');
     Route::post('/deleteProfilePhoto', 'User\ProfileController@deleteProfilePhoto');
     Route::post('/fetchStudents', 'Admin\StudentController@fetchStudents');
+    Route::post('/selectBatch', 'Teacher\AttendanceController@selectBatch');
+    Route::post('/selectStudents', 'Teacher\AttendanceController@selectStudents');
     
 
     /**

@@ -33,8 +33,9 @@ class HomeController extends Controller
 	    	else if(Sentinel::inRole('admin'))
 	    		return view('admin.home');
 	    	else if(Sentinel::inRole('user'))
-	    		
 	    		return view('user.home');
+	    	else if(Sentinel::inRole('teacher'))
+	    		return view('teacher.home');
 	    }
 	    else
 	    	return redirect('/login');
